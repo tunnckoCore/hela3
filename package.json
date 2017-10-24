@@ -37,7 +37,7 @@
     "resolve-plugins-sync": "1.1.4"
   },
   "devDependencies": {
-    "hela-config-tunnckocore": "1.2.16",
+    "hela-config-tunnckocore": "2.0.0",
     "mukla": "0.4.9"
   },
   "keywords": [
