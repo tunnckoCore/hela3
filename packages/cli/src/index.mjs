@@ -41,7 +41,7 @@ async function main() {
  *
  * @returns {Promise<Object>} preset config
  */
-async function loadConfig(sa) {
+async function loadConfig() {
   const configPath = await tryFind('hela.config');
   let configModule = null;
 
