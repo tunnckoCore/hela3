@@ -1,3 +1,5 @@
+import { join } from 'path';
+import process from 'process';
 import { hela } from '@hela/core';
 
 const cli = hela();
@@ -16,7 +18,7 @@ cli.option('--show-stack', 'Show error stack trace when command fail', false);
  * @returns {Promise}
  */
 async function main() {
-  const configModule = await import('./hela.config');
+  const configModule = await import(join(process.cwd(), 'hela.config'));
   const preset = Object.assign({}, configModule);
 
   if (preset.default && typeof preset.default === 'function') {
