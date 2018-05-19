@@ -1,0 +1,28 @@
+{
+  "name": "@hela/cli",
+  "version": "0.1.0",
+  "description": "The command line interface behind Hela",
+  "main": "src/",
+  "module": "src/index.mjs",
+  "files": [
+    "src"
+  ],
+  "bin": {
+    "hela": "src/cli.js"
+  },
+  "repository": "https://github.com/tunnckoCore/hela",
+  "homepage": "https://github.com/tunnckoCore/hela/tree/master/packages/cli",
+  "author": "Charlike Mike Reagent",
+  "license": "Apache-2.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "dependencies": {
+    "@hela/core": "^0.1.0",
+    "esm": "^3.0.34"
+  }
+}

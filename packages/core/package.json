@@ -1,0 +1,24 @@
+{
+  "name": "@hela/core",
+  "version": "0.1.0",
+  "description": "The programmatic API behind @hela/cli",
+  "main": "src/",
+  "module": "src/index.mjs",
+  "repository": "https://github.com/tunnckoCore/hela",
+  "homepage": "https://github.com/tunnckoCore/hela/tree/master/packages/core",
+  "author": "Charlike Mike Reagent",
+  "license": "Apache-2.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "dependencies": {
+    "@hela/dargs": "^0.1.0",
+    "esm": "^3.0.34",
+    "execa-pro": "^1.0.3",
+    "sade": "^1.4.1"
+  }
+}

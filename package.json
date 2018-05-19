@@ -1,111 +1,25 @@
 {
-  "name": "hela",
-  "version": "0.0.0-semantic-release",
-  "description": "Powerful & flexible task runner framework in 80 lines, based on [execa][]. Supports shareable configs, a la ESLint",
-  "repository": "tunnckoCore/hela",
-  "author": "Charlike Mike Reagent (https://i.am.charlike.online)",
-  "nspId": "98435a9b-965d-465e-bb57-1209d467e6f1",
-  "main": "./src/index.js",
-  "scripts": {
-    "hela-self": "./src/cli.js",
-    "test": "NODE_ENV=test yarn hela-self test",
-    "precommit": "yarn hela-self precommit",
-    "commit": "yarn hela-self commit",
-    "prepublishOnly": "yarn hela-self protect"
-  },
-  "license": "Apache-2.0",
-  "licenseStart": 2017,
-  "engines": {
-    "node": ">=8",
-    "npm": ">=5",
-    "yarn": ">=1"
-  },
-  "files": [
-    "src/"
+  "private": true,
+  "name": "hela-monorepo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
   ],
-  "bin": {
-    "hela": "./src/cli.js"
-  },
-  "dependencies": {
-    "@tunnckocore/pretty-config": "0.5.1",
-    "arrayify": "1.0.0",
-    "execa-pro": "1.0.3",
-    "mri": "1.1.1",
-    "resolve-plugins-sync": "1.1.4"
-  },
   "devDependencies": {
-    "eslint": "4.19.1",
-    "eslint-config-tunnckocore": "0.3.0",
-    "hela-config-tunnckocore": "2.2.45",
-    "mukla": "0.4.9"
-  },
-  "keywords": [
-    "automation",
-    "charlike",
-    "cli",
-    "command line",
-    "configs",
-    "es2015",
-    "eslint",
-    "eslint fix",
-    "execa",
-    "execute",
-    "hela",
-    "hooks",
-    "lint",
-    "npm scripts",
-    "precommit",
-    "presets",
-    "prettier",
-    "publish",
-    "release",
-    "runner",
-    "scripts",
-    "semantic",
-    "semantic release",
-    "shareable configs",
-    "shareable presets",
-    "standard",
-    "task",
-    "task runner",
-    "tasks",
-    "testing"
-  ],
-  "verb": {
-    "run": true,
-    "toc": {
-      "render": true,
-      "method": "preWrite",
-      "maxdepth": 3
-    },
-    "layout": "empty",
-    "tasks": [
-      "readme"
-    ],
-    "related": {
-      "list": [
-        "gitcommit",
-        "parse-commit-message",
-        "execa-pro",
-        "hela-config-tunnckocore",
-        "new-release"
-      ],
-      "highlight": "hela-config-tunnckocore"
-    },
-    "lint": {
-      "reflinks": true
-    },
-    "reflinks": [
-      "cosmiconfig",
-      "execa",
-      "execa-pro",
-      "hela",
-      "semantic-release",
-      "hela-config-new-project",
-      "hela-config-rollup-build",
-      "hela-config-tunnckocore",
-      "hela-preset-tunnckocore",
-      "rollup"
-    ]
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-flowtype": "^2.46.3",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.8.2",
+    "eslint-plugin-unicorn": "^4.0.3",
+    "prettier": "^1.12.1",
+    "prettier-eslint": "^8.8.1"
   }
 }
