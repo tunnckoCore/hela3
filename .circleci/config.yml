@@ -1,16 +1,16 @@
 version: 2
 
 defaults: &defaults
-  working_directory: ~/hela-core
+  working_directory: ~/hela
   docker:
     - image: circleci/node:8
 
 restore_modules_cache: &restore_modules_cache
   restore_cache:
     keys:
-    - hela-core-{{ checksum "yarn.lock" }}
+    - hela-{{ checksum "yarn.lock" }}
     # fallback to using the latest cache if no exact match is found
-    - hela-core-
+    - hela-
 
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
           name: Installing dependencies
           command: yarn install
       - save_cache:
-          key: hela-core-{{ checksum "yarn.lock" }}
+          key: hela-{{ checksum "yarn.lock" }}
           paths: node_modules
       - run:
           name: Remove node_modules to cleanup workspace
@@ -58,10 +58,10 @@ workflows:
       - test:
           requires:
             - install
-      - release:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
-          context: org-global
+      # - release:
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: master
+      #     context: org-global
