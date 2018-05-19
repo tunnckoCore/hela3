@@ -22,8 +22,5 @@
     "eslint-plugin-unicorn": "^4.0.3",
     "prettier": "^1.12.1",
     "prettier-eslint": "^8.8.1"
-  },
-  "hela": {
-    "extends": "@hela/config-tunnckocore"
   }
 }
