@@ -1,20 +1,7 @@
 import fs from 'fs';
 import util from 'util';
-import path from 'path';
-import process from 'process';
 import { hela } from '@hela/core';
 import findUp from 'find-file-up';
-
-function tryFind(filename, bool) {
-  try {
-    return findUp.promise(`${filename}.mjs`);
-  } catch (err) {
-    if (bool) {
-      return tryFind(`${filename}.js`, true);
-    }
-    throw err;
-  }
-}
 
 const cli = hela();
 
@@ -32,28 +19,7 @@ cli.option('--show-stack', 'Show error stack trace when command fail', false);
  * @returns {Promise}
  */
 async function main() {
-  const configPath = await tryFind('hela.config');
-
-  let configModule = null;
-
-  try {
-    configModule = await import(configPath);
-  } catch (err) {
-    const pkgPath = await findUp.promise('package.json');
-    const preset = await util
-      .promisify(fs.readFile)(pkgPath, 'utf8')
-      .then(JSON.parse)
-      .then((json) => json.hela && json.hela.extends);
-
-    try {
-      configModule = await import(preset);
-    } catch (e) {
-      throw new Error('hela: need a config or `pkg.hela.extends` field');
-    }
-  }
-
-  // const configModule = await import(path.join(process.cwd(), 'hela.config'));
-  const cfg = Object.assign({}, configModule);
+  const cfg = await loadConfig();
 
   if (cfg.default && typeof cfg.default === 'function') {
     const meta = cfg.default.getMeta();
@@ -69,6 +35,53 @@ async function main() {
 
   cli.tree = Object.assign({}, cli.tree, tasks);
   return cli.listen();
+}
+
+/**
+ *
+ * @returns {Promise<Object>} preset config
+ */
+async function loadConfig(sa) {
+  const configPath = await tryFind('hela.config');
+  let configModule = null;
+
+  try {
+    configModule = await import(configPath);
+  } catch (err) {
+    configModule = await loadPkgConfig();
+  }
+
+  // const configModule = await import(path.join(process.cwd(), 'hela.config'));
+  return Object.assign({}, configModule);
+}
+
+function tryFind(filename, bool) {
+  try {
+    return findUp.promise(`${filename}.mjs`);
+  } catch (err) {
+    if (bool) {
+      return tryFind(`${filename}.js`, true);
+    }
+    throw err;
+  }
+}
+
+async function loadPkgConfig() {
+  const pkgPath = await findUp.promise('package.json');
+  const preset =
+    (await util
+      .promisify(fs.readFile)(pkgPath, 'utf8')
+      .then(JSON.parse)
+      .then((json) => json.hela && json.hela.extends)) ||
+    '@hela/config-tunnckocore';
+
+  try {
+    return import(preset);
+  } catch (err) {
+    throw new Error(
+      'hela: need a config file, hela.extends field or installed @hela/config-tunnckocore',
+    );
+  }
 }
 
 export default main;

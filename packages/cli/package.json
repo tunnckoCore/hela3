@@ -1,6 +1,6 @@
 {
   "name": "@hela/cli",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "The command line interface behind Hela",
   "main": "src/",
   "module": "src/index.mjs",
