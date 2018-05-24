@@ -1,6 +1,6 @@
 {
   "name": "@hela/dargs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Helper that does the opposite of minimist/mri, enhanced fork of sindersorhus/dargs.",
   "main": "src/",
   "module": "src/index.mjs",
