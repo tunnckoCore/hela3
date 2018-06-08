@@ -24,5 +24,8 @@
     "esm": "^3.0.48",
     "execa-pro": "^1.0.3",
     "sade": "^1.4.1"
+  },
+  "devDependencies": {
+    "asia": "*"
   }
 }

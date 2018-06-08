@@ -1,4 +1,4 @@
-import test from '../../asia/src';
+import test from 'asia';
 
 test('pretty-config', (t) => {
   console.log('yeah');

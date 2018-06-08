@@ -1,4 +1,4 @@
-import test from '../../asia/src';
+import test from 'asia';
 
 test('@hela/dargs', (t) => {
   console.log('yeah');

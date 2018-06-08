@@ -124,6 +124,7 @@ export default {
 
     // TODO: update
     'import/extensions': 'off',
+    'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
 
     // Enforce throwing instead of `process.exit`.
@@ -132,7 +133,10 @@ export default {
 
     // Ensure we don't import something that is ignored.
     // https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/process-exit-as-throw.md
-    'node/no-unpublished-import': 'error',
+    'node/no-unpublished-import': [
+      'error',
+      { tryExtensions: ['.js', '.jsx', '.mjs'] },
+    ],
 
     // Ensure we have the defined bin file.
     // https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/process-exit-as-throw.md

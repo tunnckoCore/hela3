@@ -124,15 +124,17 @@ module.exports = {
 
     // TODO: update
     'import/extensions': 'off',
+    'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
 
     // Enforce throwing instead of `process.exit`.
     // https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/process-exit-as-throw.md
     'node/process-exit-as-throw': 'error',
 
+    // TODO: disabled temporary...
     // Ensure we don't import something that is ignored.
     // https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/process-exit-as-throw.md
-    'node/no-unpublished-import': 'error',
+    'node/no-unpublished-import': 'off',
 
     // Ensure we have the defined bin file.
     // https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/process-exit-as-throw.md

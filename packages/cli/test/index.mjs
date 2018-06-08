@@ -1,4 +1,4 @@
-import test from '../../asia/src';
+import test from 'asia';
 
 test('@hela/cli', (t) => {
   console.log('yeah');

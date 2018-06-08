@@ -24,7 +24,8 @@
     "esm": "^3.0.48"
   },
   "devDependencies": {
-    "@hela/cli": "^0.1.5"
+    "@hela/cli": "^0.1.5",
+    "asia": "*"
   },
   "hela": {
     "extends": "src/index.mjs"

@@ -4,6 +4,9 @@
   "description": "WIP: Test runner for 2018, done right",
   "main": "src/",
   "module": "src/index.mjs",
+  "files": [
+    "src"
+  ],
   "scripts": {
     "lint": "eslint src test -f codeframe --ext .mjs --quiet --fix --cache",
     "test": "node -r esm test"

@@ -1,14 +1,14 @@
 {
   "name": "xaxa",
-  "version": "0.2.0",
-  "description": "Zero config linter powered with AirBnB, React, TypeScript, Flow and Prettier. Linting done right for 2018 and beyond",
+  "version": "0.3.0",
+  "description": "Zero-config linter powered with AirBnB, React, TypeScript, Flow and Prettier. Linting done right for 2018 and beyond",
   "main": "src/",
   "module": "src/index.mjs",
   "bin": {
     "xaxa": "src/cli.js"
   },
   "scripts": {
-    "lint": "eslint src test -f codeframe --ext .mjs --quiet --fix --cache"
+    "lint": "node src/cli --no-exit"
   },
   "repository": "https://github.com/tunnckoCore/hela/tree/master/packages/xaxa",
   "homepage": "https://github.com/tunnckoCore/hela/tree/master/packages/xaxa",
@@ -22,8 +22,7 @@
     "node": "^8.9.0 || ^10.3.0"
   },
   "dependencies": {
-    "esm": "^3.0.48",
-    "execa-pro": "^1.0.3",
+    "arrayify": "^1.0.0",
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -35,7 +34,12 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-unicorn": "^4.0.3",
+    "esm": "^3.0.48",
+    "mri": "^1.1.1",
     "prettier": "^1.12.1",
     "prettier-eslint": "^8.8.1"
+  },
+  "devDependencies": {
+    "asia": "*"
   }
 }

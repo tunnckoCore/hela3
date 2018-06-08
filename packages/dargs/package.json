@@ -21,5 +21,8 @@
   },
   "dependencies": {
     "esm": "^3.0.48"
+  },
+  "devDependencies": {
+    "asia": "*"
   }
 }
