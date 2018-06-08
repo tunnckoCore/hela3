@@ -79,6 +79,7 @@ class Asia extends AsiaPrivate {
     }
     if (testTitle === null) {
       this.stats.anonymous += 1;
+      testTitle = `(anonymous test ${this.stats.anonymous})`;
     }
 
     this.stats.count += 1;
