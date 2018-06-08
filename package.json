@@ -9,14 +9,8 @@
     ]
   },
   "scripts": {
-    "lint": "eslint packages/*/src packages/*/test -f codeframe --ext .mjs --quiet --fix --cache",
-    "new": "echo okkk",
-    "clean": "npm-run-all -p clean:*",
-    "clean:root": "rm -rf node_modules yarn.lock",
-    "clean:cli": "rm -rf packages/cli/node_modules",
-    "clean:core": "rm -rf packages/core/node_modules",
-    "clean:dargs": "rm -rf packages/dargs/node_modules",
-    "clean:config-tunnckocore": "rm -rf packages/config-tunnckocore/node_modules"
+    "clean": "rm -rf node_modules yarn.lock packages/*/node_modules",
+    "fresh": "bolt clean && bolt install"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
