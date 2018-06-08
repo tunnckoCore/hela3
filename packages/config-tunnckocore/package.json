@@ -5,7 +5,7 @@
   "main": "src/",
   "module": "src/index.mjs",
   "scripts": {
-    "lint": "eslint src test -f codeframe --ext .mjs --quiet --fix --cache",
+    "lint": "xaxa",
     "test": "node -r esm test"
   },
   "repository": "https://github.com/tunnckoCore/hela",
@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "@hela/core": "^0.1.2",
-    "esm": "^3.0.48"
+    "esm": "^3.0.48",
+    "xaxa": "^0.3.0"
   },
   "devDependencies": {
     "@hela/cli": "^0.1.5",

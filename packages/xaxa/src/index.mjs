@@ -133,10 +133,7 @@ export default {
 
     // Ensure we don't import something that is ignored.
     // https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/process-exit-as-throw.md
-    'node/no-unpublished-import': [
-      'error',
-      { tryExtensions: ['.js', '.jsx', '.mjs'] },
-    ],
+    'node/no-unpublished-import': 'off',
 
     // Ensure we have the defined bin file.
     // https://github.com/mysticatea/eslint-plugin-node/blob/master/docs/rules/process-exit-as-throw.md
