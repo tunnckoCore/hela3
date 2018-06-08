@@ -55,4 +55,14 @@ async function prettyConfig(name, options) {
 
 prettyConfig.configFiles = configFiles;
 
-export default prettyConfig;
+// Example:
+//
+// import { resolveConfig, resolveConfigPath } from 'pretty-config'
+//
+// const configPath: string = resolveConfigPath(opts)
+//
+// resolveConfig(opts, configPath)
+//   .then((config: any) => console.log('cfg', config))
+//   .catch(console.error)
+
+export { prettyConfig, configFiles, resolveConfig, resolveConfigPath };

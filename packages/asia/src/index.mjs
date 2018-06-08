@@ -1,5 +1,5 @@
 import proc from 'process';
-import prettyConfig from 'pretty-config';
+import { prettyConfig } from 'pretty-config';
 import Asia from './lib/publicApi';
 
 const app = new Asia();

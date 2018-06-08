@@ -33,7 +33,7 @@
     "p-map-series": "^1.0.0",
     "p-memoize": "^2.0.0",
     "p-reflect": "^1.0.0",
-    "pretty-config": "^0.1.0",
+    "pretty-config": "^0.2.0",
     "redolent": "^2.0.5"
   },
   "devDependencies": {
