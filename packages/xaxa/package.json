@@ -1,6 +1,6 @@
 {
   "name": "xaxa",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Zero-config linter powered with AirBnB, React, TypeScript, Flow and Prettier. Linting done right for 2018 and beyond",
   "main": "src/",
   "module": "src/index.mjs",
