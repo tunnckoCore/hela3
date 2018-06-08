@@ -11,7 +11,7 @@
     "hela": "src/cli.js"
   },
   "scripts": {
-    "lint": "eslint src test -f codeframe --ext .mjs --quiet --fix --cache",
+    "lint": "xaxa",
     "test": "node -r esm test"
   },
   "repository": "https://github.com/tunnckoCore/hela",
@@ -31,6 +31,7 @@
     "find-file-up": "^2.0.1"
   },
   "devDependencies": {
-    "asia": "*"
+    "asia": "*",
+    "xaxa": "*"
   }
 }

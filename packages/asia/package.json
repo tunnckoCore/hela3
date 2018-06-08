@@ -8,7 +8,7 @@
     "src"
   ],
   "scripts": {
-    "lint": "eslint src test -f codeframe --ext .mjs --quiet --fix --cache",
+    "lint": "xaxa",
     "test": "node -r esm test"
   },
   "repository": "https://github.com/tunnckoCore/hela",
@@ -35,5 +35,8 @@
     "p-reflect": "^1.0.0",
     "pretty-config": "^0.1.0",
     "redolent": "^2.0.5"
+  },
+  "devDependencies": {
+    "xaxa": "*"
   }
 }
