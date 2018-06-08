@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import util from 'util';
 import { hela } from '@hela/core';
 import findUp from 'find-file-up';
@@ -51,7 +52,6 @@ async function loadConfig() {
     configModule = await loadPkgConfig();
   }
 
-  // const configModule = await import(path.join(process.cwd(), 'hela.config'));
   return Object.assign({}, configModule);
 }
 
@@ -67,21 +67,31 @@ function tryFind(filename, bool) {
 }
 
 async function loadPkgConfig() {
+  const isDefault = (val) => val === '@hela/config-tunnckocore';
   const pkgPath = await findUp.promise('package.json');
-  const preset =
+
+  let preset =
     (await util
       .promisify(fs.readFile)(pkgPath, 'utf8')
       .then(JSON.parse)
       .then((json) => json.hela && json.hela.extends)) ||
     '@hela/config-tunnckocore';
 
+  let cfg = null;
+
+  if (!isDefault(preset) && /\.m?js/.test(preset)) {
+    preset = path.join(path.dirname(pkgPath), preset);
+  }
+
   try {
-    return import(preset);
+    cfg = await import(preset);
   } catch (err) {
     throw new Error(
       'hela: need a config file, hela.extends field or installed @hela/config-tunnckocore',
     );
   }
+
+  return cfg;
 }
 
 export default main;

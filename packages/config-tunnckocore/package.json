@@ -22,5 +22,11 @@
   "dependencies": {
     "@hela/core": "^0.1.2",
     "esm": "^3.0.48"
+  },
+  "devDependencies": {
+    "@hela/cli": "^0.1.5"
+  },
+  "hela": {
+    "extends": "src/index.mjs"
   }
 }
