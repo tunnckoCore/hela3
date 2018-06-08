@@ -7,6 +7,9 @@
   "bin": {
     "xaxa": "src/cli.js"
   },
+  "files": [
+    "src/"
+  ],
   "scripts": {
     "lint": "node src/cli --no-exit"
   },
