@@ -1,6 +1,6 @@
 {
   "name": "xaxa",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Zero-config linting, powered by few amazing unicorns, AirBnB & Prettier.",
   "main": "src/",
   "module": "src/index.mjs",
