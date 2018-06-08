@@ -4,19 +4,19 @@
   "description": "Simple Hela shareable config for @tunnckoCore",
   "main": "src/",
   "module": "src/index.mjs",
+  "scripts": {
+    "lint": "eslint src test -f codeframe --ext .mjs --quiet --fix --cache"
+  },
   "repository": "https://github.com/tunnckoCore/hela",
   "homepage": "https://github.com/tunnckoCore/hela/tree/master/packages/config-tunnckocore",
   "author": "Charlike Mike Reagent",
   "license": "Apache-2.0",
   "private": false,
-  "scripts": {
-    "baw": "echo config"
-  },
   "publishConfig": {
     "access": "public"
   },
   "engines": {
-    "node": ">=8"
+    "node": "^8.9.0 || ^10.3.0"
   },
   "dependencies": {
     "@hela/core": "^0.1.2",

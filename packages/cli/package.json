@@ -10,19 +10,19 @@
   "bin": {
     "hela": "src/cli.js"
   },
+  "scripts": {
+    "lint": "eslint src test -f codeframe --ext .mjs --quiet --fix --cache"
+  },
   "repository": "https://github.com/tunnckoCore/hela",
   "homepage": "https://github.com/tunnckoCore/hela/tree/master/packages/cli",
   "author": "Charlike Mike Reagent",
   "license": "Apache-2.0",
   "private": false,
-  "scripts": {
-    "baw": "eslint src"
-  },
   "publishConfig": {
     "access": "public"
   },
   "engines": {
-    "node": ">=8"
+    "node": "^8.9.0 || ^10.3.0"
   },
   "dependencies": {
     "@hela/core": "^0.1.2",

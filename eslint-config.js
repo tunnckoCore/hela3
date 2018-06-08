@@ -1,7 +1,7 @@
 module.exports = {
   parser: 'babel-eslint',
   extends: ['airbnb', 'prettier', 'prettier/flowtype', 'prettier/react'],
-  plugins: ['unicorn', 'flowtype', 'node', 'prettier'],
+  plugins: ['unicorn', 'flowtype', 'node', 'prettier', 'jest'],
   rules: {
     // Enforce using named functions when regular function is used,
     // otherwise use arrow functions

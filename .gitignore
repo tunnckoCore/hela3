@@ -1,6 +1,7 @@
 node_modules
 coverage
 .nyc_output
+.eslintcache
 
 # npm >=5 lock file (& shrinkwrap), we use Yarn!
 package-lock.json
