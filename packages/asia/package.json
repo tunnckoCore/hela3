@@ -1,6 +1,6 @@
 {
   "name": "asia",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "WIP: Test runner for 2018, done right",
   "main": "src/",
   "module": "src/index.mjs",
