@@ -1,6 +1,7 @@
-// import test from 'mukla';
+import test from '../../asia/src';
 
-// test('foo bar', (done) => {
-//   console.log('ooooooookey');
-//   done();
-// });
+test('@hela/cli', (t) => {
+  console.log('yeah');
+  t.pass();
+  return true;
+});

@@ -1,7 +1,7 @@
 {
-  "name": "@hela/dargs",
-  "version": "0.1.2",
-  "description": "Helper that does the opposite of minimist/mri, enhanced fork of sindersorhus/dargs.",
+  "name": "pretty-config",
+  "version": "0.1.0",
+  "description": "Pretty small & fantastic configuration loader, done right. Understands JSON(6), YAML and JS (both CJS & ESM) config files.",
   "main": "src/",
   "module": "src/index.mjs",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "node -r esm test"
   },
   "repository": "https://github.com/tunnckoCore/hela",
-  "homepage": "https://github.com/tunnckoCore/hela/tree/master/packages/dargs",
+  "homepage": "https://github.com/tunnckoCore/hela/tree/master/packages/pretty-config",
   "author": "Charlike Mike Reagent",
   "license": "Apache-2.0",
   "private": false,
@@ -20,6 +20,8 @@
     "node": "^8.9.0 || ^10.3.0"
   },
   "dependencies": {
-    "esm": "^3.0.48"
+    "esm": "^3.0.48",
+    "js-yaml": "^3.12.0",
+    "json-6": "^1.0.2"
   }
 }

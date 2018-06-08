@@ -1,6 +1,6 @@
-// import test from 'mukla';
+import test from '../../asia/src';
 
-// test('foo bar', (done) => {
-//   console.log('ooooooookey');
-//   done();
-// });
+test('@hela/config-tunnckocore', (t) => {
+  console.log('yeah');
+  t.pass();
+});

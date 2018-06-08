@@ -1,6 +1,6 @@
 import test from '../../asia/src';
 
-test('@hela/core', (t) => {
+test('pretty-config', (t) => {
   console.log('yeah');
   t.pass();
 });
