@@ -9,6 +9,9 @@
   "author": "Charlike Mike Reagent",
   "license": "Apache-2.0",
   "private": false,
+  "scripts": {
+    "baw": "echo core"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -16,8 +19,8 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@hela/dargs": "^0.1.0",
-    "esm": "^3.0.34",
+    "@hela/dargs": "^0.1.2",
+    "esm": "^3.0.48",
     "execa-pro": "^1.0.3",
     "sade": "^1.4.1"
   }
