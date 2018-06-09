@@ -2119,6 +2119,27 @@ write@^0.2.1:
   dependencies:
     mkdirp "^0.5.1"
 
+xaxa@*:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/xaxa/-/xaxa-0.3.4.tgz#e255d133bb57c368a11ed4427d690d2e9698e984"
+  dependencies:
+    arrayify "^1.0.0"
+    babel-eslint "^8.2.3"
+    eslint "^4.19.1"
+    eslint-config-airbnb "^16.1.0"
+    eslint-config-prettier "^2.9.0"
+    eslint-plugin-flowtype "^2.46.3"
+    eslint-plugin-import "^2.11.0"
+    eslint-plugin-jsx-a11y "^6.0.3"
+    eslint-plugin-node "^6.0.1"
+    eslint-plugin-prettier "^2.6.0"
+    eslint-plugin-react "^7.8.2"
+    eslint-plugin-unicorn "^4.0.3"
+    esm "^3.0.48"
+    mri "^1.1.1"
+    prettier "^1.12.1"
+    prettier-eslint "^8.8.1"
+
 yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"

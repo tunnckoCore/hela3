@@ -1,3 +1,3 @@
 module.exports = {
-  extends: require.resolve('./eslint-config')
+  extends: './node_modules/xaxa/src/index.js'
 }

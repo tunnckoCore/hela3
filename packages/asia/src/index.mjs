@@ -9,7 +9,6 @@ if (!proc.env.ASIA_CLI) {
   prettyConfig('asia').then((config) => {
     /* eslint-disable-next-line no-shadow */
     app.use((app) => {
-      /* eslint-disable-next-line no-param-reassign */
       Object.assign(app.options, config);
       return app;
     });
