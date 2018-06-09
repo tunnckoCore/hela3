@@ -24,11 +24,5 @@
     "asia": "^0.3.3",
     "esm": "^3.0.48",
     "xaxa": "^0.3.4"
-  },
-  "devDependencies": {
-    "@hela/cli": "^0.1.5"
-  },
-  "hela": {
-    "extends": "src/index.mjs"
   }
 }

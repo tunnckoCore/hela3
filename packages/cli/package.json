@@ -31,7 +31,7 @@
     "find-file-up": "^2.0.1"
   },
   "devDependencies": {
-    "asia": "*",
-    "xaxa": "*"
+    "asia": "^0.3.3",
+    "xaxa": "^0.3.4"
   }
 }
