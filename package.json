@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "arrayify": "^1.0.0",
+    "asia": "^0.3.3",
     "auto-bind": "^1.2.0",
     "esm": "^3.0.48",
     "execa-pro": "^1.0.3",

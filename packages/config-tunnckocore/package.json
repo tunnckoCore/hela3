@@ -1,6 +1,6 @@
 {
   "name": "@hela/config-tunnckocore",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Simple Hela shareable config for @tunnckoCore",
   "main": "src/",
   "module": "src/index.mjs",
@@ -21,12 +21,12 @@
   },
   "dependencies": {
     "@hela/core": "^0.1.2",
+    "asia": "^0.3.3",
     "esm": "^3.0.48",
     "xaxa": "^0.3.4"
   },
   "devDependencies": {
-    "@hela/cli": "^0.1.5",
-    "asia": "*"
+    "@hela/cli": "^0.1.5"
   },
   "hela": {
     "extends": "src/index.mjs"

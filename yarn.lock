@@ -185,6 +185,20 @@ asap@~2.0.3:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
 
+asia@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/asia/-/asia-0.3.3.tgz#33a8acfcb2c73aef868cc0253cee3872b26db8b3"
+  dependencies:
+    auto-bind "^1.2.0"
+    esm "^3.0.48"
+    p-finally "^1.0.0"
+    p-map "^1.2.0"
+    p-map-series "^1.0.0"
+    p-memoize "^2.0.0"
+    p-reflect "^1.0.0"
+    pretty-config "^0.2.0"
+    redolent "^2.0.5"
+
 ast-types-flow@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/ast-types-flow/-/ast-types-flow-0.0.7.tgz#f70b735c6bca1a5c9c22d982c3e39e7feba3bdad"
@@ -1616,6 +1630,14 @@ prettier-eslint@^8.8.1:
 prettier@^1.12.1, prettier@^1.7.0:
   version "1.13.5"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.5.tgz#7ae2076998c8edce79d63834e9b7b09fead6bfd0"
+
+pretty-config@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/pretty-config/-/pretty-config-0.2.0.tgz#483aaef87e39b8bb6b62dda7ce7b8c8899954b69"
+  dependencies:
+    esm "^3.0.48"
+    js-yaml "^3.12.0"
+    json-6 "^1.0.2"
 
 pretty-format@^22.0.3:
   version "22.4.3"
