@@ -21,12 +21,12 @@
   },
   "dependencies": {
     "@hela/core": "^0.1.2",
-    "esm": "^3.0.48"
+    "esm": "^3.0.48",
+    "xaxa": "^0.3.4"
   },
   "devDependencies": {
     "@hela/cli": "^0.1.5",
-    "asia": "*",
-    "xaxa": "*"
+    "asia": "*"
   },
   "hela": {
     "extends": "src/index.mjs"

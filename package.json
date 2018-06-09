@@ -14,8 +14,7 @@
     "lint": "xaxa packages/*/src packages/*/test"
   },
   "devDependencies": {
-    "bolt": "^0.20.7",
-    "xaxa": "*"
+    "bolt": "^0.20.7"
   },
   "dependencies": {
     "arrayify": "^1.0.0",
@@ -32,7 +31,8 @@
     "p-memoize": "^2.0.0",
     "p-reflect": "^1.0.0",
     "redolent": "^2.0.5",
-    "sade": "^1.4.1"
+    "sade": "^1.4.1",
+    "xaxa": "^0.3.4"
   },
   "nyc": {
     "statements": 0,
