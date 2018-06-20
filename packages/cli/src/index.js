@@ -48,7 +48,7 @@ async function loadConfig() {
 
   try {
     // eslint-disable-next-line import/no-dynamic-require, global-require
-    configModule = await require(configPath);
+    configModule = await Promise.resolve(require(configPath));
   } catch (err) {
     configModule = await loadPkgConfig();
   }

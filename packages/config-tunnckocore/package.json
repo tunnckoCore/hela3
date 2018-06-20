@@ -3,10 +3,9 @@
   "version": "0.2.3",
   "description": "Simple Hela shareable config for @tunnckoCore",
   "main": "src/",
-  "module": "src/index.mjs",
   "scripts": {
     "lint": "xaxa",
-    "test": "node -r esm test"
+    "test": "node test"
   },
   "repository": "https://github.com/tunnckoCore/hela",
   "homepage": "https://github.com/tunnckoCore/hela/tree/master/packages/config-tunnckocore",
@@ -20,9 +19,9 @@
     "node": "^8.9.0 || ^10.3.0"
   },
   "dependencies": {
-    "@hela/core": "^0.1.2",
-    "asia": "^0.3.3",
-    "esm": "^3.0.48",
-    "xaxa": "^0.3.4"
+    "@hela/core": "*",
+    "asia": "*",
+    "esm": "*",
+    "xaxa": "*"
   }
 }

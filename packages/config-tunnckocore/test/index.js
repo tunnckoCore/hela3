@@ -1,4 +1,4 @@
-import test from 'asia';
+const test = require('asia');
 
 test('@hela/config-tunnckocore', (t) => {
   console.log('yeah');
