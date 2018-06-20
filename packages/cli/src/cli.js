@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-const esmLoader = require('esm');
 
-const main = esmLoader(module)('./index.mjs').default;
+const main = require('./index');
 
 main()
   .then(() => {

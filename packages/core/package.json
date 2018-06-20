@@ -19,12 +19,12 @@
     "node": "^8.9.0 || ^10.3.0"
   },
   "dependencies": {
-    "@hela/dargs": "^0.2.0",
+    "@hela/dargs": "*",
     "execa-pro": "^1.0.3",
     "sade": "^1.4.1"
   },
   "devDependencies": {
-    "asia": "^0.3.3",
-    "xaxa": "^0.3.4"
+    "asia": "*",
+    "xaxa": "*"
   }
 }
