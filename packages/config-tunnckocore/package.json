@@ -21,7 +21,6 @@
   "dependencies": {
     "@hela/core": "*",
     "asia": "*",
-    "esm": "*",
     "xaxa": "*"
   }
 }
