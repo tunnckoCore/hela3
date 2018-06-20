@@ -1,6 +1,6 @@
 {
   "name": "@hela/core",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "The programmatic API behind @hela/cli",
   "main": "src/",
   "scripts": {
