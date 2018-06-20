@@ -1,6 +1,6 @@
 {
   "name": "pretty-config",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Pretty small & fantastic configuration loader, done right. Understands JSON(6), YAML and JS (both CJS & ESM) config files.",
   "main": "src/",
   "scripts": {
