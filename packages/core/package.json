@@ -3,10 +3,9 @@
   "version": "0.1.3",
   "description": "The programmatic API behind @hela/cli",
   "main": "src/",
-  "module": "src/index.mjs",
   "scripts": {
     "lint": "xaxa",
-    "test": "node -r esm test"
+    "test": "node test"
   },
   "repository": "https://github.com/tunnckoCore/hela",
   "homepage": "https://github.com/tunnckoCore/hela/tree/master/packages/core",
@@ -20,8 +19,7 @@
     "node": "^8.9.0 || ^10.3.0"
   },
   "dependencies": {
-    "@hela/dargs": "^0.1.2",
-    "esm": "^3.0.48",
+    "@hela/dargs": "^0.2.0",
     "execa-pro": "^1.0.3",
     "sade": "^1.4.1"
   },

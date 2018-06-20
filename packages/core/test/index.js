@@ -1,4 +1,4 @@
-import test from 'asia';
+const test = require('asia');
 
 test('@hela/core', (t) => {
   console.log('yeah');
