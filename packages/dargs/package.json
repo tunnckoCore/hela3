@@ -3,10 +3,9 @@
   "version": "0.1.3",
   "description": "Helper that does the opposite of minimist/mri, enhanced fork of sindersorhus/dargs.",
   "main": "src/",
-  "module": "src/index.mjs",
   "scripts": {
     "lint": "xaxa",
-    "test": "node -r esm test"
+    "test": "node test"
   },
   "repository": "https://github.com/tunnckoCore/hela",
   "homepage": "https://github.com/tunnckoCore/hela/tree/master/packages/dargs",
@@ -19,9 +18,7 @@
   "engines": {
     "node": "^8.9.0 || ^10.3.0"
   },
-  "dependencies": {
-    "esm": "^3.0.48"
-  },
+  "dependencies": {},
   "devDependencies": {
     "asia": "^0.3.3",
     "xaxa": "^0.3.4"
