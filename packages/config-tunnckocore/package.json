@@ -1,6 +1,6 @@
 {
   "name": "@hela/config-tunnckocore",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Simple Hela shareable config for @tunnckoCore",
   "main": "src/",
   "scripts": {
