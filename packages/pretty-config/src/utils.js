@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
 
-import fs from 'fs';
-import path from 'path';
-import util from 'util';
-import yaml from 'js-yaml';
-import JSON6 from 'json-6';
+const fs = require('fs');
+const path = require('path');
+const util = require('util');
+const yaml = require('js-yaml');
+const JSON6 = require('json-6');
 
 function isObject(val) {
   return val && typeof val === 'object' && !Array.isArray(val);
@@ -66,7 +66,7 @@ async function resolveConfig(opts, configPath) {
   // - 3.6) `.eslint.config.js`
   if (/\.m?js$/.test(configPath)) {
     // TODO: When target Node >=8:
-    const esmLoader = await import('esm');
+    const esmLoader = require('esm'); // eslint-disable-line global-require
     const esmOpts = { cjs: true, mode: 'all' };
 
     const esmRequire = interop(esmLoader)(module, esmOpts);
@@ -102,20 +102,6 @@ async function resolveConfig(opts, configPath) {
     // - 5.4) otherwise falsey value
     null
   );
-
-  // uncomment above when target Node >= 8
-  // 5) if config in package.json:
-  // return contents.then(JSON.parse).then(
-  //   (pkg) =>
-  //     // - 5.1) pkg.eslint
-  //     pkg[opts.name] ||
-  //     // - 5.2) pkg.eslintConfig
-  //     pkg[`${opts.name}Config`] ||
-  //     // - 5.3) pkg.config.eslint
-  //     (pkg.config && pkg.config[opts.name]) ||
-  //     // - 5.4) otherwise falsey value
-  //     null,
-  // );
 }
 
-export { resolveConfigPath, resolveConfig };
+module.exports = { resolveConfigPath, resolveConfig };

@@ -1,4 +1,4 @@
-import test from 'asia';
+const test = require('asia');
 
 test('pretty-config', (t) => {
   console.log('yeah');
