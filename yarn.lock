@@ -58,6 +58,10 @@
   version "0.20.0"
   resolved "https://registry.yarnpkg.com/@std/esm/-/esm-0.20.0.tgz#658cb32e3b163f20b7d9f29a78987041068b1182"
 
+"@tunnckocore/execa@>= 0.1.0 < 3":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@tunnckocore/execa/-/execa-2.3.2.tgz#b72f639b2806f50245665d5c01827cc4caaea11c"
+
 "@tunnckocore/pretty-config@0.5.1":
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/@tunnckocore/pretty-config/-/pretty-config-0.5.1.tgz#e8cc45cf28ec5c74245f857ae317955d483a2879"
@@ -1067,28 +1071,15 @@ execa-pro@1.0.2:
     execa "0.8.0"
     p-map-series "1.0.0"
 
-execa-pro@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/execa-pro/-/execa-pro-1.0.3.tgz#903301a5e0b55e05b6ddef0792cfedae2ff6df58"
+execa-pro@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/execa-pro/-/execa-pro-1.1.1.tgz#e4a0438096012dcac66d4dcc89e803e98d7852e6"
   dependencies:
-    execa "0.9.0"
-    p-map-series "1.0.0"
+    "@tunnckocore/execa" ">= 0.1.0 < 3"
 
 execa@0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/execa/-/execa-0.8.0.tgz#d8d76bbc1b55217ed190fd6dd49d3c774ecfc8da"
-  dependencies:
-    cross-spawn "^5.0.1"
-    get-stream "^3.0.0"
-    is-stream "^1.1.0"
-    npm-run-path "^2.0.0"
-    p-finally "^1.0.0"
-    signal-exit "^3.0.0"
-    strip-eof "^1.0.0"
-
-execa@0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/execa/-/execa-0.9.0.tgz#adb7ce62cf985071f60580deb4a88b9e34712d01"
   dependencies:
     cross-spawn "^5.0.1"
     get-stream "^3.0.0"
