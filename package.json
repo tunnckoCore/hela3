@@ -1,0 +1,49 @@
+{
+  "private": true,
+  "version": "0.1.0",
+  "name": "@tunnckocore/hela-monorepo",
+  "description": "WIP: Powerful software development experience",
+  "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
+  "repository": "tunnckocorehq/hela",
+  "homepage": "https://github.com/tunnckocorehq/hela",
+  "license": "MPL-2.0",
+  "scripts": {
+    "postinstall": "lerna bootstrap",
+    "lint": "yarn scripts devest lint",
+    "test": "yarn scripts devest test",
+    "cleanup": "rm -rf dist packages/*/dist",
+    "babel-runner": "babel packages/jest-runner-babel/src -d packages/jest-runner-babel/dist --delete-dir-on-start --config-file ./.babelrc.js",
+    "build": "yarn run cleanup && yarn run babel-runner && jest --config jest-build.config.js",
+    "now-build": "yarn build"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-syntax-import-meta": "^7.2.0",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@tunnckocore/config": "^4.0.1",
+    "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
+    "jest": "^24.8.0",
+    "lerna": "^3.15.0"
+  },
+  "renovate": {
+    "extends": [
+      "config:base",
+      ":onlyNpm",
+      ":gitSignOff",
+      ":automergePr",
+      ":automergeAll",
+      ":respectLatest",
+      ":rebaseStalePrs",
+      ":semanticCommits",
+      ":disableRateLimiting",
+      ":preserveSemverRanges",
+      ":maintainLockFilesWeekly"
+    ]
+  }
+}

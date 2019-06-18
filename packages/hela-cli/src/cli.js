@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const main = require('./index');
+import main from './index';
 
-main()
+main
   .then(() => {
     process.exit(0);
   })

@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const util = require('util');
-const { hela } = require('@hela/core');
-const findUp = require('find-file-up');
+import fs from 'fs';
+import path from 'path';
+import util from 'util';
+import { hela } from '@hela/core';
+import findUp from 'find-file-up';
 
 const cli = hela();
 
@@ -19,7 +19,7 @@ cli.option('--show-stack', 'Show error stack trace when command fail', false);
  *
  * @returns {Promise}
  */
-async function main() {
+export default async function main() {
   const cfg = await loadConfig();
 
   if (cfg.default && typeof cfg.default === 'function') {
@@ -95,5 +95,3 @@ async function loadPkgConfig() {
 
   return cfg;
 }
-
-module.exports = main;

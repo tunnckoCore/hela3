@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "name": "@hela/core",
+  "description": "WIP: Powerful software development experience",
+  "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
+  "homepage": "https://github.com/tunnckocorehq/hela",
+  "license": "MPL-2.0",
+  "main": "dist/main/index.js",
+  "module": "dist/module/index.js",
+  "scripts": {},
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tunnckoCoreHQ/hela.git",
+    "directory": "packages/hela-core"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "tunnckocorehq",
+    "devest",
+    "hela",
+    "jest",
+    "env",
+    "develop"
+  ],
+  "dependencies": {
+    "execa": "sindresorhus/execa#master",
+    "sade": "^1.4.1",
+    "dargs": "^6.1.0"
+  }
+}
