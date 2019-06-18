@@ -3,7 +3,13 @@
 module.exports = {
   ignore: ['**/__tests__/**'],
   presets: [
-    ['@babel/preset-env', { targets: { node: 8 } }],
+    [
+      '@babel/preset-env',
+      {
+        targets: { node: 8 },
+        modules: process.env.NODE_ENV === 'module' ? false : 'commonjs',
+      },
+    ],
     '@babel/preset-typescript',
   ],
   plugins: [

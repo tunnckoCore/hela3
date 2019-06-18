@@ -9,7 +9,7 @@ import { pass, fail } from 'create-jest-runner';
 const isWin32 = os.platform() === 'win32';
 
 /* eslint-disable max-statements */
-export default function babelRunner({ testPath, config }) {
+export default async function babelRunner({ testPath, config }) {
   const start = new Date();
   const name = '@tunnckocore/jest-runner-babel';
 

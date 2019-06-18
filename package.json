@@ -12,9 +12,12 @@
     "lint": "yarn scripts devest lint",
     "test": "yarn scripts devest test",
     "cleanup": "rm -rf dist packages/*/dist",
-    "babel-runner": "babel packages/jest-runner-babel/src -d packages/jest-runner-babel/dist --delete-dir-on-start --config-file ./.babelrc.js",
-    "build": "yarn run cleanup && yarn run babel-runner && jest --config jest-build.config.js",
-    "now-build": "yarn build"
+    "babel-runner": "babel packages/jest-runner-babel/src -d packages/jest-runner-babel/dist/main --config-file ./.babelrc.js",
+    "prebuild": "yarn run cleanup && yarn run babel-runner",
+    "build": "yarn run build:main && yarn run build:module",
+    "build:main": "jest --config jest-build.config.js",
+    "build:module": "NODE_ENV=module jest --config jest-build.config.js",
+    "now-build": "yarn run build"
   },
   "workspaces": [
     "packages/*"

@@ -5,6 +5,8 @@
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
   "homepage": "https://github.com/tunnckocorehq/hela",
   "license": "MPL-2.0",
+  "main": "dist/main/index.js",
+  "module": "dist/module/index.js",
   "scripts": {},
   "publishConfig": {
     "access": "public",
