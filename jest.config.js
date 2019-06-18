@@ -1,7 +1,10 @@
 'use strict';
 
-const build = require('./jest-build.config');
+const createBuildConfig = require('./build.config');
 
 module.exports = {
-  projects: [build],
+  projects: [
+    createBuildConfig({ NODE_ENV: 'main' }),
+    createBuildConfig({ NODE_ENV: 'module' }),
+  ],
 };

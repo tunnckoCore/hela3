@@ -14,9 +14,7 @@
     "cleanup": "rm -rf dist packages/*/dist",
     "babel-runner": "babel packages/jest-runner-babel/src -d packages/jest-runner-babel/dist/main --config-file ./.babelrc.js",
     "prebuild": "yarn run cleanup && yarn run babel-runner",
-    "build": "yarn run build:main && yarn run build:module",
-    "build:main": "jest --config jest-build.config.js",
-    "build:module": "NODE_ENV=module jest --config jest-build.config.js",
+    "build": "jest",
     "now-build": "yarn run build"
   },
   "workspaces": [
