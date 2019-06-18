@@ -1,13 +1,13 @@
 'use strict';
 
-module.exports = {
-  ignore: ['**/__tests__/**'],
+module.exports = (env) => ({
+  ignore: env.NODE_ENV === 'test' ? [] : ['**/__tests__/**'],
   presets: [
     [
       '@babel/preset-env',
       {
         targets: { node: 8 },
-        modules: process.env.NODE_ENV === 'module' ? false : 'commonjs',
+        modules: env.NODE_ENV === 'module' ? false : 'commonjs',
       },
     ],
     '@babel/preset-typescript',
@@ -18,4 +18,4 @@ module.exports = {
     'babel-plugin-dynamic-import-node-babel-7',
   ],
   comments: false,
-};
+});

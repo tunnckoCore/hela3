@@ -9,13 +9,13 @@
   "license": "MPL-2.0",
   "scripts": {
     "postinstall": "lerna bootstrap",
-    "lint": "yarn scripts devest lint",
-    "test": "yarn scripts devest test",
     "cleanup": "rm -rf dist packages/*/dist",
-    "babel-runner": "babel packages/jest-runner-babel/src -d packages/jest-runner-babel/dist/main --config-file ./.babelrc.js",
+    "babel-runner": "babel packages/jest-runner-babel/src -d packages/jest-runner-babel/dist/main",
+    "test": "NODE_ENV=test jest",
+    "lint": "jest --config jest-lint.config.js",
     "prebuild": "yarn run cleanup && yarn run babel-runner",
-    "build": "jest",
-    "now-build": "yarn run build"
+    "build": "jest --config jest-build.config.js",
+    "now-build": "yarn run lint && yarn run test && yarn run build"
   },
   "workspaces": [
     "packages/*"

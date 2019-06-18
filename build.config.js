@@ -1,6 +1,6 @@
 'use strict';
 
-const babelConfig = require('./.babelrc');
+const getBabelConfig = require('./babel-main-config');
 
 module.exports = (env) => ({
   displayName: env.NODE_ENV === 'module' ? 'build:module' : 'build:main',
@@ -12,7 +12,7 @@ module.exports = (env) => ({
   haste: {
     '@tunnckocore/jest-runner-babel': {
       outDir: env.NODE_ENV === 'module' ? 'dist/module' : 'dist/main',
-      babel: babelConfig,
+      babel: getBabelConfig(env),
     },
   },
 
