@@ -12,7 +12,8 @@ export function createLintConfig(opts) {
       '.+/dist/.+',
 
       // @hela/dev specific
-      // '.+/\\.config-.+$',
+      '.+/configs/build/config\\.js$',
+      '.+/configs/lint/config\\.js$',
     ],
 
     // TODO: include in this monorepo

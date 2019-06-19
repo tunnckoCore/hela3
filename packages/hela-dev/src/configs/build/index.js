@@ -37,8 +37,8 @@ export function createBuildConfig(options) {
       '.+/dist/.+',
 
       // @hela/dev specific
-      // '.+/configs/build/config\\.js$',
-      // '.+/configs/lint/config\\.js$',
+      '.+/configs/build/config\\.js$',
+      '.+/configs/lint/config\\.js$',
     ],
 
     haste: {
