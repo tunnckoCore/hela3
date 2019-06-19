@@ -17,6 +17,7 @@ const explorer = cosmiconfig('hela', {
     '.js': esmLoader(new Module(), { cache: false }),
   },
 });
+
 const program = hela();
 
 /**
@@ -37,14 +38,22 @@ program.option(
  * @returns {Promise}
  */
 export default async function main() {
-  const { config: cfg } = await explorer.search();
+  const { config: cfg, filepath } = await explorer.search();
 
   if (!cfg) {
     throw new Error('hela: no config found');
   }
 
+  console.log('hela: Loading config -> ', filepath);
+
   Object.keys(cfg).forEach((name) => {
-    program.tree[name] = cfg[name].program.tree[name];
+    const taskValue = cfg[name];
+
+    if (taskValue && taskValue.isHela) {
+      program.tree[name] = cfg[name].tree[name];
+    } else {
+      console.log('hela: skipping... task should be Hela instance, for now.');
+    }
   });
 
   return program.listen();
