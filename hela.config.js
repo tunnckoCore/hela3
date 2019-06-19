@@ -15,8 +15,8 @@ const bld = prog
 
 export const build = bld;
 
-export const lint = prog.command('lint', 'linting something').action(() => {
+export const lint = prog.command('lint', 'linting something').action((argv) => {
   console.log('woo lint');
 
-  return shell('echo "foo $PWD bar"').then(() => build('foobie'));
+  return shell('echo "foo $PWD bar"').then(() => build('foobie', argv));
 });
