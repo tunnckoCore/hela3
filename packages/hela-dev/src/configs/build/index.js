@@ -1,5 +1,8 @@
 // import micromatch from 'micromatch';
 
+import fs from 'fs';
+import path from 'path';
+
 /* eslint-disable import/prefer-default-export */
 
 export function createBuildConfig(options) {
@@ -11,6 +14,15 @@ export function createBuildConfig(options) {
       env: { NODE_ENV: 'main' },
     },
     options,
+  );
+
+  const babelConfig = getBabelConfig(opts);
+  const fp = path.join(path.dirname(__dirname), 'babel.js');
+
+  fs.writeFileSync(
+    fp,
+    `module.exports=${JSON.stringify(babelConfig)}`,
+    'utf-8',
   );
 
   // TODO: using `micromatch`
@@ -42,7 +54,7 @@ export function createBuildConfig(options) {
     haste: {
       '@tunnckocore/jest-runner-babel': {
         outDir: opts.env.NODE_ENV === 'module' ? 'dist/module' : 'dist/main',
-        babel: getBabelConfig(opts),
+        babel: babelConfig,
       },
     },
 
