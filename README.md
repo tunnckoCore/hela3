@@ -1,6 +1,7 @@
 # Hela v3
 
 - Supports [TypeScript](https://www.typescriptlang.org/), through Babel 7, out of the box.
+- Compiles to Node 8, requires Node >=10.13
 - Instant Fast™, fully based on [Jest](https://github.com/facebook/jest)
 - Powerful, self-describing API, based on [sade](https://github.com/lukeed/sade).
 - Infinitely composable, flexible and configurable.
