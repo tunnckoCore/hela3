@@ -1,6 +1,8 @@
 // import micromatch from 'micromatch';
 
-export default function createBuildConfig(options) {
+/* eslint-disable import/prefer-default-export */
+
+export function createBuildConfig(options) {
   const opts = Object.assign(
     {
       // TODO: using `micromatch`
@@ -31,7 +33,6 @@ export default function createBuildConfig(options) {
     testPathIgnorePatterns: [
       '.+/__tests__/.+',
       '.+/dist/.+',
-      '.+/sasasasa/.+',
 
       // @hela/dev specific
       '.+/\\.config-.+$',

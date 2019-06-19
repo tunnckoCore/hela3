@@ -1,123 +1,69 @@
-'use strict';
+import fs from 'fs';
+import path from 'path';
+import util from 'util';
+import proc from 'process';
+import { exec } from '@hela/core';
 
-const fs = require('fs');
-const path = require('path');
-const proc = require('process');
-const { exec } = require('@hela/core');
+export { createBuildConfig } from './configs/build';
+export { createLintConfig } from './configs/lint';
 
-function arrayify(x) {
-  return [].concat(x || []);
+export const helaDevRoot = path.dirname(__dirname);
+export const helaDevNodeBins = path.join(
+  helaDevRoot,
+  'node_modules',
+  '.bin',
+  'jest',
+);
+
+export function createJestConfig(proj, opts) {
+  const projects = []
+    .concat(proj)
+    .map((cfg) => cfg(opts))
+    .filter(Boolean);
+
+  const hash = toHash(projects);
+
+  const content = `module.exports={projects:${JSON.stringify(projects)}};`;
+  return { hash, content };
 }
 
-/**
- * Create explicit alias key/value pair from the current
- * packages inside each workspace, because
- *
- * '^(.+)': '/path/to/package/src'
- *
- * can be very big mistake ;]
- * We just don't use regex, we precompute them.
- */
-function createAliases(rootDir) {
-  // eslint-disable-next-line import/no-dynamic-require, global-require
-  const pkg = require(path.join(rootDir, 'package.json'));
-  const defaultExtensions = ['ts', 'tsx', 'js', 'jsx', 'mjs'];
-
-  let extensions = arrayify(pkg.extensions);
-  extensions = extensions.length > 0 ? extensions : defaultExtensions;
-
-  const exts = extensions.map((x) => `.${x}`);
-
-  const alias = arrayify(pkg.workspaces)
-    .map((x) => x.slice(0, -2))
-    .filter(Boolean)
-    .reduce((acc, ws) => {
-      const workspace = path.join(rootDir, ws);
-      const packages = fs
-        .readdirSync(workspace)
-        .map((dir) => {
-          const pkgDir = path.join(workspace, dir);
-          const pkgJsonPath = path.join(pkgDir, 'package.json');
-
-          return { pkgDir, pkgJsonPath };
-        })
-        .map(({ pkgDir, pkgJsonPath }) => {
-          // eslint-disable-next-line global-require, import/no-dynamic-require
-          const pkgJson = require(pkgJsonPath);
-          return [pkgDir, pkgJson];
-        });
-
-      return acc.concat(packages);
-    }, [])
-    .reduce((acc, [pkgDir, pkgJson]) => {
-      acc[pkgJson.name] = path.join(pkgDir, 'src');
-      return acc;
-    }, {});
-
-  return { cwd: rootDir, extensions: exts, exts: extensions, alias };
+export function toHash(val) {
+  const value = typeof val !== 'string' ? JSON.stringify(val) : val;
+  return Buffer.from(value, 'base64')
+    .toString('hex')
+    .slice(-15, -2);
 }
 
-function createPartialConfig(rootDir) {
-  const res = createAliases(rootDir);
+export function exists(fp, opts) {
+  return fs.existsSync(path.join(opts.cwd, fp));
+}
 
-  res.jestConfig = {
-    rootDir,
+export async function createAction(argv) {
+  const opts = Object.assign({ cwd: proc.cwd(), type: 'build' }, argv, {
+    env: { NODE_ENV: 'main' },
+  });
 
-    moduleFileExtensions: res.exts.concat('json'),
-  };
+  opts.mono = exists('packages', opts) || exists('lerna.json', opts);
 
-  if (isObject(res.alias)) {
-    res.jestConfig.moduleNameMapper = res.alias;
+  const cfgMainPath = path.join(__dirname, 'configs', opts.type, '.config');
+  const cfgCwdPathHash = toHash(opts.cwd);
+  const cfgPath = `${cfgMainPath}-${cfgCwdPathHash}.js`;
+
+  const { hash, content } = createJestConfig(opts.projects, opts);
+
+  try {
+    const { hash: OldHash } = createJestConfig((await import(cfgPath)).default);
+
+    if (hash !== OldHash) {
+      // fs.unlinkSync(cfgPath);
+      throw new Error('fake one, to the catch');
+    }
+  } catch (err) {
+    await util.promisify(fs.writeFile)(cfgPath, content, 'utf-8');
   }
 
-  return res;
+  return exec([
+    `node ${helaDevNodeBins} --version`,
+    `node ${helaDevNodeBins} --config ${cfgPath}`,
+  ]);
 }
-function isObject(val) {
-  return val && typeof val === 'object' && !Array.isArray(val);
-}
-
-function createRunCommand(args, argv) {
-  return (cmdName, configName) => {
-    const configPath = path.join(__dirname, 'commands', cmdName, configName);
-    const cmd = ['jest', '--config', configPath]
-      .concat(args)
-      .filter(Boolean)
-      .join(' ');
-
-    return exec(cmd, {
-      env: proc.env,
-      stdio: 'inherit',
-      cwd: argv.cwd,
-    });
-  };
-}
-
-function createCommandConfig(fn) {
-  return (argv) => {
-    const res = createPartialConfig(argv.cwd);
-    return Object.assign({}, res.jestConfig, fn(res));
-  };
-}
-
-function runSetup(opts, configName) {
-  const commandsDir = path.join(__dirname, 'commands');
-  fs.readdirSync(commandsDir).forEach((name) => {
-    const configFile = path.join(commandsDir, name, configName);
-
-    // eslint-disable-next-line import/no-dynamic-require, global-require
-    const createConfig = require(path.join(commandsDir, name));
-    const config = createConfig(opts);
-
-    const content = `module.exports = ${JSON.stringify(config)}`;
-
-    fs.writeFileSync(configFile, content);
-  });
-}
-
-module.exports = {
-  createAliases,
-  createPartialConfig,
-  createCommandConfig,
-  createRunCommand,
-  runSetup,
-};
