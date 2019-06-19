@@ -1,5 +1,13 @@
-# template
-A repository template for all repos
+# Hela v3
+
+- Supports [TypeScript](https://www.typescriptlang.org/), through Babel 7, out of the box.
+- Instant Fast™, fully based on [Jest](https://github.com/facebook/jest)
+- Powerful, self-describing API, based on [sade](https://github.com/lukeed/sade).
+- Infinitely composable, flexible and configurable.
+- Shareable configs of tasks/commands.
+- Supports building sub-commands.
+- End-to-end developer environment for powerful [DX](https://hackernoon.com/developer-experience-dx-devs-are-people-too-6590d6577afe?gi=99bd2721df2b).
+- Truly beautiful and Free & Open Source, using [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/), [why & how](https://www.hashicorp.com/blog/introducing-a-cla).
 
 ## Install with
 
