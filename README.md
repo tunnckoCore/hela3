@@ -7,9 +7,11 @@ Install and try the `@hela/dev` shareable config. You can create, compose and pu
 everything is super flexible and powerful.
 
 ```bash
-yarn add --dev @hela/cli @hela/dev
+# everything is on the `next` dist-tag, so:
+yarn add --dev @hela/cli@next @hela/dev@next
 
-# And run
+# And run,
+# or with `yarn start`
 
 hela
 hela --help
