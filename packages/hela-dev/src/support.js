@@ -54,5 +54,5 @@ export async function createAction(argv) {
     await util.promisify(fs.writeFile)(cfgPath, content, 'utf-8');
   }
 
-  return exec([`yarn jest --version`, `yarn --config ${cfgPath}`]);
+  return exec([`yarn jest --version`, `yarn jest --config ${cfgPath}`]);
 }
