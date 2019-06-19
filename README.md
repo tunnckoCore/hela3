@@ -21,8 +21,8 @@ hela build
 hela all
 ```
 
-The only thing that need manual job, for now, is to add `.babelrc.js` or `babel.config.js`
-file like this one, so it will be only used when running the tests.
+The only thing that need manual job, for now, is to add `babel.config.js`
+file - that's important it isn't the same as `.babelrc.js` one, so it will be only used when running the tests.
 
 ```js
 // babel config file
@@ -30,6 +30,49 @@ file like this one, so it will be only used when running the tests.
 /* eslint-disable-next-line import/no-extraneous-dependencies */
 module.exports = require('@hela/dev/dist/build/main/configs/babel');
 ```
+
+The other thing is to put `"hela": { "extends": "@hela/dev" }` in your `package.json` file, or really any other common config file, we are using [cosmiconfic](https://github.com/davidtheclark/cosmiconfig/) for this. 
+
+If you want to try fresh, put `"hela": "./local-relative-path-to-my-config.js"`, then you need to install the `@hela/core` and import it (those config files support both CJS and ESM syntax).
+
+```js
+// that's basically the whole API
+import { hela, shell, exec, toFlags } from '@hela/core'
+
+// some config
+import { lint } from '@hela/dev'
+
+// We need create an "instance" thing.
+// This `prog` is just like `sade` - we use it under the hood.
+const prog = hela()
+
+// Then we need to start exporting our commands, jobs, tasks,
+// or however you want to call it.
+
+export const foo = prog
+  .command('build <src> [dest]', 'some example foo command')
+  .option('-f, --foo', 'some example flag', false)
+  .action((src, argv) => {
+
+    return exec(`echo "fake building '${src}' to dist/ ...."`)
+  })
+
+// Guess what?
+// You can just run `hela bar` and it will
+// use the `@hela/dev`'s `lint` command. 
+export const bar = lint
+
+// What about using inside other commands? No problem.
+// Here we just use and call the above `foo` command. 
+export const qux = prog.
+  .command('qux', 'foo bar baz qux')
+  .action((argv) => foo('quxie', argb))
+```
+
+It's truly beautiful, composable, flexible and amazing! :heart:
+In bonus, you get great features because Sade - like subcommands, `--help` handling,
+cool help output and ton other stuff. Thanks [@luuked](https://github.com/lukeed).
+
 
 Every other thing is handled by internal babel and jest configs. Look at the `hela-dev/src/configs`.
 
