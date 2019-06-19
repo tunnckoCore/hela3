@@ -16,7 +16,7 @@
     "node": ">=10.13.0"
   },
   "bin": {
-    "hela": "dist/main/cli.js"
+    "hela": "dist/build/main/cli.js"
   },
   "repository": {
     "type": "git",
