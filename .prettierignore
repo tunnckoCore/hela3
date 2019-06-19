@@ -4,6 +4,7 @@ LICENSE
 
 # Build environment
 dist
+lerna.json
 
 # Package managers lockfiles
 package-lock.json
