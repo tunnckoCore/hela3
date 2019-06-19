@@ -11,12 +11,13 @@ module.exports = (env) => ({
 
   haste: {
     '@tunnckocore/jest-runner-babel': {
-      outDir: env.NODE_ENV === 'module' ? 'dist/module' : 'dist/main',
+      outDir:
+        env.NODE_ENV === 'module' ? 'dist/build/module' : 'dist/build/main',
       babel: getBabelConfig(env),
     },
   },
 
-  runner: './packages/jest-runner-babel/dist/main/index.js',
+  runner: './packages/jest-runner-babel/dist/build/main/index.js',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'mjs'],
   // rootDir: process.cwd(),
 });

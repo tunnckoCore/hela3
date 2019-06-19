@@ -1,7 +1,6 @@
 // import micromatch from 'micromatch';
 
-import fs from 'fs';
-import path from 'path';
+import babelConfig from '../babel';
 
 /* eslint-disable import/prefer-default-export */
 
@@ -14,15 +13,6 @@ export function createBuildConfig(options) {
       env: { NODE_ENV: 'main' },
     },
     options,
-  );
-
-  const babelConfig = getBabelConfig(opts);
-  const fp = path.join(path.dirname(__dirname), 'babel.js');
-
-  fs.writeFileSync(
-    fp,
-    `module.exports=${JSON.stringify(babelConfig)}`,
-    'utf-8',
   );
 
   // TODO: using `micromatch`
@@ -53,35 +43,16 @@ export function createBuildConfig(options) {
 
     haste: {
       '@tunnckocore/jest-runner-babel': {
-        outDir: opts.env.NODE_ENV === 'module' ? 'dist/module' : 'dist/main',
-        babel: babelConfig,
+        outDir:
+          opts.env.NODE_ENV === 'module'
+            ? 'dist/build/module'
+            : 'dist/build/main',
+        babel: babelConfig.default && babelConfig,
       },
     },
 
     runner: '@tunnckocore/jest-runner-babel',
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'mjs', 'json'],
     rootDir: opts.cwd,
-  };
-}
-
-function getBabelConfig(opts) {
-  return {
-    ignore: opts.env.NODE_ENV === 'test' ? [] : ['**/__tests__/**'],
-    presets: [
-      [
-        '@babel/preset-env',
-        {
-          targets: { node: 8 },
-          modules: opts.env.NODE_ENV === 'module' ? false : 'commonjs',
-        },
-      ],
-      '@babel/preset-typescript',
-    ],
-    plugins: [
-      '@babel/plugin-syntax-dynamic-import',
-      '@babel/plugin-syntax-import-meta',
-      'babel-plugin-dynamic-import-node-babel-7',
-    ],
-    comments: false,
   };
 }
