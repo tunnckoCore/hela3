@@ -41,7 +41,9 @@ export const test = prog
   .command('test', 'Run the tests, through Jest')
   .action(function nm() {
     // const testConfig = path.join(__dirname, 'configs', 'test', 'config.js');
-    return exec(`yarn scripts jest --onlyChanged`);
+    return exec(`yarn scripts jest --onlyChanged`, {
+      env: { NODE_ENV: 'test' },
+    });
   });
 
 export const all = prog
