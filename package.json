@@ -23,7 +23,7 @@
   ],
   "devDependencies": {
     "@babel/cli": "^7.4.4",
-    "@hela/cli": "^3.0.0-alpha.11",
+    "@hela/cli": "^3.0.0-alpha.12",
     "@hela/dev": "^3.0.0-alpha.10",
     "@tunnckocore/config": "^4.0.1",
     "gitcommit": "^1.0.14",
