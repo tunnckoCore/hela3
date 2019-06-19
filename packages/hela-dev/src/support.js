@@ -10,13 +10,10 @@ export { createLintConfig } from './configs/lint';
 export function createJestConfig(proj, opts) {
   const projects = []
     .concat(proj)
-    .map((cfg) => cfg(opts))
+    .map((cfg) => (typeof cfg === 'function' ? cfg(opts) : cfg))
     .filter(Boolean);
 
-  const hash = toHash(projects);
-
-  const content = `module.exports={projects:${JSON.stringify(projects)}};`;
-  return { hash, content };
+  return `module.exports={projects:${JSON.stringify(projects)}};`;
 }
 
 export function toHash(val) {
@@ -37,25 +34,15 @@ export async function createAction(argv) {
 
   opts.mono = exists('packages', opts) || exists('lerna.json', opts);
 
-  const cfgMainPath = path.join(__dirname, 'configs', opts.type, '.config');
-  const cfgCwdPathHash = toHash(opts.cwd);
-  const cfgPath = `${cfgMainPath}-${cfgCwdPathHash}.js`;
+  const cfgPath = path.join(__dirname, 'configs', opts.type, 'config.js');
+  const content = createJestConfig(opts.projects, opts);
 
-  const { hash, content } = createJestConfig(opts.projects, opts);
-
-  try {
-    const { hash: OldHash } = createJestConfig((await import(cfgPath)).default);
-
-    if (hash !== OldHash) {
-      // fs.unlinkSync(cfgPath);
-      throw new Error('fake one, to the catch');
-    }
-  } catch (err) {
-    await util.promisify(fs.writeFile)(cfgPath, content, 'utf-8');
-  }
+  await util.promisify(fs.writeFile)(cfgPath, content, 'utf-8');
 
   return exec([
     `yarn scripts jest --version`,
-    `yarn scripts jest --config ${cfgPath}`,
+    `yarn scripts jest --onlyChanged --config ${cfgPath} ${
+      opts.watch ? '--watch' : ''
+    }`,
   ]);
 }

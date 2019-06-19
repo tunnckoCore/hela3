@@ -1,4 +1,6 @@
-import { hela } from '@hela/core';
+// import path from 'path';
+import { hela, exec } from '@hela/core';
+
 // eslint-disable-next-line import/no-duplicates
 import { createAction, createBuildConfig, createLintConfig } from './support';
 
@@ -35,10 +37,17 @@ export const lint = prog
     }),
   );
 
+export const test = prog
+  .command('test', 'Run the tests, through Jest')
+  .action(function nm() {
+    // const testConfig = path.join(__dirname, 'configs', 'test', 'config.js');
+    return exec(`yarn scripts jest --onlyChanged`);
+  });
+
 export const all = prog
-  .command('all', 'Run `lint` then `build` command.')
+  .command('all', 'Runs 1) `lint`, 2) `test`, and 3) `build` command.')
   .action((argv) =>
-    [lint, build].reduce(
+    [lint, test, build].reduce(
       (promise, cmd) => promise.then(() => cmd(argv)),
       Promise.resolve(),
     ),
