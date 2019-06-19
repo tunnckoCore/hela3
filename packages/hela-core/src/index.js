@@ -3,14 +3,6 @@ import dargs from 'dargs';
 import execa from 'execa';
 import Sade from 'sade';
 
-// import {
-//   createHandler,
-//   createActionWrapper,
-//   createListenMethod,
-//   stringActionWrapper,
-//   enhance,
-// } from './utils';
-
 const defaultOptions = {
   stdio: 'inherit',
   env: proc.env,
@@ -61,24 +53,10 @@ export function hela(options) {
   const prog = Sade('hela').version('3.0.0');
   const opts = Object.assign({}, defaultOptions, options, { lazy: true });
 
-  const sade = Object.getOwnPropertyNames(prog)
-    .concat(Object.getOwnPropertyNames(prog.__proto__)) // eslint-disable-line no-proto
-    .filter((x) => x !== 'constructor');
-
-  const app = {
+  return Object.assign(prog, {
     isHela: true,
     commands: {},
-  };
 
-  sade.forEach((key) => {
-    if (typeof prog[key] === 'function') {
-      app[key] = prog[key].bind(app);
-    } else {
-      app[key] = prog[key];
-    }
-  });
-
-  return Object.assign(app, {
     /**
      * Action that will be called when command is called.
      *
@@ -87,7 +65,6 @@ export function hela(options) {
      * @public
      */
     action(fn) {
-      // const self = this;
       const name = this.curr || '__default__';
       const taskObj = this.tree[name];
 
@@ -129,7 +106,7 @@ export function hela(options) {
         await handler.apply(this, args);
       } catch (err) {
         const error = Object.assign(err, {
-          commandArgv: args[args.length - 1],
+          commandArgv: args.pop(),
           commandArgs: args,
           commandName: name,
         });
