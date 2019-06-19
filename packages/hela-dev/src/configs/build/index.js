@@ -24,7 +24,7 @@ export function createBuildConfig(options) {
   //   .filter(Boolean)
   //   .map((pattern) => `<root>/${pattern}`);
 
-  const match = opts.mono ? 'packages/*/src/**/*' : '**/*';
+  const match = opts.mono ? 'packages/*/src/**/*' : 'src/**/*';
   return {
     displayName: opts.env.NODE_ENV === 'module' ? 'build:esm' : 'build:cjs',
 

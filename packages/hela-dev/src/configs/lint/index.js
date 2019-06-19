@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 export function createLintConfig(opts) {
-  const match = opts.mono ? 'packages/*/src/**/*' : '**/*';
+  const match = opts.mono ? 'packages/*/src/**/*' : 'src/**/*';
 
   return {
     displayName: 'lint',
