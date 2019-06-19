@@ -3,13 +3,13 @@ import dargs from 'dargs';
 import execa from 'execa';
 import sade from 'sade';
 
-import {
-  createHandler,
-  createActionWrapper,
-  createListenMethod,
-  stringActionWrapper,
-  handleChaining,
-} from './utils';
+// import {
+//   createHandler,
+//   createActionWrapper,
+//   createListenMethod,
+//   stringActionWrapper,
+//   enhance,
+// } from './utils';
 
 const defaultOptions = {
   stdio: 'inherit',
@@ -28,12 +28,12 @@ export function toFlags(argv, options) {
 
 /**
  *
- * @param {string|string[]} cmd
+ * @param {string|string[]} cmds
  * @param {object} [options]
  * @public
  */
-export function shell(cmd, options) {
-  return exec(cmd, Object.assign({}, options, { shell: true }));
+export function shell(cmds, options) {
+  return exec(cmds, Object.assign({}, options, { shell: true }));
 }
 
 /**
@@ -42,9 +42,14 @@ export function shell(cmd, options) {
  * @param {object} [options]
  * @public
  */
-export function exec(cmd, options) {
+export async function exec(cmds, options) {
+  const commands = [].concat(cmds).filter(Boolean);
   const opts = Object.assign({}, defaultOptions, options);
-  return execa.command(cmd, opts);
+
+  /* eslint-disable no-restricted-syntax, no-await-in-loop */
+  for (const cmd of commands) {
+    await execa.command(cmd, opts);
+  }
 }
 
 /**
@@ -54,7 +59,7 @@ export function exec(cmd, options) {
  */
 export function hela(options) {
   const prog = sade('hela').version('3.0.0');
-  const opts = Object.assign({}, defaultOptions, options, {});
+  const opts = Object.assign({}, defaultOptions, options, { lazy: true });
 
   prog.commands = {};
 
@@ -74,7 +79,8 @@ export function hela(options) {
       const KEY = '__default__';
       prog.default = prog.curr = KEY; // eslint-disable-line no-multi-assign
       prog.tree[KEY].usage = '';
-      prog.tree[KEY].handler = async () => fn();
+      prog.tree[KEY].describe = '';
+      prog.tree[KEY].handler = async (...args) => fn(...args);
 
       return prog;
     },
@@ -87,26 +93,19 @@ export function hela(options) {
      * @public
      */
     action(fn) {
+      // const self = this;
       const name = prog.curr || '__default__';
       const task = prog.tree[name];
 
       if (typeof fn === 'function') {
-        task.handler = createHandler({ shell, toFlags, fn, task, opts });
-      }
-      if (typeof fn === 'string') {
-        task.handler = stringActionWrapper({ shell, toFlags, cmd: fn, opts });
-      }
-      if (Array.isArray(fn)) {
-        fn.forEach((func) => {
-          prog.action(func);
-        });
+        task.handler = async (...args) => {
+          const fakeArgv = Object.assign({}, task.default, { _: [name] });
+
+          return fn(...args.concat(fakeArgv));
+        };
       }
 
-      handleChaining(task);
-
-      prog.commands[name] = createActionWrapper(task, name);
-
-      return task.handler;
+      return enhance(task, this);
     },
 
     /**
@@ -117,12 +116,49 @@ export function hela(options) {
      * @param {Function} fn
      * @public
      */
-    listen: createListenMethod(prog, opts),
+    listen() {
+      return new Promise((resolve, reject) => {
+        const result = prog.parse(proc.argv, opts);
+
+        if (!result || (result && !result.args && !result.name)) {
+          return;
+        }
+        const { args, name, handler } = result;
+
+        handler(...args)
+          .then(resolve)
+          .catch((err) => {
+            const error = Object.assign(err, {
+              commandArgv: args[args.length - 1],
+              commandArgs: args,
+              commandName: name,
+            });
+            reject(error);
+          });
+      });
+    },
   });
 
-  app.isHela = Boolean(
-    app.commands && app.commandless && app.listen && app.action && app.help,
-  );
-
   return app;
+}
+
+function enhance(task, self) {
+  const returnedFunctionFromAction = async (...args) => task.handler(...args);
+
+  return Object.keys(self)
+    .filter((x) => typeof self[x] === 'function')
+    .reduce(
+      (acc, methodName) => {
+        acc[methodName] = onChainingError;
+        return acc;
+      },
+      Object.assign(returnedFunctionFromAction, task, {
+        isHela: true,
+        program: self,
+      }),
+    );
+}
+
+function onChainingError() {
+  throw new Error('You cannot chain more after the `.action` call');
 }

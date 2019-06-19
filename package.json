@@ -14,8 +14,11 @@
     "test": "NODE_ENV=test jest",
     "lint": "jest --config jest-lint.config.js",
     "prebuild": "yarn run cleanup && yarn run babel-runner",
-    "build": "jest --config jest-build.config.js",
-    "now-build": "yarn run lint && yarn run test && yarn run build"
+    "build": "yarn run build:all",
+    "now-build": "yarn run lint && yarn run test && yarn run build",
+    "cli": "yarn build:all && yarn run cmd",
+    "cmd": "node packages/hela-cli/dist/main/cli.js",
+    "build:all": "jest --config jest-build.config.js"
   },
   "workspaces": [
     "packages/*"

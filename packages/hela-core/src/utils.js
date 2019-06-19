@@ -1,103 +1,91 @@
-import proc from 'process';
+// import proc from 'process';
 
-export function createHandler({ shell, toFlags, fn, task, opts }) {
-  return async function commandHandler(...args) {
-    const argz = args.concat(task);
-    const result = fn(...argz);
+// // export function createHandler({ shell, toFlags, fn, task, opts }) {
+// //   return async function commandHandler(...args) {
+// //     const argv = args.pop();
+// //     console.log(argv);
+// //     const argz = args.concat(task).concat(argv);
+// //     const result = fn(...argz);
 
-    if (typeof result === 'string') {
-      return stringActionWrapper({ cmd: result, shell, toFlags, opts })(
-        ...argz,
-      );
-    }
+// //     if (typeof result === 'string') {
+// //       return stringActionWrapper({ cmd: result, shell, toFlags, opts })(
+// //         ...argz,
+// //       );
+// //     }
 
-    // Specific & intentional case.
-    // 1. Allows directly calling execa.shell
-    // without passing the flags passed to hela task.
-    // 2. Runs the commands in series.
-    if (Array.isArray(result)) {
-      return shell(result, opts);
-    }
+// //     // Specific & intentional case.
+// //     // 1. Allows directly calling execa.shell
+// //     // without passing the flags passed to hela task.
+// //     // 2. Runs the commands in series.
+// //     if (Array.isArray(result)) {
+// //       return Promise.all(result.map((cmd) => shell(cmd, opts)));
+// //     }
 
-    return result;
-  };
-}
+// //     return result;
+// //   };
+// // }
 
-export function stringActionWrapper({ shell, toFlags, cmd, opts }) {
-  return (...args) => {
-    const argv = args[args.length - 1];
+// export function stringActionWrapper({ shell, toFlags, cmd, opts }) {
+//   return (...argz) => {
+//     const [argv] = argz.slice(-1);
 
-    return shell(`${cmd} ${toFlags(argv, opts)}`, opts);
-  };
-}
+//     return shell(`${cmd} ${toFlags(argv, opts)}`, opts);
+//   };
+// }
 
-export function handleChaining(cmd) {
-  const task = Object.assign({}, cmd);
-  task.handler.command = onChainingError;
-  task.handler.describe = onChainingError;
-  task.handler.option = onChainingError;
-  task.handler.action = onChainingError;
+// // export function createActionWrapper(task, name) {
+// //   return function cmdAction() {
+// //     // use `arguments` intentionally,
+// //     // because the bad side of rest/spread operator.
+// //     const args = [].slice.call(arguments); // eslint-disable-line prefer-rest-params
+// //     const lens = args.length;
+// //     const segs = task.usage.split(/\s+/);
+// //     const reqs = segs.filter((x) => x.charAt(0) === '<');
 
-  // Metadata about that specific task.
-  task.handler.getMeta = () => task;
-}
+// //     if (args.length < reqs.length) {
+// //       throw new Error(`Insufficient arguments of "${name}" task`);
+// //     }
 
-function onChainingError() {
-  throw new Error('You cannot chain more after the `.action` call');
-}
+// //     const argv = args.pop();
+// //     const fakeArgv = Object.assign(
+// //       {},
+// //       task.default,
+// //       lens > 1 && typeof argv === 'object' && argv,
+// //       { _: [name] },
+// //     );
 
-export function createActionWrapper(task, name) {
-  return function cmdAction() {
-    // use `arguments` intentionally,
-    // because the bad side of rest/spread operator.
-    const args = [].slice.call(arguments); // eslint-disable-line prefer-rest-params
-    const lens = args.length;
-    const segs = task.usage.split(/\s+/);
-    const reqs = segs.filter((x) => x.charAt(0) === '<');
+// //     Object.keys(task.alias).forEach((key) => {
+// //       task.alias[key].forEach((alias) => {
+// //         fakeArgv[key] = fakeArgv[alias];
+// //       });
+// //     });
 
-    if (args.length < reqs.length) {
-      throw new Error(`Insufficient arguments of "${name}" task`);
-    }
+// //     const argz = args.concat(fakeArgv);
 
-    const argv = args.pop();
-    const fakeArgv = Object.assign(
-      {},
-      task.default,
-      lens > 1 && typeof argv === 'object' && argv,
-      { _: [name] },
-    );
+// //     return task.handler(...argz);
+// //   };
+// // }
 
-    Object.keys(task.alias).forEach((key) => {
-      task.alias[key].forEach((alias) => {
-        fakeArgv[key] = fakeArgv[alias];
-      });
-    });
+// export function createListenMethod(prog, opts) {
+//   return function listen() {
+//     return new Promise((resolve, reject) => {
+//       const result = prog.parse(proc.argv, opts);
 
-    const argz = args.concat(fakeArgv);
+//       if (!result || (result && !result.args && !result.name)) return;
 
-    return task.handler(...argz);
-  };
-}
+//       const { args, name, handler } = result;
 
-export function createListenMethod(prog, opts) {
-  return function listen() {
-    return new Promise((resolve, reject) => {
-      const result = prog.parse(proc.argv, opts);
-
-      if (!result) return;
-
-      const { args, name, handler } = result;
-
-      handler(...args)
-        .then(resolve)
-        .catch((err) => {
-          const error = Object.assign(err, {
-            commandArgv: args[args.length - 1],
-            commandArgs: args,
-            commandName: name,
-          });
-          reject(error);
-        });
-    });
-  };
-}
+//       Promise.resolve()
+//         .then(() => handler(...args))
+//         .then(resolve)
+//         .catch((err) => {
+//           const error = Object.assign(err, {
+//             commandArgv: args[args.length - 1],
+//             commandArgs: args,
+//             commandName: name,
+//           });
+//           reject(error);
+//         });
+//     });
+//   };
+// }

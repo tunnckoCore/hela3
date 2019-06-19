@@ -36,6 +36,8 @@
   ],
   "dependencies": {
     "@hela/core": "^2.0.0",
+    "cosmiconfig": "^5.2.1",
+    "esm": "^3.2.25",
     "find-file-up": "^2.0.1"
   }
 }
