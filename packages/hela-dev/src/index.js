@@ -39,11 +39,14 @@ export const lint = prog
 
 export const test = prog
   .command('test', 'Run the tests, through Jest')
-  .action(function nm() {
+  .action(function nm(argv) {
     // const testConfig = path.join(__dirname, 'configs', 'test', 'config.js');
-    return exec(`yarn scripts jest --onlyChanged`, {
-      env: { NODE_ENV: 'test' },
-    });
+    return exec(
+      `yarn scripts jest --onlyChanged ${argv.all ? '--all' : ''} ${
+        argv.watch ? '--watch' : ''
+      }`,
+      { env: { NODE_ENV: 'test' } },
+    );
   });
 
 export const all = prog

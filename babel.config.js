@@ -1,5 +1,4 @@
 'use strict';
 
-const getBabelConfig = require('./babel-main-config');
-
-module.exports = getBabelConfig(process.env);
+/* eslint-disable-next-line import/no-extraneous-dependencies */
+module.exports = require('@hela/dev/dist/build/main/configs/babel');

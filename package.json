@@ -9,38 +9,24 @@
   "license": "MPL-2.0",
   "scripts": {
     "postinstall": "lerna bootstrap",
+    "start": "yarn hela",
     "cleanup": "rm -rf dist packages/*/dist",
-    "babel-runner": "babel packages/jest-runner-babel/src -d packages/jest-runner-babel/dist/build/main",
-    "test": "NODE_ENV=test jest",
-    "lint": "jest --config jest-lint.config.js",
-    "prebuild": "yarn run cleanup && yarn run babel-runner",
-    "build": "yarn run build:all",
-    "now-build": "yarn run lint && yarn run test && yarn run build",
-    "cli": "yarn build:all && yarn run cmd",
-    "cmd": "node packages/hela-cli/dist/build/main/cli.js",
-    "build:all": "jest --config jest-build.config.js",
+    "commit": "git add -A && gitcommit -sS",
+    "postcommit": "yarn release",
     "release": "git push && yarn run x:version && yarn run x:publish",
     "x:version": "lerna version --conventional-commits --no-changelog --sign-git-commit --sign-git-tag",
     "x:publish": "lerna publish from-git --pre-dist-tag next --dist-tag next"
   },
-  "hela": {
-    "cwd": "/home/charlike/dev/hela",
-    "extends": "./packages/hela-dev/src/index.js"
-  },
+  "hela": "./packages/hela-dev/src/index.js",
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
     "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-syntax-import-meta": "^7.2.0",
-    "@babel/preset-env": "^7.4.5",
-    "@babel/preset-typescript": "^7.3.3",
+    "@hela/cli": "^3.0.0-alpha.11",
+    "@hela/dev": "^3.0.0-alpha.10",
     "@tunnckocore/config": "^4.0.1",
-    "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
-    "jest": "^24.8.0",
-    "jest-runner-eslint": "^0.7.4",
+    "gitcommit": "^1.0.14",
     "lerna": "^3.15.0"
   },
   "renovate": {

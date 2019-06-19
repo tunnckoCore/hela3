@@ -43,6 +43,6 @@ export async function createAction(argv) {
     `yarn scripts jest --version`,
     `yarn scripts jest --onlyChanged --config ${cfgPath} ${
       opts.watch ? '--watch' : ''
-    }`,
+    } ${opts.all ? '--all' : ''}`,
   ]);
 }
