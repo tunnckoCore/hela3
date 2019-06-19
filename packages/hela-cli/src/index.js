@@ -1,12 +1,10 @@
 import path from 'path';
 import proc from 'process';
-import Module from 'module';
 import { hela } from '@hela/core';
 import cosmiconfig from 'cosmiconfig';
 import esmLoader from 'esm';
 
-const mod = new Module();
-const esmRequire = esmLoader(mod);
+const esmRequire = esmLoader(module);
 
 const explorer = cosmiconfig('hela', {
   searchPlaces: [
@@ -43,7 +41,7 @@ program.option(
 export default async function main() {
   const res = await explorer.search();
 
-  if (!res.config) {
+  if (!res || (res && !res.config)) {
     throw new Error('hela: no config found');
   }
 
