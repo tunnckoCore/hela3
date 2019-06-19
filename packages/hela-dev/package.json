@@ -31,5 +31,10 @@
     "env",
     "develop"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "@hela/core": "^2.0.0",
+    "@tunnckocore/jest-runner-babel": "^2.0.0",
+    "jest": "24.7.0",
+    "micromatch": "^4.0.2"
+  }
 }

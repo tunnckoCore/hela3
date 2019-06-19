@@ -20,6 +20,9 @@
     "cmd": "node packages/hela-cli/dist/main/cli.js",
     "build:all": "jest --config jest-build.config.js"
   },
+  "hela": {
+    "extends": "./packages/hela-dev/src/index.js"
+  },
   "workspaces": [
     "packages/*"
   ],

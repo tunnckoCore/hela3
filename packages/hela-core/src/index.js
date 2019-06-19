@@ -1,7 +1,19 @@
+import mod from 'module';
 import proc from 'process';
 import dargs from 'dargs';
 import execa from 'execa';
 import Sade from 'sade';
+
+import allModulesPaths from 'all-module-paths';
+
+// eslint-disable-next-line no-underscore-dangle
+const paths = mod._nodeModulePaths(proc.cwd());
+
+// see the screenshots below
+const dirs = allModulesPaths({ paths });
+const OWN_PATH = dirs.allPaths.binaries.join(':');
+
+proc.env.PATH = `${OWN_PATH}:${proc.env.PATH}`;
 
 const defaultOptions = {
   stdio: 'inherit',

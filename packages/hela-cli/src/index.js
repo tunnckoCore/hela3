@@ -62,8 +62,6 @@ export default async function main() {
 
       if (taskValue && taskValue.isHela) {
         program.tree[name] = taskValue.tree[name];
-      } else {
-        console.log('hela: skipping... task should be Hela instance, for now.');
       }
     });
 

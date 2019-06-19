@@ -1,5 +1,6 @@
 # Build environment
 dist
+.config-*
 
 # Package managers lockfiles
 package-lock.json
