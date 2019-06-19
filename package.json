@@ -21,7 +21,7 @@
     "build:all": "jest --config jest-build.config.js",
     "release": "git add -A && git commit -s -S",
     "postrelease": "git push && yarn run x:version && yarn run x:publish",
-    "x:version": "lerna version v3.0.0-alpha.2 --message 'chore(release): version %s' --conventional-commits --no-changelog --sign-git-commit --sign-git-tag",
+    "x:version": "lerna version v3.0.0-alpha.3 --message 'chore(release): version %s' --conventional-commits --no-changelog --sign-git-commit --sign-git-tag",
     "x:publish": "lerna publish from-git --pre-dist-tag next --dist-tag next"
   },
   "hela": {
