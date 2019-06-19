@@ -1,5 +1,6 @@
 // import micromatch from 'micromatch';
 
+import path from 'path';
 import babelConfig from '../babel';
 
 /* eslint-disable import/prefer-default-export */
@@ -27,6 +28,11 @@ export function createBuildConfig(options) {
   //   .map((pattern) => `<root>/${pattern}`);
 
   const match = opts.mono ? 'packages/*/src/**/*' : 'src/**/*';
+  const esmDest = opts.dest
+    ? path.join(opts.dest, 'module')
+    : 'dist/build/module';
+  const cjsDest = opts.dest ? path.join(opts.dest, 'main') : 'dist/build/main';
+
   return {
     displayName: opts.env.NODE_ENV === 'module' ? 'build:esm' : 'build:cjs',
 
@@ -43,10 +49,7 @@ export function createBuildConfig(options) {
 
     haste: {
       '@tunnckocore/jest-runner-babel': {
-        outDir:
-          opts.env.NODE_ENV === 'module'
-            ? 'dist/build/module'
-            : 'dist/build/main',
+        outDir: opts.env.NODE_ENV === 'module' ? esmDest : cjsDest,
         babel: babelConfig.default && babelConfig,
       },
     },

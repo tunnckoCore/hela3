@@ -90,12 +90,17 @@ export function hela(options) {
 
       this.commands[name] = taskObj;
 
+      const programName = this.name;
       // ! important: sade does add `.name` to the instance,
       // ! but also it uses it for generating help and such.
-      // ! At that point we don't need it anymore, so we can delete it.
       delete this.name;
 
-      return Object.assign(taskObj.handler, this);
+      const handler = Object.assign(taskObj.handler, this);
+
+      // ! restore
+      this.name = programName;
+
+      return handler;
     },
 
     /**

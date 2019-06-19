@@ -19,18 +19,32 @@ const prog = hela();
 
 export const build = prog
   .command('build', 'Build project with Babel through Jest')
+  .option(
+    '--format',
+    'Pass comma-separated list like `main,module`',
+    'main,module',
+  )
+  .option(
+    '--dest',
+    'Destination folder. It is appended with /main or /module, depending on format',
+  )
+  .option('--watch', "Trigger the Jest's --watch")
+  .option('--all', 'Useful, because we pass --onlyChanged by default')
   .action((argv) =>
     createAction({
       ...argv,
-      projects: [
-        (opts) => createBuildConfig(opts),
-        (opts) => createBuildConfig({ ...opts, env: { NODE_ENV: 'module' } }),
-      ],
+      projects: argv.format
+        .split(',')
+        .map((format) => (opts) =>
+          createBuildConfig({ ...opts, env: { NODE_ENV: format } }),
+        ),
     }),
   );
 
 export const lint = prog
   .command('lint', 'Linting with ESLint through Jest')
+  .option('--watch', "Trigger the Jest's --watch")
+  .option('--all', 'Useful, because we pass --onlyChanged by default')
   .action((argv) =>
     createAction({
       ...argv,
@@ -41,6 +55,8 @@ export const lint = prog
 
 export const test = prog
   .command('test', 'Run the tests, through Jest')
+  .option('--watch', "Trigger the Jest's --watch")
+  .option('--all', 'Useful, because we pass --onlyChanged by default')
   .action(function nm(argv) {
     // const testConfig = path.join(__dirname, 'configs', 'test', 'config.js');
     return exec(

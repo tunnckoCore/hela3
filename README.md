@@ -32,10 +32,17 @@ hela --help
 hela lint
 hela test
 hela build
+
+# Yea, it's a command that runs
+# lint -> test -> build, in that order, serially.
 hela all
+
+# Build only for CJS,
+# default is --format main,module
+hela build --format main
 ```
 
-The only thing that need manual job, for now, is to add `babel.config.js`
+The only thing that need manual job, or just use `hela init`, is to add `babel.config.js`
 file - that's important it isn't the same as `.babelrc.js` one, so it will be only used when running the tests.
 
 ```js
@@ -101,7 +108,7 @@ and few others like `--mono` (not really needed, we are smart enough to know if 
 
 For now it only building (not bundling) CJS and ESM outputs, respectively in `dist/build/main` which you should use as your `"main"` field and `dist/build/module` for your `"module"` field.
 
-Currently, you cannot disable that behaving, it will always build the two.
+If you want only one build use the `--format` flag, the destination stays the same.
 
 ### About the Jest yellow warning
 

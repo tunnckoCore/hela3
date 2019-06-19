@@ -23,6 +23,10 @@ const explorer = cosmiconfig('hela', {
 
 const program = hela();
 
+program.command('help', 'Displays this message').action(() => {
+  program.help();
+});
+
 /**
  * Hela's CLI options and commands
  */
