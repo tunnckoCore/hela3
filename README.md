@@ -8,7 +8,7 @@
 - Shareable configs of tasks/commands.
 - Supports building sub-commands.
 - End-to-end developer environment for powerful [DX](https://hackernoon.com/developer-experience-dx-devs-are-people-too-6590d6577afe?gi=99bd2721df2b).
-- Truly beautiful and [Free & Open Source (Mozilla Public License 2.0)]((https://www.mozilla.org/en-US/MPL/2.0/)), see [why & how](https://www.hashicorp.com/blog/introducing-a-cla).
+- Truly beautiful and [Free & Open Source (Mozilla Public License 2.0)](https://www.mozilla.org/en-US/MPL/2.0/), see [why & how](https://www.hashicorp.com/blog/introducing-a-cla).
 
 ## Install with
 
