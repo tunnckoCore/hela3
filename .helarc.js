@@ -1,5 +1,9 @@
-import { hela, exec, shell } from './packages/hela-core/src/index';
+import { hela, exec, shell } from '@hela/core';
 // const { hela, exec, shell } = require('./packages/hela-core/dist/main/index');
+
+// export default {
+//   cwd: 'ssa',
+// };
 
 const prog = hela();
 

@@ -73,35 +73,12 @@ export function hela(options) {
   sade.forEach((key) => {
     if (typeof prog[key] === 'function') {
       app[key] = prog[key].bind(app);
-    } else if (key === 'name') {
-      app.programName = prog.name;
     } else {
       app[key] = prog[key];
     }
   });
 
   return Object.assign(app, {
-    /**
-     * Define some function that will be called,
-     * when no commands are given.
-     * Allows bypassing the `No command specified.` error,
-     * instead for example show the help output.
-     * https://github.com/lukeed/sade/blob/987ffa974626e281de7ff0b9eaa63acadb2a134e/lib/index.js#L128-L130
-     *
-     * @name hela().commandless
-     * @param {Function} fn
-     * @public
-     */
-    commandless(fn) {
-      const KEY = '__default__';
-      this.default = this.curr = KEY; // eslint-disable-line no-multi-assign
-      this.tree[KEY].usage = '';
-      this.tree[KEY].describe = '';
-      this.tree[KEY].handler = async (...args) => fn.apply(this, args);
-
-      return this;
-    },
-
     /**
      * Action that will be called when command is called.
      *
@@ -121,6 +98,13 @@ export function hela(options) {
           return fn.apply(this, args.concat(fakeArgv));
         };
       }
+
+      this.commands[name] = taskObj;
+
+      // ! important: sade does add `.name` to the instance,
+      // ! but also it uses it for generating help and such.
+      // ! At that point we don't need it anymore, so we can delete it.
+      delete this.name;
 
       return Object.assign(taskObj.handler, this);
     },
