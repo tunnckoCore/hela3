@@ -7,14 +7,6 @@ import { exec } from '@hela/core';
 export { createBuildConfig } from './configs/build';
 export { createLintConfig } from './configs/lint';
 
-export const helaDevRoot = path.dirname(__dirname);
-export const helaDevNodeBins = path.join(
-  helaDevRoot,
-  'node_modules',
-  '.bin',
-  'jest',
-);
-
 export function createJestConfig(proj, opts) {
   const projects = []
     .concat(proj)
@@ -62,8 +54,5 @@ export async function createAction(argv) {
     await util.promisify(fs.writeFile)(cfgPath, content, 'utf-8');
   }
 
-  return exec([
-    `node ${helaDevNodeBins} --version`,
-    `node ${helaDevNodeBins} --config ${cfgPath}`,
-  ]);
+  return exec([`yarn jest --version`, `yarn --config ${cfgPath}`]);
 }
