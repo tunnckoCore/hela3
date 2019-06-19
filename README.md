@@ -19,6 +19,11 @@ everything is super flexible and powerful.
 # everything is on the `next` dist-tag, so:
 yarn add --dev @hela/cli@next @hela/dev@next
 
+# Then initialize
+# wHhre `config` can be package module,
+# or a relative path to the cwd
+yarn hela init [config]
+
 # And run,
 # or with `yarn start`
 

@@ -1,4 +1,6 @@
-// import path from 'path';
+import fs from 'fs';
+import path from 'path';
+
 import { hela, exec } from '@hela/core';
 
 // eslint-disable-next-line import/no-duplicates
@@ -57,3 +59,28 @@ export const all = prog
       Promise.resolve(),
     ),
   );
+
+export const init = prog
+  .command('init [config]', 'Adds the @hela/dev config to hela')
+  .option('--cwd', 'Your working directory', process.cwd())
+  .action(async (cfg, argv) => {
+    const pkgPath = path.join(argv.cwd, 'package.json');
+    const { default: pkg } = await import(pkgPath);
+
+    if (cfg && typeof cfg === 'string') {
+      pkg.hela = cfg.startsWith('.') ? cfg : { extends: cfg };
+    } else {
+      pkg.hela = { extends: '@hela/dev' };
+    }
+
+    fs.writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`);
+
+    console.log('Config initialized.');
+
+    let babelCfg = `'use strict';\n\n`;
+    babelCfg += `/* eslint-disable-next-line import/no-extraneous-dependencies */\n`;
+    babelCfg += `module.exports = require('@hela/dev/dist/build/main/configs/babel');\n`;
+
+    fs.writeFileSync(path.join(argv.cwd, 'babel.config.js'), babelCfg);
+    console.log('Babel config initialized.');
+  });
