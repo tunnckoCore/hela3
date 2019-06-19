@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "3.0.0-alpha.0",
   "name": "@hela/dev",
   "description": "WIP: Powerful software development experience",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
@@ -32,8 +32,8 @@
     "develop"
   ],
   "dependencies": {
-    "@hela/core": "^2.0.0",
-    "@tunnckocore/jest-runner-babel": "^2.0.0",
+    "@hela/core": "^3.0.0-alpha.0",
+    "@tunnckocore/jest-runner-babel": "^3.0.0-alpha.0",
     "jest": "24.7.0",
     "micromatch": "^4.0.2"
   }
