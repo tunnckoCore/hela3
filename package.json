@@ -21,6 +21,7 @@
     "build:all": "jest --config jest-build.config.js"
   },
   "hela": {
+    "cwd": "/home/charlike/dev/hela",
     "extends": "./packages/hela-dev/src/index.js"
   },
   "workspaces": [
