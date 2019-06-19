@@ -1,7 +1,10 @@
+import proc from 'process';
 import Module from 'module';
 import { hela } from '@hela/core';
 import cosmiconfig from 'cosmiconfig';
 import esmLoader from 'esm';
+
+import Worker from 'jest-worker';
 
 const explorer = cosmiconfig('hela', {
   searchPlaces: [
@@ -32,20 +35,68 @@ program.option(
 );
 
 /**
- * TODO: loading of tasks/presets/config files
+ * TODO: with workers not working correctly, we even might not need them.
  *
  * @returns {Promise}
  */
 export default async function main() {
-  const { config: cfg } = await explorer.search();
+  const { /*  config: cfg, */ filepath } = await explorer.search();
 
-  if (!cfg) {
+  const worker = new Worker(filepath, {
+    numWorkers: 6,
+    forkOptions: { stdio: 'inherit' },
+  });
+
+  // console.log(worker);
+
+  const tasks = Object.keys(worker)
+    .filter((key) => !key.startsWith('_'))
+    .map((name) => worker[name]);
+
+  if (tasks.length === 0) {
     throw new Error('hela: no config found');
   }
 
-  Object.keys(cfg).forEach((name) => {
-    program.tree[name] = cfg[name].program.tree[name];
-  });
+  // console.log(await tasks[0]);
 
-  return program.listen();
+  /* eslint-disable no-restricted-syntax, no-await-in-loop */
+  for (const task of tasks) {
+    // ! not working correctly
+    const res = program.parse(proc.argv, { lazy: true });
+    await task(res.args);
+  }
+
+  // console.log('sasa', proc.argv);
+  // const result = program.parse(proc.argv, { lazy: true });
+  // console.log('xxx', result);
+  // if (!result || (result && !result.args && !result.name)) {
+  //   return;
+  // }
+  // const { args, name, handler } = result;
+
+  // await Promise.all(
+  //   tasks.map(async (runTask) => {
+  //     const prog = await runTask();
+
+  //     console.log('prog', prog);
+  //     if (prog.curr === name) {
+  //       try {
+  //         await handler.apply(prog, args);
+  //       } catch (err) {
+  //         const error = Object.assign(err, {
+  //           commandArgv: args.pop(),
+  //           commandArgs: args,
+  //           commandName: name,
+  //         });
+
+  //         throw error;
+  //       }
+  //     } else {
+  //     }
+
+  //     // program.tree[prog.curr] = prog.tree[prog.curr];
+  //   }),
+  // );
+
+  // return program.listen();
 }

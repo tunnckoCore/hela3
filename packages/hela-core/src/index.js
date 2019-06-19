@@ -61,9 +61,24 @@ export function hela(options) {
   const prog = sade('hela').version('3.0.0');
   const opts = Object.assign({}, defaultOptions, options, { lazy: true });
 
-  prog.commands = {};
+  const sadeMethods = Object.getOwnPropertyNames(prog)
+    .concat(Object.getOwnPropertyNames(prog.__proto__)) // eslint-disable-line no-proto
+    .filter((x) => x !== 'constructor');
 
-  const app = Object.assign(prog, {
+  const app = {
+    isHela: true,
+    tasks: {},
+  };
+
+  sadeMethods.forEach((key) => {
+    if (typeof prog[key] === 'function') {
+      app[key] = prog[key].bind(app);
+    } else {
+      app[key] = prog[key];
+    }
+  });
+
+  return Object.assign(app, {
     /**
      * Define some function that will be called,
      * when no commands are given.
@@ -77,12 +92,12 @@ export function hela(options) {
      */
     commandless(fn) {
       const KEY = '__default__';
-      prog.default = prog.curr = KEY; // eslint-disable-line no-multi-assign
-      prog.tree[KEY].usage = '';
-      prog.tree[KEY].describe = '';
-      prog.tree[KEY].handler = async (...args) => fn(...args);
+      this.default = this.curr = KEY; // eslint-disable-line no-multi-assign
+      this.tree[KEY].usage = '';
+      this.tree[KEY].describe = '';
+      this.tree[KEY].handler = async (...args) => fn(...args);
 
-      return prog;
+      return this;
     },
 
     /**
@@ -92,20 +107,24 @@ export function hela(options) {
      * @param {Function} fn
      * @public
      */
-    action(fn) {
+    task(fn) {
       // const self = this;
-      const name = prog.curr || '__default__';
-      const task = prog.tree[name];
+      const name = this.curr || '__default__';
+      const taskObj = this.tree[name];
 
       if (typeof fn === 'function') {
-        task.handler = async (...args) => {
-          const fakeArgv = Object.assign({}, task.default, { _: [name] });
+        taskObj.handler = async (...args) => {
+          const fakeArgv = Object.assign({}, taskObj.default, { _: [name] });
 
-          return fn(...args.concat(fakeArgv));
+          return fn.apply(this, args.concat(fakeArgv));
         };
       }
 
-      return enhance(task, this);
+      this.tasks[name] = taskObj;
+
+      // return 333;
+      return taskObj.handler;
+      // return enhance(task, this);
     },
 
     /**
@@ -116,49 +135,53 @@ export function hela(options) {
      * @param {Function} fn
      * @public
      */
-    listen() {
-      return new Promise((resolve, reject) => {
-        const result = prog.parse(proc.argv, opts);
-
-        if (!result || (result && !result.args && !result.name)) {
-          return;
-        }
-        const { args, name, handler } = result;
-
-        handler(...args)
-          .then(resolve)
-          .catch((err) => {
-            const error = Object.assign(err, {
-              commandArgv: args[args.length - 1],
-              commandArgs: args,
-              commandName: name,
-            });
-            reject(error);
-          });
-      });
-    },
+    // listen: createListen(proc, prog, opts),
   });
-
-  return app;
 }
 
-function enhance(task, self) {
-  const returnedFunctionFromAction = async (...args) => task.handler(...args);
+// export function createListen(processArgv, prog, options) {
+//   return function listen() {
+//     // ! ProTip: DO NOT USE THE `.listen()` method on the hela cli.
+//     return new Promise((resolve, reject) => {
+//       const result = prog.parse(processArgv, options);
 
-  return Object.keys(self)
-    .filter((x) => typeof self[x] === 'function')
-    .reduce(
-      (acc, methodName) => {
-        acc[methodName] = onChainingError;
-        return acc;
-      },
-      Object.assign(returnedFunctionFromAction, task, {
-        isHela: true,
-        program: self,
-      }),
-    );
-}
+//       if (!result || (result && !result.args && !result.name)) {
+//         return;
+//       }
+//       const { args, name, handler } = result;
 
-function onChainingError() {
-  throw new Error('You cannot chain more after the `.action` call');
-}
+//       handler
+//         .apply(prog, args)
+//         .then(resolve)
+//         .catch((err) => {
+//           const error = Object.assign(err, {
+//             commandArgv: args[args.length - 1],
+//             commandArgs: args,
+//             commandName: name,
+//           });
+//           reject(error);
+//         });
+//     });
+//   };
+// }
+
+// function enhance(task, self) {
+//   const returnedFunctionFromAction = async (...args) => task.handler(...args);
+
+//   return Object.keys(self)
+//     .filter((x) => typeof self[x] === 'function')
+//     .reduce(
+//       (acc, methodName) => {
+//         acc[methodName] = onChainingError;
+//         return acc;
+//       },
+//       Object.assign(self, {
+//         isHela: true,
+//         thisram: self,
+//       }),
+//     );
+// }
+
+// function onChainingError() {
+//   throw new Error('You cannot chain more after the `.action` call');
+// }

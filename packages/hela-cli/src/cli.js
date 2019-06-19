@@ -1,13 +1,21 @@
 #!/usr/bin/env node
 
+'use strict';
+
+import proc from 'process';
 import main from './index';
 
 main()
   .then(() => {
-    process.exit(0);
+    proc.exit(0);
   })
   .catch((err) => {
-    console.error('Failed command:', err.commandName);
+    if (err.commandName) {
+      console.error('Failed command:', err.commandName);
+    }
+
+    // ! TODO: remove
+    console.log(err);
 
     if (err.commandArgv && err.commandArgv['show-stack']) {
       console.error('Error stack:', err.stack);
@@ -15,5 +23,5 @@ main()
       console.error(`${err.name}:`, err.message);
     }
 
-    process.exit(1);
+    proc.exit(1);
   });
