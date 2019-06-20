@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { hela, exec } from '@hela/core';
+import { hela, exec, toFlags } from '@hela/core';
 
 // eslint-disable-next-line import/no-duplicates
 import { createAction, createBuildConfig, createLintConfig } from './support';
@@ -100,3 +100,22 @@ export const init = prog
     fs.writeFileSync(path.join(argv.cwd, 'babel.config.js'), babelCfg);
     console.log('Babel config initialized.');
   });
+
+export const commit = prog
+  .command('commit')
+  .describe(
+    'All original `git commit` flags are available, plus 3 more - scope, body & footer',
+  )
+  .option('--gpg-sign, -S', 'GPG-sign commits', true)
+  .option(
+    '--signoff, -s',
+    'Add Signed-off-by line by the committer at the end',
+    true,
+  )
+  .option('--scope, -x', 'Prompt a question for commit scope', false)
+  .option('--body, -y', 'Prompt a question for commit body', true)
+  .option('--footer, -w', 'Prompt a question for commit footer', false)
+
+  // allows AsyncFunction, Function, String and Array to be passed
+  // if function, it also can return promise, string or array.
+  .action((argv) => exec(`gitcommit ${toFlags(argv)}`));
