@@ -63,8 +63,15 @@ export default async function babelRunner({ testPath, config }) {
     relativePath = path.relative(path.join(rootDir, 'src'), testPath);
   }
 
-  const outDir = path.resolve(rootDir, runnerConfig.outDir);
-  const outFile = path.join(outDir, relativePath);
+  let outDir = path.resolve(rootDir, runnerConfig.outDir);
+  let outFile = path.join(outDir, relativePath);
+
+  // the new dir of the new file
+  outDir = path.dirname(outFile);
+
+  const basename = path.basename(outFile, path.extname(outFile));
+
+  outFile = path.join(outDir, `${basename}.js`);
 
   mkdirp.sync(path.dirname(outFile));
   fs.writeFileSync(outFile, result.code);
