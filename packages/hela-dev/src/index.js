@@ -121,4 +121,4 @@ export const commit = prog
 
   // allows AsyncFunction, Function, String and Array to be passed
   // if function, it also can return promise, string or array.
-  .action((argv) => exec(`gitcommit ${toFlags(argv)}`));
+  .action((argv) => exec(['git add -A', `gitcommit ${toFlags(argv)}`]));
