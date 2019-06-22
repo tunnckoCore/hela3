@@ -30,16 +30,23 @@ export const build = prog
   )
   .option('--watch', "Trigger the Jest's --watch")
   .option('--all', 'Useful, because we pass --onlyChanged by default')
-  .action((argv) =>
-    createAction({
+  .action((...args) => {
+    console.log('args', args);
+
+    const argv = args[args.length - 1];
+
+    // why it doesn't picks up the default, set in .option() ?!
+    const fmt = argv.format || 'main,module';
+
+    return createAction({
       ...argv,
-      projects: argv.format
+      projects: fmt
         .split(',')
         .map((format) => (opts) =>
           createBuildConfig({ ...opts, env: { NODE_ENV: format } }),
         ),
-    }),
-  );
+    });
+  });
 
 export const lint = prog
   .command('lint', 'Linting with ESLint through Jest')
