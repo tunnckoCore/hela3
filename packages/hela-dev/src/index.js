@@ -123,34 +123,34 @@ export const init = prog
     console.log('Babel config initialized.');
   });
 
-export const commit = prog
-  .command('commit')
-  .describe(
-    'All original `git commit` flags are available, plus 3 more - scope, body & footer',
-  )
-  .option('--gpg-sign, -S', 'GPG-sign commits', true)
-  .option(
-    '--signoff, -s',
-    'Add Signed-off-by line by the committer at the end',
-    true,
-  )
-  .option('--scope, -x', 'Prompt a question for commit scope', false)
-  .option('--body, -y', 'Prompt a question for commit body', true)
-  .option('--footer, -w', 'Prompt a question for commit footer', false)
-  .action(({ cwd, ...argv }) => {
-    const { scope, boyd, footer, signoff, S } = argv;
-    const flags = toFlags({
-      scope,
-      boyd,
-      footer,
-      signoff,
-      'gpg-sign': argv['gpg-sign'],
-    });
+// export const commit = prog
+//   .command('commit')
+//   .describe(
+//     'All original `git commit` flags are available, plus 3 more - scope, body & footer',
+//   )
+//   .option('--gpg-sign, -S', 'GPG-sign commits', true)
+//   .option(
+//     '--signoff, -s',
+//     'Add Signed-off-by line by the committer at the end',
+//     true,
+//   )
+//   .option('--scope, -x', 'Prompt a question for commit scope', false)
+//   .option('--body, -y', 'Prompt a question for commit body', true)
+//   .option('--footer, -w', 'Prompt a question for commit footer', false)
+//   .action(({ cwd, ...argv }) => {
+//     const { scope, boyd, footer, signoff, S } = argv;
+//     const flags = toFlags({
+//       scope,
+//       boyd,
+//       footer,
+//       signoff,
+//       'gpg-sign': argv['gpg-sign'],
+//     });
 
-    console.log(flags);
+//     console.log(flags);
 
-    return exec(['git add -A', `gitcommit ${flags}`]);
-  });
+//     return exec(['git add -A', `gitcommit -s -S`]);
+//   });
 
 export const typegen = prog
   .command('typegen', 'Generate TypeScript types or copy existing to dist/')
