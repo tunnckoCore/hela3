@@ -1,0 +1,41 @@
+{
+  "version": "0.5.0",
+  "name": "@tunnckocore/template",
+  "description": "WIP: some description for your template",
+  "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
+  "repository": "tunnckocorehq/template",
+  "homepage": "https://github.com/tunnckocorehq/template",
+  "license": "MPL-2.0",
+  "scripts": {
+    "start": "yarn hela",
+    "test": "yarn hela test",
+    "lint": "yarn hela lint",
+    "commit": "yarn hela commit",
+    "now-build": "yarn hela all --all"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "hela": {
+    "extends": "@hela/dev"
+  },
+  "keywords": [
+    "tunnckocorehq",
+    "template"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@hela/cli": "^3.0.0-alpha.48",
+    "@hela/dev": "^3.0.0-alpha.49",
+    "@tunnckocore/config": "^4.0.1"
+  },
+  "jest-runner-eslint": {
+    "cliOptions": {
+      "format": "codeframe",
+      "quiet": true,
+      "cache": true,
+      "fix": true
+    }
+  }
+}

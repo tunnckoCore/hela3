@@ -1,10 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 
+// eslint-disable-next-line no-unused-vars
+import Worker from 'jest-worker';
+
 import { hela, exec, toFlags } from '@hela/core';
 
 /* eslint-disable import/no-duplicates */
 import {
+  // eslint-disable-next-line no-unused-vars
+  tscGenTypes,
   runJest,
   createJestConfig,
   createBuildConfig,
@@ -71,6 +76,12 @@ export const test = prog
   .option('--all', 'Useful, because we pass --onlyChanged by default')
   .action(function nm(argv) {
     // const testConfig = path.join(__dirname, 'configs', 'test', 'config.js');
+
+    // ? we can just do `toFlags(argv)`, but that's blocked for now by
+    // ? 1) next minor/major release of `dargs`
+    // ? 2) because we don't know what flags will come from other commands,
+    // ? or if the command is ran manually from another script,
+    // ? and jest will throw for unknow flag
     return exec(
       `yarn scripts jest --onlyChanged ${argv.all ? '--all' : ''} ${
         argv.watch ? '--watch' : ''
@@ -129,3 +140,20 @@ export const commit = prog
   .action(({ cwd, ...argv }) =>
     exec(['git add -A', `gitcommit ${toFlags(argv)}`]),
   );
+
+export const typegen = prog
+  .command('typegen', 'Generate TypeScript types or copy existing to dist/')
+  .option('--workspaces', 'Comma-separated list of workspace directories')
+  .option(
+    '--tsconfig',
+    'Path to tsconfig.json file, relative to --cwd or package root',
+  )
+  .action(async (argv) => {
+    await tscGenTypes(argv);
+    // ? Seems like even in worker it still the same timing?!
+    // const worker = new Worker(require.resolve('./tsc-worker.js'), {
+    //   numWorkers: 8,
+    //   forkOptions: { stdio: 'inherit' },
+    // });
+    // await worker.default(argv);
+  });

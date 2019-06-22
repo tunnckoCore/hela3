@@ -25,7 +25,8 @@
   "dependencies": {
     "@hela/cli": "^3.0.0-alpha.55",
     "@tunnckocore/config": "^4.0.1",
-    "lerna": "^3.15.0"
+    "lerna": "^3.15.0",
+    "typescript": "^3.5.2"
   },
   "renovate": {
     "extends": [

@@ -50,3 +50,84 @@ export function runJest({ filepath, options = {} }) {
     } ${options.all ? '--all' : ''}`,
   ]);
 }
+
+export async function tscGenTypesForPackage(argv) {
+  const fromCwd = (...x) => path.resolve(argv.cwd, ...x);
+
+  // TODO: reconsider
+  const tsConfigPath = fromCwd(argv.tsconfig || 'tsconfig.json');
+
+  const typesDist = fromCwd('dist', 'types');
+  const outFile = fromCwd(typesDist, 'index.d.ts');
+
+  if (fs.existsSync(fromCwd('index.d.ts'))) {
+    fs.mkdirSync(typesDist, { recursive: true });
+    fs.copyFileSync(fromCwd('index.d.ts'), outFile);
+    return;
+  }
+  if (fs.existsSync(fromCwd('src', 'index.d.ts'))) {
+    fs.mkdirSync(typesDist, { recursive: true });
+    fs.copyFileSync(fromCwd('src', 'index.d.ts'), outFile);
+    return;
+  }
+
+  const hasTypeScriptFiles = [fromCwd('src', 'index.ts'), fromCwd('index.ts')]
+    .map((x) => fs.existsSync(x))
+    .filter(Boolean);
+
+  if (hasTypeScriptFiles.length > 0 && fs.existsSync(tsConfigPath)) {
+    const flags = [
+      '-d',
+      '--emitDeclarationOnly',
+      '--declarationMap',
+      'false',
+      '--project',
+      tsConfigPath,
+      '--declarationDir',
+      typesDist,
+    ];
+
+    console.log(`Calling: yarn scripts tsc ${flags.join(' ')}`);
+    await exec(`yarn scripts tsc ${flags.join(' ')}`);
+  }
+}
+
+export async function tscGenTypes(argv) {
+  const fromRoot = (...x) => path.resolve(argv.cwd, ...x);
+  const rootPkg = await import(fromRoot('package.json'));
+  const rootLerna = fs.existsSync(fromRoot('lerna.json'))
+    ? await import(fromRoot('lerna.json'))
+    : {};
+
+  const workspaces = []
+    .concat(
+      rootLerna.packages ||
+        (rootPkg.workspaces ? rootPkg.workspaces : argv.workspaces),
+    )
+    .filter((x) => typeof x === 'string')
+    .filter(Boolean)
+    .reduce((acc, ws) => acc.concat(ws.split(',')), [])
+    .map((ws) => path.dirname(ws));
+
+  if (workspaces.length > 0) {
+    const { cwd, ...opts } = argv;
+
+    return Promise.all(
+      workspaces.map(async (ws) => {
+        const wsDir = fromRoot(ws);
+        const pkgsInWorkspace = await util.promisify(fs.readdir)(wsDir);
+
+        return Promise.all(
+          pkgsInWorkspace.map(async (pkgDir) => {
+            const pkgRoot = path.join(wsDir, pkgDir);
+            const options = Object.assign({}, opts, { cwd: pkgRoot });
+
+            await tscGenTypesForPackage(options);
+          }),
+        );
+      }),
+    );
+  }
+
+  return tscGenTypesForPackage(argv);
+}
