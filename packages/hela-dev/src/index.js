@@ -138,8 +138,12 @@ export const commit = prog
   .option('--body, -y', 'Prompt a question for commit body', true)
   .option('--footer, -w', 'Prompt a question for commit footer', false)
   .action(({ cwd, ...argv }) => {
-    console.log(toFlags(argv));
-    return exec(['git add -A', `gitcommit ${toFlags(argv)}`]);
+    const { scope, boyd, footer, signoff, S } = argv;
+
+    return exec([
+      'git add -A',
+      `gitcommit ${toFlags({ scope, boyd, footer, signoff, S })}`,
+    ]);
   });
 
 export const typegen = prog
