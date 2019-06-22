@@ -4,7 +4,7 @@ import path from 'path';
 // eslint-disable-next-line no-unused-vars
 import Worker from 'jest-worker';
 
-import { hela, exec, toFlags } from '@hela/core';
+import { hela, exec /* toFlags */ } from '@hela/core';
 
 /* eslint-disable import/no-duplicates */
 import {
