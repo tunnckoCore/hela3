@@ -7,7 +7,7 @@ import { exec } from '@hela/core';
 export { createBuildConfig } from './configs/build';
 export { createLintConfig } from './configs/lint';
 
-export function createJestConfig(proj, opts) {
+export function createJestConfigContent(proj, opts) {
   const projects = []
     .concat(proj)
     .map((cfg) => (typeof cfg === 'function' ? cfg(opts) : cfg))
@@ -27,22 +27,26 @@ export function exists(fp, opts) {
   return fs.existsSync(path.join(opts.cwd, fp));
 }
 
-export async function createAction(argv) {
-  const opts = Object.assign({ cwd: proc.cwd(), type: 'build' }, argv, {
+export async function createJestConfig(argv) {
+  const options = Object.assign({ cwd: proc.cwd(), type: 'build' }, argv, {
     env: { NODE_ENV: 'main' },
   });
 
-  opts.mono = exists('packages', opts) || exists('lerna.json', opts);
+  options.mono = exists('packages', options) || exists('lerna.json', options);
 
-  const cfgPath = path.join(__dirname, 'configs', opts.type, 'config.js');
-  const content = createJestConfig(opts.projects, opts);
+  const cfgPath = path.join(__dirname, 'configs', options.type, 'config.js');
+  const content = createJestConfigContent(options.projects, options);
 
   await util.promisify(fs.writeFile)(cfgPath, content, 'utf-8');
 
+  return { filepath: cfgPath, content, options };
+}
+
+export function runJest({ filepath, options = {} }) {
   return exec([
     `yarn scripts jest --version`,
-    `yarn scripts jest --onlyChanged --config ${cfgPath} ${
-      opts.watch ? '--watch' : ''
-    } ${opts.all ? '--all' : ''}`,
+    `yarn scripts jest --onlyChanged --config ${filepath} ${
+      options.watch ? '--watch' : ''
+    } ${options.all ? '--all' : ''}`,
   ]);
 }

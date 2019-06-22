@@ -3,8 +3,13 @@ import path from 'path';
 
 import { hela, exec, toFlags } from '@hela/core';
 
-// eslint-disable-next-line import/no-duplicates
-import { createAction, createBuildConfig, createLintConfig } from './support';
+/* eslint-disable import/no-duplicates */
+import {
+  runJest,
+  createJestConfig,
+  createBuildConfig,
+  createLintConfig,
+} from './support';
 
 /**
  * Might be useful for others that uses/extend that config.
@@ -30,11 +35,11 @@ export const build = prog
   )
   .option('--watch', "Trigger the Jest's --watch")
   .option('--all', 'Useful, because we pass --onlyChanged by default')
-  .action((argv) => {
+  .action(async (argv) => {
     // why it doesn't picks up the default, set in .option() ?!
     const fmt = argv.format || 'main,module';
 
-    return createAction({
+    const { filepath, content, options } = await createJestConfig({
       ...argv,
       projects: fmt
         .split(',')
@@ -42,19 +47,23 @@ export const build = prog
           createBuildConfig({ ...opts, env: { NODE_ENV: format } }),
         ),
     });
+
+    return runJest({ filepath, content, options });
   });
 
 export const lint = prog
   .command('lint', 'Linting with ESLint through Jest')
   .option('--watch', "Trigger the Jest's --watch")
   .option('--all', 'Useful, because we pass --onlyChanged by default')
-  .action((argv) =>
-    createAction({
+  .action(async (argv) => {
+    const { filepath, options } = await createJestConfig({
       ...argv,
       type: 'lint',
       projects: [(opts) => createLintConfig(opts)],
-    }),
-  );
+    });
+
+    return runJest({ filepath, options });
+  });
 
 export const test = prog
   .command('test', 'Run the tests, through Jest')
@@ -118,7 +127,4 @@ export const commit = prog
   .option('--scope, -x', 'Prompt a question for commit scope', false)
   .option('--body, -y', 'Prompt a question for commit body', true)
   .option('--footer, -w', 'Prompt a question for commit footer', false)
-
-  // allows AsyncFunction, Function, String and Array to be passed
-  // if function, it also can return promise, string or array.
   .action((argv) => exec(['git add -A', `gitcommit ${toFlags(argv)}`]));
