@@ -13,7 +13,7 @@
     "cleanup": "rm -rf dist packages/*/dist",
     "commit": "yarn start commit",
     "postcommit": "yarn release",
-    "now-build": "yarn start all",
+    "now-build": "git status",
     "release": "git push && yarn run x:version && yarn run x:publish",
     "x:version": "lerna version --conventional-commits --no-changelog --sign-git-commit --sign-git-tag",
     "x:publish": "lerna publish from-git --pre-dist-tag next --dist-tag next"
