@@ -11,7 +11,7 @@
     "postinstall": "lerna bootstrap",
     "start": "yarn hela",
     "cleanup": "rm -rf dist packages/*/dist",
-    "commit": "git add -A && yarn start commit",
+    "commit": "yarn start commit",
     "postcommit": "yarn release",
     "now-build": "yarn start all",
     "release": "git push && yarn run x:version && yarn run x:publish",
