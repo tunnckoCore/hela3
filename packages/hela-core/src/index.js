@@ -88,6 +88,7 @@ export function hela(options) {
         };
       }
 
+      this.option('--cwd', 'Current working directory', proc.cwd());
       this.commands[name] = taskObj;
 
       const programName = this.name;

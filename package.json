@@ -9,7 +9,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "postinstall": "lerna bootstrap",
-    "start": "yarn hela",
+    "start": "yarn node -r esm ./packages/hela-cli/src/cli.js",
     "cleanup": "rm -rf dist packages/*/dist",
     "commit": "yarn start commit",
     "postcommit": "yarn release",
@@ -23,7 +23,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "@hela/cli": "^3.0.0-alpha.30",
+    "@hela/cli": "^3.0.0-alpha.55",
     "@tunnckocore/config": "^4.0.1",
     "lerna": "^3.15.0"
   },

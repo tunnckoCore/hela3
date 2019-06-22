@@ -90,7 +90,6 @@ export const all = prog
 
 export const init = prog
   .command('init [config]', 'Adds the @hela/dev config to hela')
-  .option('--cwd', 'Your working directory', process.cwd())
   .action(async (cfg, argv) => {
     const pkgPath = path.join(argv.cwd, 'package.json');
     const { default: pkg } = await import(pkgPath);
@@ -127,4 +126,6 @@ export const commit = prog
   .option('--scope, -x', 'Prompt a question for commit scope', false)
   .option('--body, -y', 'Prompt a question for commit body', true)
   .option('--footer, -w', 'Prompt a question for commit footer', false)
-  .action((argv) => exec(['git add -A', `gitcommit ${toFlags(argv)}`]));
+  .action(({ cwd, ...argv }) =>
+    exec(['git add -A', `gitcommit ${toFlags(argv)}`]),
+  );
