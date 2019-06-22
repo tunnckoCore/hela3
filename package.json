@@ -23,8 +23,8 @@
     "packages/*"
   ],
   "dependencies": {
+    "@hela/cli": "^3.0.0-alpha.15",
     "@tunnckocore/config": "^4.0.1",
-    "@hela/cli": "^^3.0.0-alpha.15",
     "lerna": "^3.15.0"
   },
   "renovate": {
