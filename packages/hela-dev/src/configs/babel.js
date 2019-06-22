@@ -1,11 +1,16 @@
+'use strict';
+
+const proc = require('process');
+
+// ! keep in sync with babel config inside `src/configs/build/index.js`
 module.exports = {
-  ignore: process.env.NODE_ENV === 'test' ? [] : ['**/__tests__/**'],
+  ignore: proc.env.NODE_ENV === 'test' ? [] : ['**/__tests__/**'],
   presets: [
     [
       '@babel/preset-env',
       {
-        targets: { node: 8 },
-        modules: process.env.NODE_ENV === 'module' ? false : 'commonjs',
+        targets: { node: '8.9' },
+        modules: proc.env.NODE_ENV === 'module' ? false : 'commonjs',
       },
     ],
     '@babel/preset-typescript',

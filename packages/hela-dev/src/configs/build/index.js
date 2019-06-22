@@ -1,7 +1,6 @@
 // import micromatch from 'micromatch';
 
 import path from 'path';
-import babelConfig from '../babel';
 
 /* eslint-disable import/prefer-default-export */
 
@@ -50,7 +49,26 @@ export function createBuildConfig(options) {
     haste: {
       '@tunnckocore/jest-runner-babel': {
         outDir: opts.env.NODE_ENV === 'module' ? esmDest : cjsDest,
-        babel: babelConfig.default || babelConfig,
+        // ! keep in sync with `src/configs/babel.js`
+        babel: {
+          ignore: opts.env.NODE_ENV === 'test' ? [] : ['**/__tests__/**'],
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                targets: { node: '8.9' },
+                modules: opts.env.NODE_ENV === 'module' ? false : 'commonjs',
+              },
+            ],
+            '@babel/preset-typescript',
+          ],
+          plugins: [
+            '@babel/plugin-syntax-dynamic-import',
+            '@babel/plugin-syntax-import-meta',
+            'babel-plugin-dynamic-import-node-babel-7',
+          ],
+          comments: false,
+        },
       },
     },
 
