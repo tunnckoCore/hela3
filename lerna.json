@@ -4,7 +4,7 @@
   ],
   "useWorkspaces": true,
   "npmClient": "yarn",
-  "version": "3.0.0-alpha.20",
+  "version": "3.0.0-alpha.30",
   "command": {
     "version": {
       "message": "chore(release): version %s"

@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-alpha.20",
+  "version": "3.0.0-alpha.30",
   "name": "@hela/cli",
   "description": "WIP: Powerful software development experience",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
@@ -35,7 +35,7 @@
     "develop"
   ],
   "dependencies": {
-    "@hela/core": "^3.0.0-alpha.20",
+    "@hela/core": "^3.0.0-alpha.30",
     "cosmiconfig": "^5.2.1",
     "esm": "^3.2.25",
     "find-file-up": "^2.0.1"
