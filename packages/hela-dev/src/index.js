@@ -30,11 +30,7 @@ export const build = prog
   )
   .option('--watch', "Trigger the Jest's --watch")
   .option('--all', 'Useful, because we pass --onlyChanged by default')
-  .action((...args) => {
-    console.log('args', args);
-
-    const argv = args[args.length - 1];
-
+  .action((argv) => {
     // why it doesn't picks up the default, set in .option() ?!
     const fmt = argv.format || 'main,module';
 

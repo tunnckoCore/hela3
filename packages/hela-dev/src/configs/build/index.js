@@ -50,7 +50,7 @@ export function createBuildConfig(options) {
     haste: {
       '@tunnckocore/jest-runner-babel': {
         outDir: opts.env.NODE_ENV === 'module' ? esmDest : cjsDest,
-        babel: babelConfig.default && babelConfig,
+        babel: babelConfig.default || babelConfig,
       },
     },
 
