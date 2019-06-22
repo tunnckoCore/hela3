@@ -1,5 +1,5 @@
 {
-  "version": "0.5.0",
+  "version": "3.0.0-alpha.60",
   "name": "@tunnckocore/template",
   "description": "WIP: some description for your template",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
@@ -24,10 +24,9 @@
     "tunnckocorehq",
     "template"
   ],
-  "dependencies": {},
   "devDependencies": {
-    "@hela/cli": "^3.0.0-alpha.48",
-    "@hela/dev": "^3.0.0-alpha.49",
+    "@hela/cli": "^3.0.0-alpha.60",
+    "@hela/dev": "^3.0.0-alpha.60",
     "@tunnckocore/config": "^4.0.1"
   },
   "jest-runner-eslint": {
