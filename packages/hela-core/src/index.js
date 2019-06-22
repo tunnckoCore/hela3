@@ -26,7 +26,7 @@ const defaultOptions = {
  * @param {object} options
  */
 export function toFlags(argv, options) {
-  const opts = Object.assign({ allowSingleFlags: true }, options);
+  const opts = Object.assign({ shortFlag: true }, options);
   return dargs(argv, opts).join(' ');
 }
 
