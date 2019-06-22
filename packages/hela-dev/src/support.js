@@ -87,12 +87,12 @@ export async function tscGenTypesForPackage(argv) {
       typesDist,
     ];
 
-    console.log(`Calling: yarn scripts tsc ${flags.join(' ')}`);
     await exec(`yarn scripts tsc ${flags.join(' ')}`);
   }
 }
 
 export async function tscGenTypes(argv) {
+  // ! TODO: should do the same part for theother commands too, so externalize
   const fromRoot = (...x) => path.resolve(argv.cwd, ...x);
   const rootPkg = await import(fromRoot('package.json'));
   const rootLerna = fs.existsSync(fromRoot('lerna.json'))
@@ -108,6 +108,7 @@ export async function tscGenTypes(argv) {
     .filter(Boolean)
     .reduce((acc, ws) => acc.concat(ws.split(',')), [])
     .map((ws) => path.dirname(ws));
+  // ! TODO: end of todo
 
   if (workspaces.length > 0) {
     const { cwd, ...opts } = argv;

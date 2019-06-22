@@ -137,9 +137,10 @@ export const commit = prog
   .option('--scope, -x', 'Prompt a question for commit scope', false)
   .option('--body, -y', 'Prompt a question for commit body', true)
   .option('--footer, -w', 'Prompt a question for commit footer', false)
-  .action(({ cwd, ...argv }) =>
-    exec(['git add -A', `gitcommit ${toFlags(argv)}`]),
-  );
+  .action(({ cwd, ...argv }) => {
+    console.log(toFlags(argv));
+    return exec(['git add -A', `gitcommit ${toFlags(argv)}`]);
+  });
 
 export const typegen = prog
   .command('typegen', 'Generate TypeScript types or copy existing to dist/')

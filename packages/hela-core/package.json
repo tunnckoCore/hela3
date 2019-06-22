@@ -33,7 +33,7 @@
   ],
   "dependencies": {
     "all-module-paths": "^0.7.1",
-    "dargs": "^6.1.0",
+    "dargs": "^7.0.0",
     "execa": "^2.0.0-alpha.0",
     "sade": "^1.4.1"
   }
