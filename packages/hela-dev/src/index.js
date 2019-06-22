@@ -139,11 +139,17 @@ export const commit = prog
   .option('--footer, -w', 'Prompt a question for commit footer', false)
   .action(({ cwd, ...argv }) => {
     const { scope, boyd, footer, signoff, S } = argv;
+    const flags = toFlags({
+      scope,
+      boyd,
+      footer,
+      signoff,
+      'gpg-sign': argv['gpg-sign'],
+    });
 
-    return exec([
-      'git add -A',
-      `gitcommit ${toFlags({ scope, boyd, footer, signoff, S })}`,
-    ]);
+    console.log(flags);
+
+    return exec(['git add -A', `gitcommit ${flags}`]);
   });
 
 export const typegen = prog
