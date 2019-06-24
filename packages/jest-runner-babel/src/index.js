@@ -1,5 +1,3 @@
-import { createJestRunner } from 'create-jest-runner';
+const { createJestRunner } = require('create-jest-runner');
 
-const babelRunner = createJestRunner(require.resolve('./runner'));
-
-module.exports = babelRunner.default || babelRunner;
+module.exports = createJestRunner(require.resolve('./runner.js'));

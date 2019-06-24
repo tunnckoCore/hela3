@@ -11,7 +11,7 @@
     "postinstall": "lerna bootstrap",
     "start": "yarn node -r esm ./packages/hela-cli/src/cli.js",
     "cleanup": "rm -rf dist packages/*/dist",
-    "commit": "yarn start commit",
+    "commit": "git add -A && gitcommit -sSxy",
     "postcommit": "yarn release",
     "now-build": "node -p 'JSON.stringify(process.env,0,2)'",
     "release": "git push && yarn run x:version && yarn run x:publish",
@@ -23,8 +23,10 @@
     "packages/*"
   ],
   "dependencies": {
-    "@hela/cli": "^3.0.0-alpha.55",
+    "@babel/cli": "^7.4.4",
+    "@hela/cli": "^3.0.0-alpha.66",
     "@tunnckocore/config": "^4.0.1",
+    "esm": "^3.2.25",
     "lerna": "^3.15.0",
     "typescript": "^3.5.2"
   },
@@ -50,8 +52,5 @@
       "cache": true,
       "fix": true
     }
-  },
-  "devDependencies": {
-    "esm": "^3.2.25"
   }
 }

@@ -1,15 +1,13 @@
-import fs from 'fs';
-import os from 'os';
-import path from 'path';
-import { transformFileSync } from '@babel/core';
-import mkdirp from 'mkdirp';
-
-import { pass, fail } from 'create-jest-runner';
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const { transformFileSync } = require('@babel/core');
+const { pass, fail } = require('create-jest-runner');
 
 const isWin32 = os.platform() === 'win32';
 
 /* eslint-disable max-statements */
-export default async function babelRunner({ testPath, config }) {
+module.exports = async function babelRunner({ testPath, config }) {
   const start = new Date();
   const name = '@tunnckocore/jest-runner-babel';
 
@@ -23,6 +21,15 @@ export default async function babelRunner({ testPath, config }) {
       start,
       end: new Date(),
       test: { path: testPath, title: 'Babel', errorMessage: err.message },
+    });
+  }
+
+  // Classic in the genre! Yes, it's possible.
+  if (!result) {
+    return fail({
+      start,
+      end: new Date(),
+      test: { path: testPath, title: 'Babel', errorMessage: 'faling...' },
     });
   }
 
@@ -73,7 +80,7 @@ export default async function babelRunner({ testPath, config }) {
 
   outFile = path.join(outDir, `${basename}.js`);
 
-  mkdirp.sync(path.dirname(outFile));
+  fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, result.code);
 
   return pass({
@@ -81,4 +88,4 @@ export default async function babelRunner({ testPath, config }) {
     end: new Date(),
     test: { path: outFile },
   });
-}
+};

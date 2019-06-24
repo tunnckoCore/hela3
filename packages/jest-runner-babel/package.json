@@ -5,8 +5,7 @@
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
   "homepage": "https://github.com/tunnckocorehq/hela",
   "license": "MPL-2.0",
-  "main": "dist/build/main/index.js",
-  "module": "dist/build/module/index.js",
+  "main": "src/index.js",
   "scripts": {},
   "publishConfig": {
     "access": "public",
@@ -18,8 +17,7 @@
     "directory": "packages/jest-runner-babel"
   },
   "files": [
-    "index.js",
-    "dist"
+    "src"
   ],
   "keywords": [
     "tunnckocorehq",

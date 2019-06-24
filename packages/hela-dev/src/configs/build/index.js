@@ -39,6 +39,7 @@ export function createBuildConfig(options) {
     testMatch: [`<rootDir>/${match}`],
     testPathIgnorePatterns: [
       '.+/__tests__/.+',
+      '.+/jest-runner-babel/.+',
       '.+/dist/.+',
 
       // @hela/dev specific
@@ -51,7 +52,10 @@ export function createBuildConfig(options) {
         outDir: opts.env.NODE_ENV === 'module' ? esmDest : cjsDest,
         // ! keep in sync with `src/configs/babel.js`
         babel: {
-          ignore: opts.env.NODE_ENV === 'test' ? [] : ['**/__tests__/**'],
+          ignore: (opts.env.NODE_ENV === 'test'
+            ? []
+            : ['**/__tests__/**']
+          ).concat('**/jest-runner-babel/**'),
           presets: [
             [
               '@babel/preset-env',
