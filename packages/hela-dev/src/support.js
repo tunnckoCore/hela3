@@ -6,6 +6,7 @@ import { exec } from '@hela/core';
 
 export { createBuildConfig } from './configs/build';
 export { createLintConfig } from './configs/lint';
+export { createTestConfig } from './configs/test';
 
 export function createJestConfigContent(proj, opts) {
   const projects = []
@@ -39,13 +40,13 @@ export async function createJestConfig(argv) {
 
   await util.promisify(fs.writeFile)(cfgPath, content, 'utf-8');
 
-  return { filepath: cfgPath, content, options };
+  return { configPath: cfgPath, content, options };
 }
 
-export function runJest({ filepath, options = {} }) {
+export function runJest({ configPath, options = {} }) {
   return exec([
     `yarn scripts jest --version`,
-    `yarn scripts jest --onlyChanged --config ${filepath} ${
+    `yarn scripts jest --onlyChanged --config ${configPath} ${
       options.watch ? '--watch' : ''
     } ${options.all ? '--all' : ''}`,
   ]);

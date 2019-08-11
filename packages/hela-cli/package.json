@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-alpha.67",
+  "version": "3.0.0-alpha.71",
   "name": "@hela/cli",
   "description": "WIP: Powerful software development experience",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
@@ -35,7 +35,7 @@
     "develop"
   ],
   "dependencies": {
-    "@hela/core": "^3.0.0-alpha.66",
+    "@hela/core": "^3.0.0-alpha.71",
     "cosmiconfig": "^5.2.1",
     "esm": "^3.2.25"
   }

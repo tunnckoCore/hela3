@@ -1,5 +1,1 @@
-'use strict';
-
-module.exports = {
-  displayName: 'test',
-};
+module.exports={projects:[{"displayName":"test","testEnvironment":"node","testPathIgnorePatterns":[".+/dist/.+"],"moduleFileExtensions":["ts","tsx","js","jsx","mjs"],"rootDir":"/home/charlike/dev/code/helapkg/hela"}]};

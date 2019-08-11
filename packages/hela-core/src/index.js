@@ -91,17 +91,17 @@ export function hela(options) {
       this.option('--cwd', 'Current working directory', proc.cwd());
       this.commands[name] = taskObj;
 
-      const programName = this.name;
-      // ! important: sade does add `.name` to the instance,
-      // ! but also it uses it for generating help and such.
-      delete this.name;
+      // const programName = this.name;
+      // // ! important: sade does add `.name` to the instance,
+      // // ! but also it uses it for generating help and such.
+      // delete this.name;
 
-      const handler = Object.assign(taskObj.handler, this);
+      // const handler = Object.assign(taskObj.handler, this);
 
-      // ! restore
-      this.name = programName;
+      // // ! restore
+      // this.name = programName;
 
-      return handler;
+      return Object.assign(taskObj.handler, this);
     },
 
     /**

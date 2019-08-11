@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-alpha.67",
+  "version": "3.0.0-alpha.71",
   "name": "@tunnckocore/jest-runner-babel",
   "description": "Fork of the Babel runner (`jest-runner-babel`) with support for runnerConfig options",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
@@ -28,7 +28,7 @@
     "develop"
   ],
   "dependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.5.5",
     "create-jest-runner": "^0.5.3",
     "mkdirp": "^0.5.1"
   }

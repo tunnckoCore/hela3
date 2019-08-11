@@ -4,7 +4,7 @@ import path from 'path';
 // eslint-disable-next-line no-unused-vars
 import Worker from 'jest-worker';
 
-import { hela, exec /* toFlags */ } from '@hela/core';
+import { hela /* exec,  toFlags */ } from '@hela/core';
 
 /* eslint-disable import/no-duplicates */
 import {
@@ -14,6 +14,7 @@ import {
   createJestConfig,
   createBuildConfig,
   createLintConfig,
+  createTestConfig,
 } from './support';
 
 /**
@@ -44,7 +45,7 @@ export const build = prog
     // why it doesn't picks up the default, set in .option() ?!
     const fmt = argv.format || 'main,module';
 
-    const { filepath, content, options } = await createJestConfig({
+    const { configPath, content, options } = await createJestConfig({
       ...argv,
       projects: fmt
         .split(',')
@@ -53,7 +54,7 @@ export const build = prog
         ),
     });
 
-    return runJest({ filepath, content, options });
+    return runJest({ configPath, content, options });
   });
 
 export const lint = prog
@@ -61,33 +62,42 @@ export const lint = prog
   .option('--watch', "Trigger the Jest's --watch")
   .option('--all', 'Useful, because we pass --onlyChanged by default')
   .action(async (argv) => {
-    const { filepath, options } = await createJestConfig({
+    const { configPath, options } = await createJestConfig({
       ...argv,
       type: 'lint',
+      // ! important: need to be a function, not just passing `argv`
+      // ! strange but tested that it not work/behave the same, so.
       projects: [(opts) => createLintConfig(opts)],
     });
 
-    return runJest({ filepath, options });
+    return runJest({ configPath, options });
   });
 
 export const test = prog
   .command('test', 'Run the tests, through Jest')
   .option('--watch', "Trigger the Jest's --watch")
   .option('--all', 'Useful, because we pass --onlyChanged by default')
-  .action(function nm(argv) {
+  .action(async function nm(argv) {
     // const testConfig = path.join(__dirname, 'configs', 'test', 'config.js');
+    const { configPath, options } = await createJestConfig({
+      ...argv,
+      type: 'test',
+      projects: createTestConfig(argv),
+    });
+
+    return runJest({ configPath, options });
 
     // ? we can just do `toFlags(argv)`, but that's blocked for now by
     // ? 1) next minor/major release of `dargs`
     // ? 2) because we don't know what flags will come from other commands,
     // ? or if the command is ran manually from another script,
     // ? and jest will throw for unknow flag
-    return exec(
-      `yarn scripts jest --onlyChanged ${argv.all ? '--all' : ''} ${
-        argv.watch ? '--watch' : ''
-      }`,
-      { env: { NODE_ENV: 'test' } },
-    );
+    // return exec(
+    //   `yarn scripts jest --onlyChanged ${argv.all ? '--all' : ''} ${
+    //     argv.watch ? '--watch' : ''
+    //   }`,
+    //   { env: { NODE_ENV: 'test' } },
+    // );
   });
 
 export const all = prog
@@ -161,7 +171,7 @@ export const typegen = prog
   )
   .action(async (argv) => {
     await tscGenTypes(argv);
-    // ? Seems like even in worker it still the same timing?!
+    // ? Seems like even in worker it's still the same timing?!
     // const worker = new Worker(require.resolve('./tsc-worker.js'), {
     //   numWorkers: 8,
     //   forkOptions: { stdio: 'inherit' },
