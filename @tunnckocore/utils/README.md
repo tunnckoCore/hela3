@@ -2,7 +2,7 @@
 
 > Utility functions and helpers for internal usage.
 
-<!-- ! todo, upgrade readme and use .verb.md --!>
+<!-- todo, upgrade readme and use .verb.md -->
 
 [![npm version][npm-img]][npm-url]
 [![Mozilla Public License 2.0][license-img]][license-url]
@@ -10,6 +10,7 @@
 [![Twitter][twitter-img]][twitter-url]
 [![Become a Patron][patreon-img]][patreon-url]
 <!-- [![codecov-img][]][codecov-url]-->
+
 
 
 ## Install
