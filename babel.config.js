@@ -6,6 +6,7 @@
 // module.exports = require('./@hela/dev/src/configs/babel');
 
 module.exports = {
+  ignore: process.env.NODE_ENV === 'prepare' ? ['**/__tests__/**'] : [],
   presets: [
     [
       '@babel/preset-env',

@@ -1,7 +1,7 @@
 import mod from 'module';
 import proc from 'process';
 import dargs from 'dargs';
-import execa from 'execa';
+import { shell as Shell, exec as Exec } from '@tunnckocore/execa';
 import Sade from 'sade';
 
 import allModulesPaths from 'all-module-paths';
@@ -18,6 +18,7 @@ proc.env.PATH = `${OWN_PATH}:${proc.env.PATH}`;
 const defaultOptions = {
   stdio: 'inherit',
   env: proc.env,
+  concurrency: 1,
 };
 
 /**
@@ -37,7 +38,7 @@ export function toFlags(argv, options) {
  * @public
  */
 export function shell(cmds, options) {
-  return exec(cmds, Object.assign({}, options, { shell: true }));
+  return Shell(cmds, Object.assign({}, defaultOptions, options));
 }
 
 /**
@@ -46,14 +47,8 @@ export function shell(cmds, options) {
  * @param {object} [options]
  * @public
  */
-export async function exec(cmds, options) {
-  const commands = [].concat(cmds).filter(Boolean);
-  const opts = Object.assign({}, defaultOptions, options);
-
-  /* eslint-disable no-restricted-syntax, no-await-in-loop */
-  for (const cmd of commands) {
-    await execa.command(cmd, opts);
-  }
+export function exec(cmds, options = {}) {
+  return Exec(cmds, Object.assign({}, defaultOptions, options));
 }
 
 /**
@@ -90,16 +85,6 @@ export function hela(options) {
 
       this.option('--cwd', 'Current working directory', proc.cwd());
       this.commands[name] = taskObj;
-
-      // const programName = this.name;
-      // // ! important: sade does add `.name` to the instance,
-      // // ! but also it uses it for generating help and such.
-      // delete this.name;
-
-      // const handler = Object.assign(taskObj.handler, this);
-
-      // // ! restore
-      // this.name = programName;
 
       return Object.assign(taskObj.handler, this);
     },

@@ -9,7 +9,9 @@
   "license": "MPL-2.0",
   "scripts": {
     "setup": "yarn && lerna bootstrap",
-    "prehela": "babel ./@hela/core/src -d ./@hela/core/dist/build/main",
+    "build:execa": "NODE_ENV=prepare babel ./@tunnckocore/execa/src -d ./@tunnckocore/execa/dist/build/cjs",
+    "build:hela": "NODE_ENV=prepare babel ./@hela/core/src -d ./@hela/core/dist/build/cjs",
+    "prehela": "yarn build:execa && yarn build:hela",
     "hela": "yarn node -r esm ./@hela/cli/src/cli.js",
     "cleanup": "rm -rf dist ./packages/*/dist ./@hela/*/dist ./@tunnckocore/*/dist",
     "fresh": "rm -rf ./node_modules ./packages/*/node_modules ./@hela/*/node_modules ./@tunnckocore/*/node_modules",

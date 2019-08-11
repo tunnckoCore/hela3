@@ -1,0 +1,51 @@
+{
+  "version": "4.3.1",
+  "name": "@tunnckocore/execa",
+  "description": "Thin layer on top of `execa` that allows executing multiple commands in parallel or in sequence with control for concurrency",
+  "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
+  "homepage": "https://github.com/tunnckocorehq/hela",
+  "license": "MPL-2.0",
+  "main": "dist/build/cjs/index.js",
+  "module": "dist/build/esm/index.js",
+  "scripts": {},
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tunnckoCoreHQ/hela.git",
+    "directory": "@tunnckocore/execa"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "tunnckocorehq",
+    "develop",
+    "parallel",
+    "series",
+    "concurrency",
+    "sequence",
+    "exec",
+    "child",
+    "process",
+    "execute",
+    "fork",
+    "execfile",
+    "spawn",
+    "file",
+    "shell",
+    "bin",
+    "binary",
+    "binaries",
+    "npm",
+    "path",
+    "local"
+  ],
+  "dependencies": {
+    "execa": "^2.0.3",
+    "p-map": "^3.0.0"
+  },
+  "devDependencies": {}
+}

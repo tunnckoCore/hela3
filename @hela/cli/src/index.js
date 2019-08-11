@@ -8,13 +8,13 @@ const esmRequire = esmLoader(module);
 
 const explorer = cosmiconfig('hela', {
   searchPlaces: [
-    `.helarc.js`,
-    `hela.config.js`,
-    `package.json`,
-    `.helarc.json`,
-    `.helarc.yaml`,
-    `.helarc.yml`,
-    `.helarc`,
+    '.helarc.js',
+    'hela.config.js',
+    'package.json',
+    '.helarc.json',
+    '.helarc.yaml',
+    '.helarc.yml',
+    '.helarc',
   ],
   loaders: {
     '.js': esmRequire,

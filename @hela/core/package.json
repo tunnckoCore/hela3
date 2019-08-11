@@ -1,12 +1,12 @@
 {
-  "version": "3.0.0-alpha.80",
+  "version": "3.0.0-alpha.90",
   "name": "@hela/core",
   "description": "WIP: Powerful software development experience",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
   "homepage": "https://github.com/tunnckocorehq/hela",
   "license": "MPL-2.0",
-  "main": "dist/build/main/index.js",
-  "module": "dist/build/module/index.js",
+  "main": "dist/build/cjs/index.js",
+  "module": "dist/build/esm/index.js",
   "scripts": {},
   "publishConfig": {
     "access": "public",
@@ -34,7 +34,7 @@
   "dependencies": {
     "all-module-paths": "^0.7.1",
     "dargs": "^7.0.0",
-    "execa": "^2.0.3",
+    "@tunnckocore/execa": "^4.3.1",
     "sade": "^1.6.1"
   }
 }

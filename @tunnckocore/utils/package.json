@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.4.0",
   "name": "@tunnckocore/utils",
   "description": "Utility functions and helpers for internal usage",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
