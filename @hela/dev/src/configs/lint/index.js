@@ -5,15 +5,20 @@ import { getWorkspacesAndExtensions } from '@tunnckocore/utils';
 
 export function createLintConfig(opts) {
   const { workspaces, exts } = getWorkspacesAndExtensions(opts.cwd);
-  const roots = workspaces.length > 0 ? workspaces : ['src/**/*'];
+  const srcGlob = ['src', '**', '*'];
+
+  const wsRoots =
+    workspaces.length > 0 ? workspaces.map((w) => path.join(w, '*')) : [''];
+
+  const matches = wsRoots.map((ws) =>
+    path.join('<rootDir>', ...[ws, ...srcGlob].filter(Boolean)),
+  );
 
   return {
     displayName: 'lint',
 
     testEnvironment: 'node',
-    testMatch: roots.map((ws) =>
-      path.join(`<rootDir>`, ws, '*', 'src', '**', '*'),
-    ),
+    testMatch: matches,
     testPathIgnorePatterns: [
       '.+/dist/.+',
 

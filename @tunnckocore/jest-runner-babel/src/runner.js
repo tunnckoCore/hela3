@@ -43,12 +43,12 @@ module.exports = async function babelRunner({ testPath, config }) {
   let relativePath = path.relative(rootDir, testPath);
   // const outFolder = runnerConfig.outDir;
 
-  runnerConfig.monorepo =
-    runnerConfig.monorepo || relativePath.startsWith('packages');
+  // you can also use workspaces: true
+  const isMono = [].concat(runnerConfig.workspaces).filter(Boolean).length > 0;
 
   // we are in monorepo environment,
   // so make dist folder in each package root
-  if (runnerConfig.monorepo) {
+  if (isMono) {
     if (isWin32 && relativePath.indexOf('/') < 0) {
       relativePath = relativePath.replace(/\\/g, '/');
     }
@@ -70,6 +70,8 @@ module.exports = async function babelRunner({ testPath, config }) {
     relativePath = path.relative(path.join(rootDir, 'src'), testPath);
   }
 
+  // ! important: the `rootDir` here is already a package's directory
+  // ! like <monorepo root>/<workspace name>/<package dir> so we can append the dist
   let outDir = path.resolve(rootDir, runnerConfig.outDir);
   let outFile = path.join(outDir, relativePath);
 

@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0-alpha.71",
+  "version": "3.0.0-alpha.80",
   "name": "@hela/core",
   "description": "WIP: Powerful software development experience",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
@@ -10,7 +10,7 @@
   "scripts": {},
   "publishConfig": {
     "access": "public",
-    "tag": "latest"
+    "tag": "next"
   },
   "engines": {
     "node": ">=10.13.0"

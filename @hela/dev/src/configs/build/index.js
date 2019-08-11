@@ -27,7 +27,14 @@ export function createBuildConfig(options) {
   //   .map((pattern) => `<root>/${pattern}`);
 
   const { workspaces, exts } = getWorkspacesAndExtensions(opts.cwd);
-  const roots = workspaces.length > 0 ? workspaces : ['src/**/*'];
+  const srcGlob = ['src', '**', '*'];
+
+  const wsRoots =
+    workspaces.length > 0 ? workspaces.map((w) => path.join(w, '*')) : [''];
+
+  const matches = wsRoots.map((ws) =>
+    path.join('<rootDir>', ...[ws, ...srcGlob].filter(Boolean)),
+  );
 
   const esmDest = opts.dest
     ? path.join(opts.dest, 'module')
@@ -38,9 +45,7 @@ export function createBuildConfig(options) {
     displayName: opts.env.NODE_ENV === 'module' ? 'build:esm' : 'build:cjs',
 
     testEnvironment: 'node',
-    testMatch: roots.map((ws) =>
-      path.join(`<rootDir>`, ws, '*', 'src', '**', '*'),
-    ),
+    testMatch: matches,
     testPathIgnorePatterns: [
       '.+/__tests__/.+',
       '.+/jest-runner-babel/.+',
@@ -55,6 +60,7 @@ export function createBuildConfig(options) {
     haste: {
       '@tunnckocore/jest-runner-babel': {
         outDir: opts.env.NODE_ENV === 'module' ? esmDest : cjsDest,
+        workspaces: true,
         // ! keep in sync with `src/configs/babel.js`
         babel: {
           ignore: (opts.env.NODE_ENV === 'test'
