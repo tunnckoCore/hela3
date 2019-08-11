@@ -77,7 +77,7 @@ export const test = prog
   .command('test', 'Run the tests, through Jest')
   .option('--watch', "Trigger the Jest's --watch")
   .option('--all', 'Useful, because we pass --onlyChanged by default')
-  .action(async function nm(argv) {
+  .action(async (argv) => {
     // const testConfig = path.join(__dirname, 'configs', 'test', 'config.js');
     const { configPath, options } = await createJestConfig({
       ...argv,

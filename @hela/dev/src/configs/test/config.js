@@ -1,0 +1,1 @@
+module.exports={projects:[{"displayName":"test","testEnvironment":"node","testPathIgnorePatterns":[".+/dist/.+"],"moduleFileExtensions":["js","jsx","ts","tsx","mjs"],"rootDir":"/home/charlike/dev/code/helapkg/hela"}]};

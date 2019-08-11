@@ -3,6 +3,7 @@ import path from 'path';
 import util from 'util';
 import proc from 'process';
 import { exec } from '@hela/core';
+import { getWorkspacesAndExtensions } from '@tunnckocore/utils';
 
 export { createBuildConfig } from './configs/build';
 export { createLintConfig } from './configs/lint';
@@ -93,23 +94,24 @@ export async function tscGenTypesForPackage(argv) {
 }
 
 export async function tscGenTypes(argv) {
-  // ! TODO: should do the same part for theother commands too, so externalize
   const fromRoot = (...x) => path.resolve(argv.cwd, ...x);
-  const rootPkg = await import(fromRoot('package.json'));
-  const rootLerna = fs.existsSync(fromRoot('lerna.json'))
-    ? await import(fromRoot('lerna.json'))
-    : {};
+  // // ! TODO: should do the same part for theother commands too, so externalize
+  // const rootPkg = await import(fromRoot('package.json'));
+  // const rootLerna = fs.existsSync(fromRoot('lerna.json'))
+  //   ? await import(fromRoot('lerna.json'))
+  //   : {};
 
-  const workspaces = []
-    .concat(
-      rootLerna.packages ||
-        (rootPkg.workspaces ? rootPkg.workspaces : argv.workspaces),
-    )
-    .filter((x) => typeof x === 'string')
-    .filter(Boolean)
-    .reduce((acc, ws) => acc.concat(ws.split(',')), [])
-    .map((ws) => path.dirname(ws));
-  // ! TODO: end of todo
+  // const workspaces = []
+  //   .concat(
+  //     rootLerna.packages ||
+  //       (rootPkg.workspaces ? rootPkg.workspaces : argv.workspaces),
+  //   )
+  //   .filter((x) => typeof x === 'string')
+  //   .filter(Boolean)
+  //   .reduce((acc, ws) => acc.concat(ws.split(',')), [])
+  //   .map((ws) => path.dirname(ws));
+  // // ! TODO: end of todo
+  const { workspaces } = getWorkspacesAndExtensions(argv.cwd);
 
   if (workspaces.length > 0) {
     const { cwd, ...opts } = argv;

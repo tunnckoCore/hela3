@@ -1,8 +1,8 @@
 import path from 'path';
 import proc from 'process';
-import { hela } from '@hela/core';
 import cosmiconfig from 'cosmiconfig';
 import esmLoader from 'esm';
+import { hela } from '@hela/core';
 
 const esmRequire = esmLoader(module);
 

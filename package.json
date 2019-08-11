@@ -9,19 +9,21 @@
   "license": "MPL-2.0",
   "scripts": {
     "setup": "yarn && lerna bootstrap",
-    "prehela": "babel ./packages/hela-core/src -d ./packages/hela-core/dist/build/main",
-    "hela": "yarn node -r esm ./packages/hela-cli/src/cli.js",
-    "cleanup": "rm -rf dist packages/*/dist",
-    "fresh": "rm -rf node_modules packages/*/node_modules",
+    "prehela": "babel ./@hela/core/src -d ./@hela/core/dist/build/main",
+    "hela": "yarn node -r esm ./@hela/cli/src/cli.js",
+    "cleanup": "rm -rf dist ./packages/*/dist ./@hela/*/dist ./@tunnckocore/*/dist",
+    "fresh": "rm -rf ./node_modules ./packages/*/node_modules ./@hela/*/node_modules ./@tunnckocore/*/node_modules",
     "commit": "git add -A && gitcommit -sSxy",
     "postcommit": "yarn release",
     "release": "git push && yarn run x:version && yarn run x:publish",
     "x:version": "lerna version --conventional-commits --no-changelog --sign-git-commit --sign-git-tag",
     "x:publish": "lerna publish from-git --pre-dist-tag next --dist-tag next"
   },
-  "hela": "./packages/hela-dev/src/index.js",
+  "hela": "./@hela/dev/src/index.js",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "@hela/*",
+    "@tunnckocore/*"
   ],
   "dependencies": {
     "@babel/cli": "^7.5.5",

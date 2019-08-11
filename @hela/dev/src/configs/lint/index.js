@@ -1,19 +1,26 @@
+import path from 'path';
+import { getWorkspacesAndExtensions } from '@tunnckocore/utils';
+
 /* eslint-disable import/prefer-default-export */
 
 export function createLintConfig(opts) {
-  const match = opts.mono ? 'packages/*/src/**/*' : 'src/**/*';
+  const { workspaces, exts } = getWorkspacesAndExtensions(opts.cwd);
+  const roots = workspaces.length > 0 ? workspaces : ['src/**/*'];
 
   return {
     displayName: 'lint',
 
     testEnvironment: 'node',
-    testMatch: [`<rootDir>/${match}`],
+    testMatch: roots.map((ws) =>
+      path.join(`<rootDir>`, ws, '*', 'src', '**', '*'),
+    ),
     testPathIgnorePatterns: [
       '.+/dist/.+',
 
       // @hela/dev specific
       '.+/configs/build/config\\.js$',
       '.+/configs/lint/config\\.js$',
+      '.+/configs/test/config\\.js$',
     ],
 
     // TODO: include in this monorepo
@@ -22,7 +29,7 @@ export function createLintConfig(opts) {
     // },
 
     runner: 'jest-runner-eslint',
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'mjs'],
+    moduleFileExtensions: exts,
     rootDir: opts.cwd,
   };
 }

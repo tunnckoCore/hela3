@@ -1,4 +1,5 @@
 import path from 'path';
+import { getWorkspacesAndExtensions } from '@tunnckocore/utils';
 
 /* eslint-disable import/prefer-default-export */
 
@@ -25,7 +26,9 @@ export function createBuildConfig(options) {
   //   .filter(Boolean)
   //   .map((pattern) => `<root>/${pattern}`);
 
-  const match = opts.mono ? 'packages/*/src/**/*' : 'src/**/*';
+  const { workspaces, exts } = getWorkspacesAndExtensions(opts.cwd);
+  const roots = workspaces.length > 0 ? workspaces : ['src/**/*'];
+
   const esmDest = opts.dest
     ? path.join(opts.dest, 'module')
     : 'dist/build/module';
@@ -35,7 +38,9 @@ export function createBuildConfig(options) {
     displayName: opts.env.NODE_ENV === 'module' ? 'build:esm' : 'build:cjs',
 
     testEnvironment: 'node',
-    testMatch: [`<rootDir>/${match}`],
+    testMatch: roots.map((ws) =>
+      path.join(`<rootDir>`, ws, '*', 'src', '**', '*'),
+    ),
     testPathIgnorePatterns: [
       '.+/__tests__/.+',
       '.+/jest-runner-babel/.+',
@@ -44,6 +49,7 @@ export function createBuildConfig(options) {
       // @hela/dev specific
       '.+/configs/build/config\\.js$',
       '.+/configs/lint/config\\.js$',
+      '.+/configs/test/config\\.js$',
     ],
 
     haste: {
@@ -77,7 +83,7 @@ export function createBuildConfig(options) {
     },
 
     runner: '@tunnckocore/jest-runner-babel',
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'mjs', 'json'],
+    moduleFileExtensions: exts.concat('json'),
     rootDir: opts.cwd,
   };
 }

@@ -5,7 +5,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "removeComments": true,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "sourceMap": false,
     "strict": true,
     "jsx": "react",
