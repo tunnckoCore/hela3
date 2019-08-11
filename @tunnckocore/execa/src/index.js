@@ -31,7 +31,7 @@ import pMap from 'p-map';
  * main();
  *
  * @name   .exec
- * @param  {string|string[]} cmds a commands to execute, if array of strings executes them serially
+ * @param  {string|string[]} cmds a commands to execute in parallel or series
  * @param  {object} [options] directly passed to [execa][] and so to `child_process`
  * @return {Promise} resolved or rejected promises
  * @public
@@ -86,7 +86,7 @@ export async function exec(cmds, options) {
  * main();
  *
  * @name   .shell
- * @param  {string|string[]} cmds a commands to execute, if array of strings executes them serially
+ * @param  {string|string[]} cmds a commands to execute in parallel or series
  * @param  {object} options directly passed to `execa`
  * @return {Promise} resolved or rejected promises
  * @public
