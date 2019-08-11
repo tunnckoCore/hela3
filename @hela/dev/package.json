@@ -18,7 +18,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tunnckoCoreHQ/hela.git",
-    "directory": "packages/hela-dev"
+    "directory": "@hela/dev"
   },
   "files": [
     "dist"

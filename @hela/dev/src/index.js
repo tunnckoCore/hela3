@@ -30,28 +30,22 @@ const prog = hela();
 
 export const build = prog
   .command('build', 'Build project with Babel through Jest')
-  .option(
-    '--format',
-    'Pass comma-separated list like `main,module`',
-    'main,module',
-  )
+  .option('--format', 'Pass comma-separated list like `esm,cjs`', 'esm,cjs')
   .option(
     '--dest',
-    'Destination folder. It is appended with /main or /module, depending on format',
+    "Destination folder. It's appended with /cjs or /module, depending on format",
   )
   .option('--watch', "Trigger the Jest's --watch")
   .option('--all', 'Useful, because we pass --onlyChanged by default')
   .action(async (argv) => {
     // why it doesn't picks up the default, set in .option() ?!
-    const fmt = argv.format || 'main,module';
+    const fmt = argv.format || 'esm,cjs';
 
     const { configPath, content, options } = await createJestConfig({
       ...argv,
       projects: fmt
         .split(',')
-        .map((format) => (opts) =>
-          createBuildConfig({ ...opts, env: { NODE_ENV: format } }),
-        ),
+        .map((format) => (opts) => createBuildConfig({ ...opts, format })),
     });
 
     return runJest({ configPath, content, options });

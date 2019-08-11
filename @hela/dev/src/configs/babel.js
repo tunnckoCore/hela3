@@ -1,16 +1,16 @@
 'use strict';
 
-const proc = require('process');
+// const proc = require('process');
 
+// ! used for testing only
 // ! keep in sync with babel config inside `src/configs/build/index.js`
-module.exports = {
-  ignore: proc.env.NODE_ENV === 'test' ? [] : ['**/__tests__/**'],
+const baseConfig = {
   presets: [
     [
       '@babel/preset-env',
       {
         targets: { node: '10.13' },
-        modules: proc.env.NODE_ENV === 'module' ? false : 'commonjs',
+        modules: 'commonjs',
       },
     ],
     '@babel/preset-react',
@@ -23,3 +23,5 @@ module.exports = {
   ],
   comments: false,
 };
+
+module.exports = baseConfig;

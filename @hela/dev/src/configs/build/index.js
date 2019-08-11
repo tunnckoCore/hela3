@@ -5,15 +5,7 @@ import { getWorkspacesAndExtensions } from '@tunnckocore/utils';
 
 // ! keep in sync with babel config inside `src/configs/babel.js`
 export function createBuildConfig(options) {
-  const opts = Object.assign(
-    {
-      // TODO: using `micromatch`, Jest 25 will simplify the matching
-      // match: 'packages/**/*',
-      // ignore: ['**/*.d.ts', '**/dist/**', '**/__tests__/**'],
-      env: { NODE_ENV: 'main' },
-    },
-    options,
-  );
+  const opts = Object.assign({}, options);
 
   // TODO: using `micromatch`, Jest 25 will simplify the matching
   // const ignores = []
@@ -36,19 +28,18 @@ export function createBuildConfig(options) {
     path.join('<rootDir>', ...[ws, ...srcGlob].filter(Boolean)),
   );
 
-  const esmDest = opts.dest
-    ? path.join(opts.dest, 'module')
-    : 'dist/build/module';
-  const cjsDest = opts.dest ? path.join(opts.dest, 'main') : 'dist/build/main';
+  const esmDest = opts.dest ? path.join(opts.dest, 'esm') : 'dist/build/esm';
+  const cjsDest = opts.dest ? path.join(opts.dest, 'main') : 'dist/build/cjs';
 
   return {
-    displayName: opts.env.NODE_ENV === 'module' ? 'build:esm' : 'build:cjs',
+    displayName: opts.format === 'esm' ? 'build:esm' : 'build:cjs',
 
     testEnvironment: 'node',
     testMatch: matches,
     testPathIgnorePatterns: [
       '.+/__tests__/.+',
       '.+/jest-runner-babel/.+',
+      '.+/utils/.+',
       '.+/dist/.+',
 
       // @hela/dev specific
@@ -59,20 +50,20 @@ export function createBuildConfig(options) {
 
     haste: {
       '@tunnckocore/jest-runner-babel': {
-        outDir: opts.env.NODE_ENV === 'module' ? esmDest : cjsDest,
-        workspaces: true,
+        outDir: opts.format === 'esm' ? esmDest : cjsDest,
+        workspaces,
         // ! keep in sync with `src/configs/babel.js`
         babel: {
-          ignore: (opts.env.NODE_ENV === 'test'
-            ? []
-            : ['**/__tests__/**']
-          ).concat('**/jest-runner-babel/**'),
+          // ignore: (opts.env.NODE_ENV === 'test'
+          //   ? []
+          //   : ['**/__tests__/**']
+          // ).concat('**/jest-runner-babel/**'),
           presets: [
             [
               '@babel/preset-env',
               {
                 targets: { node: '10.13' },
-                modules: opts.env.NODE_ENV === 'module' ? false : 'commonjs',
+                modules: opts.format === 'esm' ? false : 'commonjs',
               },
             ],
             '@babel/preset-react',
