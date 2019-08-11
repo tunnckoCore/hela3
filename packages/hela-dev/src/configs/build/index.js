@@ -1,13 +1,12 @@
-// import micromatch from 'micromatch';
-
 import path from 'path';
 
 /* eslint-disable import/prefer-default-export */
 
+// ! keep in sync with babel config inside `src/configs/babel.js`
 export function createBuildConfig(options) {
   const opts = Object.assign(
     {
-      // TODO: using `micromatch`
+      // TODO: using `micromatch`, Jest 25 will simplify the matching
       // match: 'packages/**/*',
       // ignore: ['**/*.d.ts', '**/dist/**', '**/__tests__/**'],
       env: { NODE_ENV: 'main' },
@@ -15,7 +14,7 @@ export function createBuildConfig(options) {
     options,
   );
 
-  // TODO: using `micromatch`
+  // TODO: using `micromatch`, Jest 25 will simplify the matching
   // const ignores = []
   //   .concat(opts.ignore)
   //   .filter(Boolean)
@@ -60,10 +59,11 @@ export function createBuildConfig(options) {
             [
               '@babel/preset-env',
               {
-                targets: { node: '8.9' },
+                targets: { node: '10.13' },
                 modules: opts.env.NODE_ENV === 'module' ? false : 'commonjs',
               },
             ],
+            '@babel/preset-react',
             '@babel/preset-typescript',
           ],
           plugins: [

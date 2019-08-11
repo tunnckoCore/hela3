@@ -9,10 +9,11 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        targets: { node: '8.9' },
+        targets: { node: '10.13' },
         modules: proc.env.NODE_ENV === 'module' ? false : 'commonjs',
       },
     ],
+    '@babel/preset-react',
     '@babel/preset-typescript',
   ],
   plugins: [
