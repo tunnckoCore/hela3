@@ -38,6 +38,7 @@ export function createBuildConfig(options) {
     testMatch: matches,
     testPathIgnorePatterns: [
       '.+/__tests__/.+',
+      '.+/fixtures/.+',
       '.+/jest-runner-babel/.+',
       '.+/utils/.+',
       '.+/dist/.+',
