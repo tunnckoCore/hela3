@@ -1,3 +1,8 @@
+# @hela/dev specifics
+configs/test/config.js
+configs/lint/config.js
+configs/build/config.js
+
 # Build environment
 dist
 
