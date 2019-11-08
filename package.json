@@ -1,61 +1,16 @@
 {
+  "scripts": {},
+  "dependencies": {},
+  "renovate": {
+    "extends": "@tunnckocore"
+  },
+  "workspaces": [
+    "modules/*"
+  ],
   "private": true,
-  "version": "0.1.0",
-  "name": "@tunnckocore/hela-monorepo",
+  "name": "hela",
+  "version": "0.0.0",
   "description": "WIP: Powerful software development experience",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
-  "repository": "tunnckocorehq/hela",
-  "homepage": "https://github.com/tunnckocorehq/hela",
-  "license": "MPL-2.0",
-  "scripts": {
-    "setup": "yarn && lerna bootstrap",
-    "build": "lerna bootstrap && yarn hela all --all",
-    "build:execa": "NODE_ENV=prepare babel ./@tunnckocore/execa/src -d ./@tunnckocore/execa/dist/build/cjs",
-    "build:hela": "NODE_ENV=prepare babel ./@hela/core/src -d ./@hela/core/dist/build/cjs",
-    "prehela": "yarn build:execa && yarn build:hela",
-    "hela": "yarn node -r esm ./@hela/cli/src/cli.js",
-    "cleanup": "rm -rf dist ./packages/*/dist ./@hela/*/dist ./@tunnckocore/*/dist",
-    "fresh": "rm -rf ./node_modules ./packages/*/node_modules ./@hela/*/node_modules ./@tunnckocore/*/node_modules",
-    "commit": "git add -A && gitcommit -sSxy",
-    "postcommit": "yarn release",
-    "release": "git push && yarn run x:version && yarn run x:publish",
-    "x:version": "lerna version --conventional-commits --no-changelog --sign-git-commit --sign-git-tag",
-    "x:publish": "lerna publish from-git --pre-dist-tag next --dist-tag next"
-  },
-  "hela": "./@hela/dev/src/index.js",
-  "workspaces": [
-    "packages/*",
-    "@hela/*",
-    "@tunnckocore/*"
-  ],
-  "dependencies": {
-    "@babel/cli": "^7.5.5",
-    "@tunnckocore/config": "^4.0.1",
-    "esm": "^3.2.25",
-    "lerna": "^3.16.4",
-    "typescript": "^3.5.3"
-  },
-  "renovate": {
-    "extends": [
-      "config:base",
-      ":onlyNpm",
-      ":gitSignOff",
-      ":automergePr",
-      ":automergeAll",
-      ":respectLatest",
-      ":rebaseStalePrs",
-      ":semanticCommits",
-      ":disableRateLimiting",
-      ":preserveSemverRanges",
-      ":maintainLockFilesWeekly"
-    ]
-  },
-  "jest-runner-eslint": {
-    "cliOptions": {
-      "format": "codeframe",
-      "quiet": true,
-      "cache": true,
-      "fix": true
-    }
-  }
+  "license": "MPL-2.0"
 }

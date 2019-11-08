@@ -1,7 +1,7 @@
-# @hela/dev specifics
-configs/test/config.js
-configs/lint/config.js
-configs/build/config.js
+*.tsbuildinfo
+.cache
+.*cache
+*.cache
 
 # Build environment
 dist
@@ -9,6 +9,7 @@ dist
 # Package managers lockfiles
 package-lock.json
 shrinkwrap.json
+pnpm-lock.json
 
 # Logs
 logs
@@ -25,7 +26,7 @@ pids
 lib-cov
 
 # Coverage directory used by tools like istanbul
-coverage
+/coverage
 
 # nyc test coverage
 .nyc_output

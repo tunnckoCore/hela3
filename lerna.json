@@ -1,12 +1,10 @@
 {
   "packages": [
-    "packages/*",
-    "@hela/*",
-    "@tunnckocore/*"
+    "modules/*"
   ],
   "useWorkspaces": true,
   "npmClient": "yarn",
-  "version": "3.0.0-alpha.91",
+  "version": "3.0.0-beta.5",
   "command": {
     "version": {
       "message": "chore(release): version %s"

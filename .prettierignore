@@ -1,3 +1,19 @@
+fixture
+fixtures
+__fixture__
+__fixtures__
+.gitkeep
+*.map
+*.lock
+.npmrc
+.yarnrc
+*.js.snap
+
+*.tsbuildinfo
+.cache
+.*cache
+*.cache
+
 # Markdown files
 *.md
 LICENSE
@@ -9,6 +25,7 @@ lerna.json
 # Package managers lockfiles
 package-lock.json
 shrinkwrap.json
+pnpm-lock.json
 
 # Logs
 logs
