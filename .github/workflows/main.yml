@@ -23,13 +23,13 @@ jobs:
         name: Set Node.js v${{ matrix.node-version }}
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: actions/cache@master
-        name: Cache dependencies
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      # - uses: actions/cache@master
+      #   name: Cache dependencies
+      #   with:
+      #     path: node_modules
+      #     key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-node-
       - name: Install dependencies
         run: |
           yarn --prefer-offline --frozen-lockfile || yarn --frozen-lockfile || yarn
