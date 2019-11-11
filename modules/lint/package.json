@@ -1,0 +1,41 @@
+{
+  "name": "@hela/lint",
+  "version": "0.1.0",
+  "description": "A `lint` command task for Hela",
+  "author": "Charlike Mike Reagent <opensource@tunnckocore.com> (https://tunnckocore.com)",
+  "homepage": "https://github.com/tunnckoCore/hela",
+  "license": "MPL-2.0",
+  "licenseStart": 2019,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tunnckoCore/hela.git",
+    "directory": "modules/lint"
+  },
+  "engines": {
+    "node": ">=10.13"
+  },
+  "main": "dist/lint.cjs.js",
+  "module": "dist/lint.esm.js",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "src/**/*.js": {
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [],
+  "verb": {}
+}

@@ -1,16 +1,35 @@
 {
-  "scripts": {},
-  "dependencies": {},
-  "renovate": {
-    "extends": "@tunnckocore"
-  },
-  "workspaces": [
-    "modules/*"
-  ],
   "private": true,
   "name": "hela",
   "version": "0.0.0",
   "description": "WIP: Powerful software development experience",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
-  "license": "MPL-2.0"
+  "license": "MPL-2.0",
+  "workspaces": [
+    "modules/*"
+  ],
+  "scripts": {
+    "dev": "preconstruct dev",
+    "build": "preconstruct build",
+    "watch": "preconstruct watch",
+    "postinstall": "yarn dev"
+  },
+  "dependencies": {
+    "@changesets/changelog-github": "^0.1.1",
+    "@changesets/cli": "^2.4.0",
+    "@manypkg/cli": "^0.9.0",
+    "@preconstruct/cli": "^1.1.2",
+    "@tunnckocore/eslint-config": "^5.0.5",
+    "@tunnckocore/prettier-config": "^1.0.4",
+    "eslint": "^6.6.0",
+    "prettier": "^1.19.1"
+  },
+  "renovate": {
+    "extends": "@tunnckocore"
+  },
+  "preconstruct": {
+    "packages": [
+      "modules/*"
+    ]
+  }
 }
