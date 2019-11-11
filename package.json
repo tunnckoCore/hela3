@@ -9,6 +9,7 @@
     "modules/*"
   ],
   "scripts": {
+    "test": "echo 'testing needed'",
     "dev": "preconstruct dev",
     "build": "preconstruct build",
     "watch": "preconstruct watch",

@@ -35,6 +35,7 @@
     }
   },
   "dependencies": {
+    "jest": "^24.9.0",
     "mri": "^1.1.4"
   },
   "devDependencies": {},
