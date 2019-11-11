@@ -27,9 +27,9 @@ jobs:
         name: Cache dependencies
         with:
           path: node_modules
-          key: ${{ matrix.platform }}-node-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ matrix.platform }}-node-
+            ${{ runner.os }}-node-
       - name: Install dependencies
         run: |
           yarn --prefer-offline --frozen-lockfile || yarn --frozen-lockfile || yarn
