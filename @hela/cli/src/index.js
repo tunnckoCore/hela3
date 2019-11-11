@@ -53,7 +53,7 @@ export default async function main() {
     ? fromJson(res)
     : fromJS(res);
 
-  console.log('hela: Loading config -> ', res.filepath);
+  console.log('hela: Loading config ->', res.filepath);
 
   const tasksKeys = Object.keys(config);
 

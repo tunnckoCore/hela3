@@ -5,7 +5,7 @@ import { getWorkspacesAndExtensions } from '@tunnckocore/utils';
 
 // ! keep in sync with babel config inside `src/configs/babel.js`
 export function createBuildConfig(options) {
-  const opts = Object.assign({}, options);
+  const opts = { ...options };
 
   // TODO: using `micromatch`, Jest 25 will simplify the matching
   // const ignores = []

@@ -27,7 +27,7 @@ const defaultOptions = {
  * @param {object} options
  */
 export function toFlags(argv, options) {
-  const opts = Object.assign({ shortFlag: true }, options);
+  const opts = { shortFlag: true, ...options };
   return dargs(argv, opts).join(' ');
 }
 
@@ -38,7 +38,7 @@ export function toFlags(argv, options) {
  * @public
  */
 export function shell(cmds, options) {
-  return Shell(cmds, Object.assign({}, defaultOptions, options));
+  return Shell(cmds, { ...defaultOptions, ...options });
 }
 
 /**
@@ -48,7 +48,7 @@ export function shell(cmds, options) {
  * @public
  */
 export function exec(cmds, options = {}) {
-  return Exec(cmds, Object.assign({}, defaultOptions, options));
+  return Exec(cmds, { ...defaultOptions, ...options });
 }
 
 /**
@@ -58,7 +58,7 @@ export function exec(cmds, options = {}) {
  */
 export function hela(options) {
   const prog = Sade('hela').version('3.0.0');
-  const opts = Object.assign({}, defaultOptions, options, { lazy: true });
+  const opts = { ...defaultOptions, ...options, lazy: true };
 
   return Object.assign(prog, {
     isHela: true,
@@ -77,7 +77,7 @@ export function hela(options) {
 
       if (typeof fn === 'function') {
         taskObj.handler = async (...args) => {
-          const fakeArgv = Object.assign({}, taskObj.default, { _: [name] });
+          const fakeArgv = { ...taskObj.default, _: [name] };
 
           return fn.apply(this, args.concat(fakeArgv));
         };

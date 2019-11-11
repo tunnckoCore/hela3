@@ -30,9 +30,12 @@ export function exists(fp, opts) {
 }
 
 export async function createJestConfig(argv) {
-  const options = Object.assign({ cwd: proc.cwd(), type: 'build' }, argv, {
+  const options = {
+    cwd: proc.cwd(),
+    type: 'build',
+    ...argv,
     env: { NODE_ENV: 'main' },
-  });
+  };
 
   options.mono = exists('packages', options) || exists('lerna.json', options);
 
@@ -124,7 +127,7 @@ export async function tscGenTypes(argv) {
         return Promise.all(
           pkgsInWorkspace.map(async (pkgDir) => {
             const pkgRoot = path.join(wsDir, pkgDir);
-            const options = Object.assign({}, opts, { cwd: pkgRoot });
+            const options = { ...opts, cwd: pkgRoot };
 
             await tscGenTypesForPackage(options);
           }),

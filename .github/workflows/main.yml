@@ -35,8 +35,8 @@ jobs:
           yarn --prefer-offline --frozen-lockfile || yarn --frozen-lockfile || yarn
       - name: Run Tests
         run: yarn test
-      - name: Upload coverage to Codecov
-        run: bash <(curl -s https://codecov.io/bash) -C $GITHUB_SHA -B ${GITHUB_REF#refs/heads/} -Z
+      # - name: Upload coverage to Codecov
+      #   run: bash <(curl -s https://codecov.io/bash) -C $GITHUB_SHA -B ${GITHUB_REF#refs/heads/} -Z
 
   # typescript:
   #   name: TypeScript
