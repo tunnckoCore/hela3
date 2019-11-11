@@ -11,7 +11,6 @@ jobs:
     name: Tests
     env:
       CI: true
-      CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
     strategy:
       matrix:
         platform: [ubuntu-18.04, macos-latest]
@@ -37,6 +36,8 @@ jobs:
         run: yarn test
       # - name: Upload coverage to Codecov
       #   run: bash <(curl -s https://codecov.io/bash) -C $GITHUB_SHA -B ${GITHUB_REF#refs/heads/} -Z
+      #   env:
+      #     CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
 
   # typescript:
   #   name: TypeScript
