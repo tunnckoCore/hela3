@@ -58,6 +58,9 @@ export function hela(programName, options) {
     options = programName; // eslint-disable-line no-param-reassign
     programName = null; // eslint-disable-line no-param-reassign
   }
+  if (options && !isObject(options)) {
+    options = { version: options }; // eslint-disable-line no-param-reassign
+  }
 
   const bin = typeof programName === 'string' ? programName : 'hela';
   const opts = { cwd: process.cwd(), ...options, lazy: true };
