@@ -12,8 +12,7 @@
     "test": "echo 'testing needed'",
     "dev": "preconstruct dev",
     "build": "preconstruct build",
-    "watch": "preconstruct watch",
-    "postinstall": "yarn dev"
+    "watch": "preconstruct watch"
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.1.1",

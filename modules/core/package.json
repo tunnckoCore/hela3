@@ -34,7 +34,13 @@
       }
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "@hela/sade": "^0.1.0",
+    "@tunnckocore/execa": "^5.0.3",
+    "global-dirs": "^2.0.1",
+    "dargs": "^7.0.0",
+    "sade": "^1.6.1"
+  },
   "devDependencies": {},
   "keywords": [],
   "verb": {}
