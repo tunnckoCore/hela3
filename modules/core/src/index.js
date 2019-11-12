@@ -64,6 +64,7 @@ export function hela(programName, options) {
 
   const bin = typeof programName === 'string' ? programName : 'hela';
   const opts = { cwd: process.cwd(), ...options, lazy: true };
+
   const prog = Program(bin, opts).version(opts.version || '3.0.0');
 
   return Object.assign(prog, {
