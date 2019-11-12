@@ -1,6 +1,6 @@
 import dargs from 'dargs';
-import sade from '@hela/sade';
 import dirs from 'global-dirs';
+import Program from '@hela/sade';
 import { shell as Shell, exec as Exec } from '@tunnckocore/execa';
 
 const globalBins = [dirs.npm.binaries, dirs.yarn.binaries];
@@ -61,7 +61,7 @@ export function hela(programName, options) {
 
   const bin = typeof programName === 'string' ? programName : 'hela';
   const opts = { cwd: process.cwd(), ...options, lazy: true };
-  const prog = sade(bin, opts).version(opts.version || '3.0.0');
+  const prog = Program(bin, opts).version(opts.version || '3.0.0');
 
   return Object.assign(prog, {
     isHela: true,
