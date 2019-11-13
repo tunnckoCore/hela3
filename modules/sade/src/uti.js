@@ -1,32 +1,26 @@
 const GAP = 4;
-
-// eslint-disable-next-line no-underscore-dangle
 const __ = '  ';
-
 const ALL = '__all__';
 const DEF = '__default__';
 const NL = '\n';
 
 function format(arr) {
-  if (arr.length === 0) return '';
-  const len = maxLen(arr.map((x) => x[0])) + GAP;
-
-  return arr.map(
-    (a) =>
-      a[0] +
-      ' '.repeat(len - a[0].length) +
-      a[1] +
-      (a[2] == null ? '' : `  (default ${a[2]})`),
-  );
+  if (!arr.length) return '';
+  let len = maxLen(arr.map((x) => x[0])) + GAP;
+  let join = (a) =>
+    a[0] +
+    ' '.repeat(len - a[0].length) +
+    a[1] +
+    (a[2] == null ? '' : `  (default ${a[2]})`);
+  return arr.map(join);
 }
 
 function maxLen(arr) {
-  let c = 0;
-  let d = 0;
-  let l = 0;
-  let i = arr.length;
-  if (i) {
-    // eslint-disable-next-line no-plusplus
+  let c = 0,
+    d = 0,
+    l = 0,
+    i = arr.length;
+  if (i)
     while (i--) {
       d = arr[i].length;
       if (d > c) {
@@ -34,7 +28,6 @@ function maxLen(arr) {
         c = d;
       }
     }
-  }
   return arr[l].length;
 }
 
@@ -43,43 +36,31 @@ function noop(s) {
 }
 
 function section(str, arr, fn) {
-  if (!arr || arr.length === 0) return '';
-  let i = 0;
-  let out = '';
+  if (!arr || !arr.length) return '';
+  let i = 0,
+    out = '';
   out += NL + __ + str;
-  // eslint-disable-next-line no-plusplus
   for (; i < arr.length; i++) {
     out += NL + __ + __ + fn(arr[i]);
   }
   return out + NL;
 }
 
-export function getCmd(tree, name) {
-  if (!name) return null;
+exports.getCmd = function getCmd(tree, name) {
+  return Object.keys(tree).find((key) => key.startsWith(name));
+};
 
-  const cmd = Object.keys(tree)
-    // .filter((x) => !x.startsWith(ALL) && !x.startsWith(DEF))
-    .find((key) => key.startsWith(name));
-
-  return cmd ? tree[cmd] : null;
-}
-
-// eslint-disable-next-line max-statements
-export function printHelp(ctx, key) {
-  const {
-    tree,
-    bin,
-    settings: { singleMode },
-    commandAliases,
-  } = { ...ctx };
-
+exports.help = function(
+  { tree, bin, settings: { singleMode }, commandAliases },
+  key,
+) {
   let out = '';
-  const cmd = getCmd(tree, key);
+  const cmd = tree[key];
   const isDefault = key ? key === DEF : key;
   const prefix = (s) => `$ ${bin} ${s}`.replace(/\s+/g, ' ');
 
   // update ALL & CMD options
-  const tail = [['-h, --help', 'Displays this message']];
+  let tail = [['-h, --help', 'Displays this message']];
   if (isDefault) tail.unshift(['-v, --version', 'Displays current version']);
   cmd.options = (cmd.options || []).concat(tree[ALL].options, tail);
 
@@ -91,27 +72,26 @@ export function printHelp(ctx, key) {
   out += section('Usage', [cmd.usage], prefix);
 
   if (!singleMode && isDefault) {
-    const cmdAliases = Object.values(commandAliases).reduce(
-      (acc, aliases) => acc.concat(aliases),
-      [],
-    );
+    const cmdAliases = Object.values(commandAliases).reduce((acc, aliases) => {
+      return acc.concat(aliases);
+    }, []);
 
     // General help :: print all non-internal commands & their 1st line of text
-    const cmds = Object.keys(tree[ALL]).filter(
+    let cmds = Object.keys(tree[ALL]).filter(
       (k) => !/__/.test(k) && !cmdAliases.includes(k),
     );
 
-    const text = cmds.map((k) => {
-      console.log(k);
-      const desc = (tree[k].describe || [''])[0];
+    let text = cmds.map((k) => {
+      const cmdTree = tree[k];
+      const desc = (cmdTree.describe || [''])[0];
 
       return [k, desc];
     });
     out += section('Available Commands', format(text), noop);
 
-    out += `${NL + __}For more info, run any command with the \`--help\` flag`;
+    out += NL + __ + 'For more info, run any command with the `--help` flag';
     cmds.slice(0, 2).forEach((k) => {
-      out += `${NL + __ + __}${bin} ${k} --help`;
+      out += NL + __ + __ + `${bin} ${k} --help`;
     });
     out += NL;
   }
@@ -120,47 +100,44 @@ export function printHelp(ctx, key) {
   out += section('Examples', cmd.examples.map(prefix), noop);
 
   return out;
-}
+};
 
-export function printError(bin, str, num = 1) {
+exports.error = function(bin, str, num = 1) {
   let out = section('ERROR', [str], noop);
-  out += `${NL + __}Run \`$ ${bin} --help\` for more info.${NL}`;
-
+  out += NL + __ + `Run \`$ ${bin} --help\` for more info.` + NL;
   console.error(out);
-  // eslint-disable-next-line unicorn/no-process-exit
   process.exit(num);
-}
+};
 
 // Strips leading `-|--` & extra space(s)
-export function parseOption(str) {
+exports.parse = function(str) {
   return (str || '').split(/^-{1,2}|,|\s+-{1,2}|\s+/).filter(Boolean);
-}
+};
 
 // @see https://stackoverflow.com/a/18914855/3577474
-export function sentences(str) {
+exports.sentences = function(str) {
   return (str || '').replace(/([.?!])\s*(?=[A-Z])/g, '$1|').split('|');
-}
+};
 
-export function existsAsCommandAlias(val, commandAliases) {
-  const found = Object.values(commandAliases).find((aliases) =>
+exports.existsAsCommandAlias = function(val, commandAliases) {
+  let found = Object.values(commandAliases).find((aliases) =>
     aliases.includes(val),
   );
 
   return found;
-}
+};
 
-export function createAliasCommands(tree, commandAliases) {
+exports.createAliasCommands = function(tree, commandAliases) {
   Object.keys(commandAliases).forEach((name) => {
     const aliases = commandAliases[name];
     const command = tree[name];
 
     aliases.forEach((aliasName) => {
-      // eslint-disable-next-line no-param-reassign
       tree[aliasName] = command;
     });
   });
-}
+};
 
-export function isObject(val) {
+exports.isObject = (val) => {
   return val && typeof val === 'object' && Array.isArray(val) === false;
-}
+};

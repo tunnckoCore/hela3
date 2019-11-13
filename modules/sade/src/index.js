@@ -21,7 +21,7 @@ export class SadeError extends Error {
 }
 
 const assert = (cond, message) => {
-  if (!cond) {
+  if (cond) {
     throw new SadeError(message);
   }
 };
@@ -195,7 +195,7 @@ export class Sade {
     let { bin } = this;
     let tmp = null;
     let cmd = null;
-    let isVoid = null;
+    // const isVoid = null;
     let name = '';
 
     if (isSingle) {
@@ -220,9 +220,8 @@ export class Sade {
       createAliasCommands(this.tree, this.commandAliases);
 
       cmd = getCmd(this.tree, name);
-      isVoid = cmd === undefined;
-
-      if (isVoid) {
+      // isVoid = cmd;
+      if (cmd === null) {
         if (this.settings.defaultCommand) {
           name = this.settings.defaultCommand;
           cmd = getCmd(this.tree, name);
@@ -284,8 +283,16 @@ export class Sade {
     return opts.lazy ? { args, name, handler } : handler(...args);
   }
 
-  help(str) {
-    console.log(printHelp(this, str || DEF));
+  help(cmdName = DEF, log = true) {
+    const str = printHelp(this, cmdName);
+
+    if (log === true) {
+      console.log(str);
+    } else if (typeof log === 'function') {
+      log(str);
+    }
+
+    return str;
   }
 
   ver() {
