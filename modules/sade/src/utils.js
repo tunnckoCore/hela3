@@ -93,10 +93,7 @@ export function printHelp(context, key) {
 
     // General help :: print all non-internal commands & their 1st line of text
     const cmds = Object.keys(ctx.tree).filter(
-      (k) =>
-        !/__/.test(k) &&
-        !cmdAliases.includes(k) &&
-        !k.startsWith(ctx.settings.defaultCommand),
+      (k) => !/__/.test(k) && !cmdAliases.includes(k),
     );
 
     const text = cmds.map((k) => {
