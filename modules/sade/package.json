@@ -1,6 +1,6 @@
 {
   "name": "@hela/sade",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Small and intuitive CLIs/commands builder, upstream of `sade` by @lukeed",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com> (https://tunnckocore.com)",
   "homepage": "https://github.com/tunnckoCore/hela",
