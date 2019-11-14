@@ -4,7 +4,6 @@ const GAP = 4;
 const __ = '  ';
 
 const ALL = '__all__';
-const DEF = '__default__';
 const NL = '\n';
 
 function format(arr) {
@@ -65,23 +64,19 @@ export function getCmd(tree, name) {
 }
 
 // eslint-disable-next-line max-statements
-export function printHelp(ctx, key) {
-  const {
-    tree,
-    bin,
-    settings: { singleMode },
-    commandAliases,
-  } = { ...ctx };
-
+export function printHelp(context, key) {
   let out = '';
-  const cmd = getCmd(tree, key);
-  const isDefault = key ? key === DEF : key;
-  const prefix = (s) => `$ ${bin} ${s}`.replace(/\s+/g, ' ');
+  const ctx = { ...context };
+  const cmd = getCmd(ctx.tree, key);
+
+  // eslint-disable-next-line no-underscore-dangle
+  const isDefault = key ? key === ctx._defKey : key;
+  const prefix = (s) => `$ ${ctx.bin} ${s}`.replace(/\s+/g, ' ');
 
   // update ALL & CMD options
   const tail = [['-h, --help', 'Displays this message']];
   if (isDefault) tail.unshift(['-v, --version', 'Displays current version']);
-  cmd.options = (cmd.options || []).concat(tree[ALL].options, tail);
+  cmd.options = (cmd.options || []).concat(ctx.tree[ALL].options, tail);
 
   // write options placeholder
   if (cmd.options.length > 0) cmd.usage += ' [options]';
@@ -90,20 +85,22 @@ export function printHelp(ctx, key) {
   out += section('Description', cmd.describe, noop);
   out += section('Usage', [cmd.usage], prefix);
 
-  if (!singleMode && isDefault) {
-    const cmdAliases = Object.values(commandAliases).reduce(
+  if (!ctx.settings.singleMode && isDefault) {
+    const cmdAliases = Object.values(ctx.commandAliases).reduce(
       (acc, aliases) => acc.concat(aliases),
       [],
     );
 
     // General help :: print all non-internal commands & their 1st line of text
-    const cmds = Object.keys(tree[ALL]).filter(
-      (k) => !/__/.test(k) && !cmdAliases.includes(k),
+    const cmds = Object.keys(ctx.tree).filter(
+      (k) =>
+        !/__/.test(k) &&
+        !cmdAliases.includes(k) &&
+        !k.startsWith(ctx.settings.defaultCommand),
     );
 
     const text = cmds.map((k) => {
-      console.log(k);
-      const desc = (tree[k].describe || [''])[0];
+      const desc = (ctx.tree[k].describe || [''])[0];
 
       return [k, desc];
     });
@@ -111,7 +108,7 @@ export function printHelp(ctx, key) {
 
     out += `${NL + __}For more info, run any command with the \`--help\` flag`;
     cmds.slice(0, 2).forEach((k) => {
-      out += `${NL + __ + __}${bin} ${k} --help`;
+      out += `${NL + __ + __}${ctx.bin} ${k} --help`;
     });
     out += NL;
   }

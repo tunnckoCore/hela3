@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable max-statements */
 /* eslint-disable max-classes-per-file */
 
@@ -48,9 +49,13 @@ export class Sade {
     this.commandAliases = {};
 
     this.command(ALL);
-    this.command(
-      [DEF].concat(this.settings.singleMode ? rest : '<command>').join(' '),
-    );
+
+    this._defKey = this.settings.singleMode
+      ? [DEF].concat(rest).join(' ')
+      : `${DEF} <command>`;
+
+    this.command(this._defKey);
+
     this.curr = '';
   }
 
@@ -235,7 +240,7 @@ export class Sade {
 
     // show main help if relied on "default" for multi-cmd
     if (argv.help) {
-      return isSingle ? this.help(this.bin) : this.help();
+      return isSingle ? this.help(this.bin) : this.help(name);
     }
     if (argv.version) {
       return this.ver();
@@ -283,8 +288,9 @@ export class Sade {
     return opts.lazy ? { args, name, handler } : handler(...args);
   }
 
-  help(cmdName = DEF, log = true) {
-    const str = printHelp(this, cmdName);
+  help(cmdName, log = true) {
+    const cmd = cmdName && typeof cmdName === 'string' ? cmdName : this._defKey;
+    const str = printHelp(this, cmd);
 
     if (log === true) {
       console.log(str);

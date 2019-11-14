@@ -20,7 +20,7 @@
     "@hela/cli": "^3.0.0-alpha.1",
     "@manypkg/cli": "^0.9.0",
     "@preconstruct/cli": "^1.1.2",
-    "@tunnckocore/eslint-config": "^5.0.9",
+    "@tunnckocore/eslint-config": "^5.0.10",
     "@tunnckocore/prettier-config": "^1.0.4",
     "eslint": "^6.6.0",
     "jest": "^24.9.0",

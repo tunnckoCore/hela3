@@ -859,10 +859,10 @@
     "@styled-system/core" "^5.1.2"
     "@styled-system/css" "^5.0.23"
 
-"@tunnckocore/eslint-config@^5.0.9":
-  version "5.0.9"
-  resolved "https://registry.yarnpkg.com/@tunnckocore/eslint-config/-/eslint-config-5.0.9.tgz#7d14f778de3054c3f2302954e3a8ea2b2a6b5329"
-  integrity sha512-/uQt4KP7WTZP2TgDdxcJ+3Qz7kxA0WMFE2Y3WrJ/ewgMt3lBt58Xx88XXppTvT8rJ4j3CK7x7DCj/Tdq0AoTCw==
+"@tunnckocore/eslint-config@^5.0.10":
+  version "5.0.10"
+  resolved "https://registry.yarnpkg.com/@tunnckocore/eslint-config/-/eslint-config-5.0.10.tgz#e1509528d15822f79f100ec1db62a3d817c34e7d"
+  integrity sha512-Z9HHbCEvsT0pc9bWYu92AtHy80Hp6iYNQyNbE4e410ayNDaig39Qds03kz5l06biMQI/HYPUOlbr2m9g6YP+cg==
   dependencies:
     "@tunnckocore/utils" "^1.1.2"
     "@typescript-eslint/eslint-plugin" "^2.3.2"

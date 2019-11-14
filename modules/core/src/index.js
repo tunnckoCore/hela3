@@ -71,7 +71,7 @@ export class Hela extends Sade {
       cwd: process.cwd(),
       version: '3.0.0',
       singleMode: false,
-      // defaultCommand: 'zzzz',
+      defaultCommand: 'help',
       ...options,
       lazy: true,
     };
@@ -92,6 +92,9 @@ export class Hela extends Sade {
         const fakeArgv = { ...task.default, _: [name] };
         return fn.apply(this, argz.concat(fakeArgv));
       };
+    } else {
+      console.log('[warn] hela: no action function passed!');
+      // TODO(@tunnckoCore): error or somthing...
     }
 
     return Object.assign(task.handler, this);
@@ -138,11 +141,9 @@ export function hela(programName, options) {
   const prog = new Hela(programName, options);
 
   // prog.option('--cwd', 'Current working directory', prog.options.cwd);
-  // prog
-  //   .command('zzzz [command]', 'Print more information')
-  //   .action((commandName) => {
-  //     prog.help(commandName);
-  //   });
+  prog.command('help', 'Print more information').action((commandName) => {
+    prog.help(commandName);
+  });
 
   return prog;
 }

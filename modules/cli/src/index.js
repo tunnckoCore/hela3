@@ -53,7 +53,6 @@ module.exports = async function main() {
   const tasks = Object.keys(config);
   const name = tasks[tasks.length - 1];
   const state = config[name];
-  // console.log(state.tree);
 
   prog.tree = state.tree;
 
