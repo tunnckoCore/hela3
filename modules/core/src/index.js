@@ -71,7 +71,7 @@ export class Hela extends Sade {
       cwd: process.cwd(),
       version: '3.0.0',
       singleMode: false,
-      defaultCommand: 'help',
+      // defaultCommand: 'help',
       ...options,
       lazy: true,
     };

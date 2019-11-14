@@ -52,6 +52,18 @@ function section(str, arr, fn) {
   }
   return out + NL;
 }
+export class SadeError extends Error {
+  constructor(msg) {
+    super(msg);
+    this.name = 'SadeError';
+  }
+}
+
+export function assert(cond, message) {
+  if (cond) {
+    throw new SadeError(message);
+  }
+}
 
 export function getCmd(tree, name) {
   if (!name) return null;
@@ -78,6 +90,7 @@ export function printHelp(context, key) {
   if (isDefault) tail.unshift(['-v, --version', 'Displays current version']);
   cmd.options = (cmd.options || []).concat(ctx.tree[ALL].options, tail);
 
+  console.log(cmd);
   // write options placeholder
   if (cmd.options.length > 0) cmd.usage += ' [options]';
 

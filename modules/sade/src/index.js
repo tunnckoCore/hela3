@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-statements */
-/* eslint-disable max-classes-per-file */
 
 import mri from 'mri';
 import {
@@ -12,23 +11,11 @@ import {
   printError,
   getCmd,
   createAliasCommands,
+  SadeError,
+  assert,
 } from './utils';
 
-export class SadeError extends Error {
-  constructor(msg) {
-    super(msg);
-    this.name = 'SadeError';
-  }
-}
-
-const assert = (cond, message) => {
-  if (cond) {
-    throw new SadeError(message);
-  }
-};
-
 const ALL = '__all__';
-const DEF = '__default__';
 
 export class Sade {
   constructor(name, singleCommandMode) {
@@ -50,11 +37,13 @@ export class Sade {
 
     this.command(ALL);
 
+    const DEF = '__default__';
     this._defKey = this.settings.singleMode
       ? [DEF].concat(rest).join(' ')
       : `${DEF} <command>`;
 
     this.command(this._defKey);
+    console.log(this);
 
     this.curr = '';
   }
@@ -139,7 +128,7 @@ export class Sade {
   }
 
   describe(str) {
-    this.tree[this.curr || DEF].describe = Array.isArray(str)
+    this.tree[this.curr || this._defKey].describe = Array.isArray(str)
       ? str
       : sentences(str);
 
@@ -174,14 +163,14 @@ export class Sade {
   }
 
   action(handler) {
-    const command = this.tree[this.curr || DEF];
+    const command = this.tree[this.curr || this._defKey];
     command.handler = handler;
 
     return this;
   }
 
   example(str) {
-    const command = this.tree[this.curr || DEF];
+    const command = this.tree[this.curr || this._defKey];
     command.examples.push(str);
 
     return this;
@@ -204,7 +193,7 @@ export class Sade {
     let name = '';
 
     if (isSingle) {
-      cmd = this.tree[DEF];
+      cmd = this.tree[this._defKey];
     } else {
       // Loop thru possible command(s)
       let i = 1;
@@ -306,6 +295,8 @@ export class Sade {
   }
 }
 
-export const sade = (str, options) => new Sade(str, options);
+const sade = (str, options) => new Sade(str, options);
 
 export default sade;
+
+export { SadeError, sade };
