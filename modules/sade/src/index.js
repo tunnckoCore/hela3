@@ -43,7 +43,6 @@ export class Sade {
       : `${DEF} <command>`;
 
     this.command(this._defKey);
-    console.log(this);
 
     this.curr = '';
   }
