@@ -90,7 +90,6 @@ export function printHelp(context, key) {
   if (isDefault) tail.unshift(['-v, --version', 'Displays current version']);
   cmd.options = (cmd.options || []).concat(ctx.tree[ALL].options, tail);
 
-  console.log(cmd);
   // write options placeholder
   if (cmd.options.length > 0) cmd.usage += ' [options]';
 
