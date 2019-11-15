@@ -1,5 +1,7 @@
 import { hela } from '@hela/core';
 
+export * from '@hela/dev';
+
 const prog = hela();
 
 export const foo = prog

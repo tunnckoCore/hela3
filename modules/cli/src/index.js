@@ -51,10 +51,27 @@ module.exports = async function main() {
   // }
 
   const tasks = Object.keys(config);
-  const name = tasks[tasks.length - 1];
-  const state = config[name];
+  // const name = tasks[tasks.length - 1];
+  // const state = config[name];
 
-  prog.tree = state.tree;
+  const { tree, commandAliases } = tasks.reduce(
+    (acc, name) => {
+      const cmd = config[name];
+
+      acc.tree = { ...acc.tree, ...cmd.tree };
+      acc.commandAliases = {
+        ...acc.commandAliases,
+        ...cmd.commandAliases,
+      };
+
+      return acc;
+    },
+    { tree: {}, commandAliases: {} },
+  );
+
+  console.log(tree);
+  prog.tree = tree;
+  prog.commandAliases = commandAliases;
 
   return prog.listen();
 };

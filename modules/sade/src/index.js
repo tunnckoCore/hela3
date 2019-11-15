@@ -43,6 +43,11 @@ export class Sade {
       : `${DEF} <command>`;
 
     this.command(this._defKey);
+    this.tree[this._defKey].usage = this._defKey
+      .split(DEF)
+      .slice(1)
+      .join(' ')
+      .trim();
 
     this.curr = '';
   }

@@ -34,7 +34,13 @@
       }
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "@hela/build": "^0.1.0",
+    "@hela/check": "^0.1.0",
+    "@hela/core": "^3.0.0-alpha.1",
+    "@hela/format": "^0.1.0",
+    "@hela/lint": "^0.1.0"
+  },
   "devDependencies": {},
   "keywords": [],
   "verb": {}
