@@ -25,7 +25,8 @@
     "eslint": "^6.6.0",
     "jest": "^24.9.0",
     "lerna": "^3.19.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "release": "^6.1.0"
   },
   "renovate": {
     "extends": "@tunnckocore"
