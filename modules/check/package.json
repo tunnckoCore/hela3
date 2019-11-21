@@ -1,6 +1,6 @@
 {
   "name": "@hela/check",
-  "version": "0.1.1-canary.0",
+  "version": "0.1.1-canary.1",
   "description": "A `check` command task for Hela",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com> (https://tunnckocore.com)",
   "homepage": "https://github.com/tunnckoCore/hela",
@@ -35,7 +35,7 @@
     }
   },
   "dependencies": {
-    "@hela/core": "^3.0.0-canary.2"
+    "@hela/core": "^3.0.0-canary.3"
   },
   "keywords": [],
   "verb": {}

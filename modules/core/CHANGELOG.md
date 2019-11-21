@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-canary.3](https://github.com/tunnckoCore/hela/compare/@hela/core@3.0.0-canary.2...@hela/core@3.0.0-canary.3) (2019-11-21)
+
+**Note:** Version bump only for package @hela/core
+
+
+
+
+
 # 3.0.0-canary.2 (2019-11-21)
 
 
