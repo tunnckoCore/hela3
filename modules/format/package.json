@@ -1,6 +1,6 @@
 {
   "name": "@hela/format",
-  "version": "0.1.0",
+  "version": "0.1.1-canary.0",
   "description": "A `format` command task for Hela",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com> (https://tunnckocore.com)",
   "homepage": "https://github.com/tunnckoCore/hela",
@@ -35,9 +35,8 @@
     }
   },
   "dependencies": {
-    "@hela/core": "^3.0.0-alpha.1"
+    "@hela/core": "^3.0.0-canary.2"
   },
-  "devDependencies": {},
   "keywords": [],
   "verb": {}
 }

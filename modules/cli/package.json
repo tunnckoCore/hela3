@@ -1,6 +1,6 @@
 {
   "name": "@hela/cli",
-  "version": "3.0.0-canary.1",
+  "version": "3.0.0-canary.2",
   "description": "The CLI for running Hela commands",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com> (https://tunnckocore.com)",
   "homepage": "https://github.com/tunnckoCore/hela",
@@ -38,11 +38,10 @@
     }
   },
   "dependencies": {
-    "@hela/core": "^3.0.0-alpha.1",
+    "@hela/core": "^3.0.0-canary.2",
     "@tunnckocore/pretty-config": "^0.7.0",
     "esm": "^3.2.25"
   },
-  "devDependencies": {},
   "keywords": [],
   "verb": {}
 }

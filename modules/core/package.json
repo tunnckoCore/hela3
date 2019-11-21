@@ -1,6 +1,6 @@
 {
   "name": "@hela/core",
-  "version": "3.0.0-canary.1",
+  "version": "3.0.0-canary.2",
   "description": "The core programmatic API for Hela",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com> (https://tunnckocore.com)",
   "homepage": "https://github.com/tunnckoCore/hela",
@@ -36,12 +36,11 @@
     }
   },
   "dependencies": {
-    "@hela/sade": "^0.2.1",
+    "@hela/sade": "^0.2.2-canary.0",
     "@tunnckocore/execa": "^5.0.3",
-    "global-dirs": "^2.0.1",
-    "dargs": "^7.0.0"
+    "dargs": "^7.0.0",
+    "global-dirs": "^2.0.1"
   },
-  "devDependencies": {},
   "keywords": [],
   "verb": {}
 }

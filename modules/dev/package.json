@@ -1,6 +1,6 @@
 {
   "name": "@hela/dev",
-  "version": "3.1.6",
+  "version": "3.1.7-canary.0",
   "description": "A `dev` preset of commands for Hela or any other Hela-based CLI. Combining build, format, lint, check & test commands",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com> (https://tunnckocore.com)",
   "homepage": "https://github.com/tunnckoCore/hela",
@@ -35,13 +35,12 @@
     }
   },
   "dependencies": {
-    "@hela/build": "^0.1.0",
-    "@hela/check": "^0.1.0",
-    "@hela/core": "^3.0.0-alpha.1",
-    "@hela/format": "^0.1.0",
-    "@hela/lint": "^0.1.0"
+    "@hela/build": "^0.1.1-canary.0",
+    "@hela/check": "^0.1.1-canary.0",
+    "@hela/core": "^3.0.0-canary.2",
+    "@hela/format": "^0.1.1-canary.0",
+    "@hela/lint": "^0.1.1-canary.0"
   },
-  "devDependencies": {},
   "keywords": [],
   "verb": {}
 }
