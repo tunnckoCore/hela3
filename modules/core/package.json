@@ -1,6 +1,6 @@
 {
   "name": "@hela/core",
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0-canary.1",
   "description": "The core programmatic API for Hela",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com> (https://tunnckocore.com)",
   "homepage": "https://github.com/tunnckoCore/hela",
@@ -22,7 +22,8 @@
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "access": "public"
+    "access": "public",
+    "tag": "canary"
   },
   "jest": {
     "coverageThreshold": {

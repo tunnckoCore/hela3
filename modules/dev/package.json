@@ -1,7 +1,7 @@
 {
   "name": "@hela/dev",
   "version": "3.1.6",
-  "description": "A `dev` preset of commands for Hela. Combining build, format, lint, check & test commands",
+  "description": "A `dev` preset of commands for Hela or any other Hela-based CLI. Combining build, format, lint, check & test commands",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com> (https://tunnckocore.com)",
   "homepage": "https://github.com/tunnckoCore/hela",
   "license": "MPL-2.0",
