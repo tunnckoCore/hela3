@@ -16,7 +16,6 @@
   "command": {
     "version": {
       "conventionalCommits": true,
-      "conventionalPrerelease": true,
       "createRelease": "github",
       "message": "chore: release package(s)",
       "allowBranch": [
