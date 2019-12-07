@@ -3,6 +3,9 @@
 .*cache
 *.cache
 
+.yarn/unplugged
+.yarn/build-state.yml
+
 # Build environment
 dist
 

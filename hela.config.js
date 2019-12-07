@@ -10,3 +10,5 @@ export const foo = prog
   .action(() => {
     console.log('Foo command!');
   });
+
+const zzz = 123;

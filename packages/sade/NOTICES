@@ -1,0 +1,5 @@
+Source code base of `@hela/sade` is based on the original `sade` package,
+which is licensed under the MIT License by @lukeed.
+
+It has couple of updates, bugfixes & improvements. Some of which are proposed there,
+some are upcoming there, some are rejected.

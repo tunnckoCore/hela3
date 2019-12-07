@@ -8,6 +8,9 @@ __fixtures__
 .npmrc
 .yarnrc
 *.js.snap
+.yarn
+.pnp.js
+_*
 
 *.tsbuildinfo
 .cache
@@ -17,6 +20,7 @@ __fixtures__
 # Markdown files
 *.md
 LICENSE
+CHANGELOG.md
 
 # Build environment
 dist
