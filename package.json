@@ -1,5 +1,5 @@
 {
-  "name": "@hela/cli",
+  "name": "hela",
   "version": "3.0.0-next.20200115.2",
   "description": "Powerful software development",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
