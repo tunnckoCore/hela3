@@ -27,10 +27,10 @@ exports.lint = hela()
   .alias(['linting', 'lintx'])
   .option('--fix', 'Fix autofixable problems')
   .action((...rest) => {
-    const args = rest.slice(0, -1);
-    const flags = rest.slice(-1);
+    const argv = rest.slice(-1)[0];
 
-    console.log('args:', args);
-    console.log('flags:', flags);
+    console.log('argv:', argv);
+    console.log('args:', argv.args);
+    console.log('flags:', argv.flags);
     console.log('lint called!');
   });

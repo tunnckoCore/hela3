@@ -1,6 +1,6 @@
 {
-  "name": "hela",
-  "version": "3.0.0-next.20191210.5",
+  "name": "@hela/cli",
+  "version": "3.0.0-next.20200115.2",
   "description": "Powerful software development",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
   "license": "(Parity-7.0.0 AND Prosperity-3.0.0) OR Patron-1.0.0",

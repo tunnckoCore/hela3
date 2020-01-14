@@ -343,6 +343,7 @@ class Yaro {
     const foundInCommand = keys.filter(findIn(cmdFlags));
     const found = foundInGlobal.concat(foundInCommand);
 
+    // todo: bug behavior when allowUnknownFlags: false (default for Yaro)
     if (this.settings.allowUnknownFlags !== true) {
       if (found.length === 0) {
         console.log('Unknown flag(s):', keys);

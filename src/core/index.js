@@ -101,7 +101,7 @@ class Hela extends Yaro {
   constructor(progName = 'hela', options) {
     super(progName, {
       defaultsToHelp: true,
-      allowUnknownFlags: false,
+      allowUnknownFlags: true,
       version: '3.0.0',
       ...options,
     });
