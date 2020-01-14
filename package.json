@@ -1,0 +1,75 @@
+{
+  "name": "hela",
+  "version": "3.0.0-next.20191210.5",
+  "description": "Powerful software development",
+  "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
+  "license": "(Parity-7.0.0 AND Prosperity-3.0.0) OR Patron-1.0.0",
+  "licenseStart": 2017,
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/tunnckoCore/hela-deno.git"
+  },
+  "funding": {
+    "url": "https://ko-fi.com/tunnckoCore"
+  },
+  "scripts": {
+    "hela": "node ./src/cli",
+    "hela-prod": "./bin/hela-linux",
+    "test": "yarn hela && yarn build && yarn node dist",
+    "prebundle": "rm -rf dist",
+    "bundle": "yarn bundle:cli && yarn bundle:core && yarn bundle:yaro",
+    "bundle:cli": "ncc build ./src/cli/index.js -sm -o dist/cli",
+    "bundle:core": "ncc build ./src/core/index.js -sm -o dist/core",
+    "bundle:yaro": "ncc build ./src/yaro/index.js -sm -o dist/yaro",
+    "prebuild": "rm -rf bin",
+    "build": "pkg . -o bin/hela -t node10-linux,node10-macos,node10-win",
+    "xpostbuild": "ls bin/hela* | xargs gzip",
+    "prepublishOnly": "yarn bundle && yarn build"
+  },
+  "bin": {
+    "hela": "./dist/cli/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/core/index.js",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "tag": "next"
+  },
+  "devDependencies": {
+    "@tunnckocore/eslint-config": "^5.2.1",
+    "@tunnckocore/execa": "^5.1.0",
+    "@tunnckocore/prettier-config": "^1.1.0",
+    "@tunnckocore/utils": "^1.2.0",
+    "@zeit/ncc": "^0.20.5",
+    "babel-eslint": "^10.0.3",
+    "dargs": "^7.0.0",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-node": "^0.3.2",
+    "eslint-mdx": "^1.6.3",
+    "eslint-plugin-eslint-comments": "^3.1.2",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.1.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-markdown": "^1.0.1",
+    "eslint-plugin-mdx": "^1.6.3",
+    "eslint-plugin-no-use-extend-native": "^0.4.1",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "eslint-plugin-unicorn": "^14.0.1",
+    "execa": "^3.4.0",
+    "global-dirs": "^2.0.1",
+    "mri": "^1.1.4",
+    "pkg": "^4.4.1",
+    "prettier": "^1.19.1"
+  }
+}
