@@ -214,7 +214,7 @@ const additionalChanges = {
     { extensions: ['.ts', '.tsx', '.js', '.jsx', '.mdx'] },
   ],
 
-  strict: 'error',
+  strict: 'off',
   // Enforce using named functions when regular function is used,
   // otherwise use arrow functions
   'func-names': ['error', 'always'],
@@ -283,7 +283,7 @@ const additionalChanges = {
       // caughtErrorsIgnorePattern: '^(?:$$|xx|_|__|[iI]gnor(?:e|ing|ed))',
     },
   ],
-  strict: 'error',
+  strict: 'off',
   'node/shebang': 'off',
   'import/prefer-default-export': 'off',
 

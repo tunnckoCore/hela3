@@ -1,6 +1,5 @@
 /* eslint-disable unicorn/no-process-exit */
 /* eslint-disable no-undef */
-/* eslint-disable strict */
 
 'use strict';
 

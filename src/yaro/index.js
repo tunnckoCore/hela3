@@ -1,7 +1,6 @@
 /* eslint-disable no-continue */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable strict */
 
 'use strict';
 
@@ -255,7 +254,6 @@ class Yaro {
     return sections;
   }
 
-  // eslint-disable-next-line max-statements
   parse(argv = processArgv, options = {}) {
     this.settings = { ...this.settings, options };
     this.result = this.__getResult(argv.slice(2));
@@ -277,6 +275,19 @@ class Yaro {
 
     const command = this.checkArguments(cmd.command);
     const res = { ...this.result, command };
+    // console.log(res);
+    // let flags = {};
+
+    [...command.flags.values()].forEach((flag) => {
+      flag.names.forEach((flagName) => {
+        if (hasOwn(res.flags, flagName)) {
+          res.flags[flagName] = hasOwn(res.flags, flagName);
+        }
+        if (hasOwn(flag.config, 'default')) {
+          res.flags[flagName] = flag.config.default;
+        }
+      });
+    });
 
     // since we can pass alias as "defaultCommand",
     // so we should sync them
@@ -391,6 +402,9 @@ class Yaro {
       description,
       config: { ...config },
     };
+    if (config !== undefined) {
+      flag.config.default = config;
+    }
 
     // You may use cli.option('--env.* [value]', 'desc') to support a dot-nested option
     flag.rawName = rawName.replace(/\.\*/g, '');
@@ -412,6 +426,7 @@ class Yaro {
     flag.name = flag.names[flag.names.length - 1];
 
     if (flag.negated) {
+      // ? hmmmm? should be false?
       flag.config.default = true;
     }
 
@@ -512,6 +527,9 @@ class Yaro {
   }
 }
 
+function hasOwn(obj, val) {
+  return Object.prototype.hasOwnProperty.call(obj, val);
+}
 function removeBrackets(val) {
   return val && val.replace(new RegExp('[<[].+'), '').trim();
 }

@@ -1,4 +1,6 @@
-const Yaro = require('./index');
+'use strict';
+
+const { Yaro } = require('./index');
 
 const cli = new Yaro('hela', {
   // defaultsToHelp: 1,
@@ -31,15 +33,16 @@ cli
   .option('--save-dev', 'descr here')
   .alias('i', 'add')
   .action((...args) => {
-    // console.log('args:', args);
+    console.log('args:', args);
     console.log('install cmd');
   });
 
 cli.command('foo-bar-baz-qux-zaz', 'Okkk deps').action(() => {
   console.log('foobar cmd');
 });
+
 const result = cli.parse();
 
-// console.log('result:', result);
+console.log('result:', result);
 
 // cli.showHelp();

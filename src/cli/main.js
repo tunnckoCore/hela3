@@ -1,8 +1,6 @@
-/* eslint-disable unicorn/no-process-exit */
 /* eslint-disable node/no-unsupported-features/node-builtins */
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-/* eslint-disable strict */
 
 'use strict';
 
@@ -15,10 +13,7 @@ const CWD = utils.cwd();
 
 const prog = hela();
 
-prog
-  .option('--cwd', 'some global flag')
-  .example('bar -ptv')
-  .example('lint src --cache');
+prog.option('--cwd', 'some global flag');
 
 module.exports = async function main() {
   const cfg = await getConfig('hela', { cwd: CWD });
