@@ -27,7 +27,7 @@
     "prebuild": "rm -rf bin",
     "build": "pkg . -o bin/hela -t node10-linux,node10-macos,node10-win",
     "xpostbuild": "ls bin/hela* | xargs gzip",
-    "prepublishOnly": "yarn bundle && yarn build"
+    "xprepublishOnly": "yarn bundle && yarn build"
   },
   "bin": {
     "hela": "./dist/cli/index.js",

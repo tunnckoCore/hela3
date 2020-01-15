@@ -89,8 +89,17 @@ function isValidConfig(val) {
 async function getConfig(name, { cwd } = {}) {
   let cfg = await getPkg(cwd);
 
+  // ! suppport ESM config files, and/or the freaking .mjs
+  // ! in some wa without the `esm` package,
+  // ! because I assume that `hela` bundle will be even more huge
+  // ! it's freaking that Hela is 3x bigger than the whole Deno (~10mb)!
+  const jsConfigFiles = ['hela.config.js', '.helarc.js'];
+
   if (!cfg) {
-    const filepath = path.join(cwd, 'hela.config.js');
+    const filepath = jsConfigFiles
+      .map((x) => path.join(cwd, x))
+      .find((fp) => (fs.existsSync(fp) ? fp : false));
+
     let config = null;
 
     try {
@@ -98,6 +107,7 @@ async function getConfig(name, { cwd } = {}) {
     } catch (err) {
       config = null;
     }
+
     cfg = { config, filepath };
   }
 
