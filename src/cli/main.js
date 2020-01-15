@@ -55,6 +55,12 @@ function fromJson(config) {
 
     return require(path.join(CWD, config));
   }
+
+  // config.extends / pkg.hela.extends
+  // TODOs:
+  // should try to load config package (like `@hela/dev`) up to homedir,
+  // and check if it is globally installed.
+  // hint: detect-installed, get-installed-path, find-up and etc
   if (config && typeof config === 'object') {
     if (config.cwd) {
       if (!config.extends) {
@@ -85,7 +91,13 @@ async function getConfig(name, { cwd } = {}) {
 
   if (!cfg) {
     const filepath = path.join(cwd, 'hela.config.js');
-    const config = require(filepath);
+    let config = null;
+
+    try {
+      config = require(filepath);
+    } catch (err) {
+      config = null;
+    }
     cfg = { config, filepath };
   }
 
