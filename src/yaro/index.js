@@ -281,7 +281,7 @@ class Yaro {
     [...command.flags.values()].forEach((flag) => {
       flag.names.forEach((flagName) => {
         if (hasOwn(res.flags, flagName)) {
-          res.flags[flagName] = hasOwn(res.flags, flagName);
+          res.flags[flagName] = res.flags.flagName;
         }
         if (hasOwn(flag.config, 'default')) {
           res.flags[flagName] = flag.config.default;
