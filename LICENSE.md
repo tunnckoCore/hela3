@@ -2,4 +2,4 @@
 
 - https://patronlicense.com (purchise a tier from Ko-Fi, or subscribe for monthly over 10EUR which includes PayPal fees)
 - https://paritylicense.com
-- https://prosperitylicense.com (upcoming v3)
+- https://prosperitylicense.com
