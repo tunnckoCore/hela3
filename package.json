@@ -1,6 +1,6 @@
 {
   "name": "hela",
-  "version": "3.0.0-next.20200115.10",
+  "version": "3.0.0-next.20200115.11",
   "description": "Powerful software development",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
   "license": "(Parity-7.0.0 AND Prosperity-3.0.0) OR Patron-1.0.0",
@@ -35,7 +35,8 @@
     "hela-bin": "./dist/cli/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "src/dev"
   ],
   "hela": "./src/dev/index.js",
   "main": "./dist/core/index.js",
@@ -75,7 +76,6 @@
     "eslint-plugin-unicorn": "^15.0.1",
     "execa": "^4.0.0",
     "global-dirs": "^2.0.1",
-    "is-ci": "^2.0.0",
     "mri": "^1.1.4",
     "pkg": "^4.4.2",
     "prettier": "^1.19.1",
@@ -84,8 +84,13 @@
   "peerDependencies": {
     "@tunnckocore/jest-runner-babel": "^4.1.0",
     "@tunnckocore/jest-runner-eslint": "^1.1.0",
+    "@tunnckocore/utils": "^1.2.0",
     "jest": "^24.9.0",
     "jest-runner-docs": "^1.1.0",
     "jest-runner-rollup": "^1.2.0"
+  },
+  "dependencies": {
+    "is-ci": "^2.0.0",
+    "picomatch": "^2.2.1"
   }
 }
