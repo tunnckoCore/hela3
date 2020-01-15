@@ -1,6 +1,6 @@
 {
   "name": "hela",
-  "version": "3.0.0-next.20200115.22",
+  "version": "3.0.0-next.20200115.33",
   "description": "Powerful software development",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
   "license": "(Parity-7.0.0 AND Prosperity-3.0.0) OR Patron-1.0.0",
@@ -38,7 +38,7 @@
   "files": [
     "dist"
   ],
-  "hela": "./dist/dev/index.js",
+  "hela": "./src/dev/index.js",
   "main": "./dist/core/index.js",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -76,6 +76,7 @@
     "eslint-plugin-unicorn": "^15.0.1",
     "execa": "^4.0.0",
     "global-dirs": "^2.0.1",
+    "jest": "^24.9.0",
     "mri": "^1.1.4",
     "pkg": "^4.4.2",
     "prettier": "^1.19.1",

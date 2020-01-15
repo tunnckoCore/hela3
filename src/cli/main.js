@@ -13,7 +13,9 @@ const CWD = utils.cwd();
 
 const prog = hela();
 
-prog.option('--cwd', 'some global flag');
+prog
+  .option('--cwd', 'some global flag')
+  .option('--showStack', 'Show more detailed info when errors', false);
 
 module.exports = async function main() {
   const cfg = await getConfig('hela', { cwd: CWD });

@@ -43,6 +43,7 @@ exports.createJestCommand = function createJestCommand(prog) {
           'exclude',
           'bundle',
           'docs',
+          'showStack',
           'cwd',
         ].forEach((key) => {
           delete opts[key];
@@ -69,7 +70,13 @@ exports.createJestCommand = function createJestCommand(prog) {
 
         try {
           await exec(cmd, { stdio: 'inherit' });
-          // eslint-disable-next-line no-empty
-        } catch (err) {}
+        } catch (err) {
+          if (argv.showStack) {
+            console.log(err);
+          }
+
+          // eslint-disable-next-line unicorn/no-process-exit
+          process.exit(1);
+        }
       });
 };
