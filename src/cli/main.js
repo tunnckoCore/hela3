@@ -28,10 +28,12 @@ module.exports = async function main() {
     ? fromJson(cfg.config)
     : cfg.config;
 
-  console.log(
-    '[info] hela: Loading config ->',
-    path.relative(CWD, cfg.filepath),
-  );
+  if (process.argv.includes('--verbose')) {
+    console.log(
+      '[info] hela: Loading config ->',
+      path.relative(CWD, cfg.filepath),
+    );
+  }
 
   if (!isValidConfig(config)) {
     throw new HelaError('No config found or invalid');
@@ -102,6 +104,9 @@ async function getConfig(name, { cwd } = {}) {
     try {
       config = require(filepath);
     } catch (err) {
+      if (process.argv.includes('--verbose')) {
+        console.log('[error] hela: while loading config!', err.message || err);
+      }
       config = null;
     }
 
@@ -118,6 +123,9 @@ async function getPkg(cwd) {
   try {
     pkg = JSON.parse(await fs.promises.readFile(filepath, 'utf8'));
   } catch (err) {
+    if (process.argv.includes('--verbose')) {
+      console.log('[error] hela: while loading config!', err.message || err);
+    }
     return null;
   }
 
