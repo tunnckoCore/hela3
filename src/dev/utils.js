@@ -27,7 +27,7 @@ exports.createJestCommand = function createJestCommand(prog) {
       .action(async (argv) => {
         // switch the env set by default when running Jest. For ensurance.
         process.env.NODE_ENV = name;
-        console.log(argv);
+
         const opts = { ...argv };
 
         const ignores = opts.exclude;
