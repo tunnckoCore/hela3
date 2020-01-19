@@ -1,6 +1,6 @@
 {
   "name": "hela",
-  "version": "3.0.0-next.20200115.55",
+  "version": "3.0.0-next.20200119.1",
   "description": "Powerful software development",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
   "license": "(Parity-7.0.0 AND Prosperity-3.0.0) OR Patron-1.0.0",
@@ -14,32 +14,18 @@
   },
   "scripts": {
     "hela": "node ./src/cli",
-    "hela-bin": "./bin/hela-linux",
-    "test": "yarn test:src && yarn test:dist && yarn test:bin",
-    "test:src": "yarn hela",
-    "test:dist": "yarn node ./dist/cli",
-    "test:bin": "yarn hela-bin",
-    "prebundle": "rm -rf ./dist",
-    "bundle": "yarn bundle:cli && yarn bundle:core && yarn bundle:yaro && yarn copydev",
-    "bundle:cli": "ncc build ./src/cli/index.js -sm -o ./dist/cli",
-    "bundle:core": "ncc build ./src/core/index.js -sm -o ./dist/core",
-    "bundle:yaro": "ncc build ./src/yaro/index.js -sm -o ./dist/yaro",
-    "copydev": "cp -R ./src/dev ./dist/dev",
-    "prebuild": "rm -rf bin",
-    "build": "pkg . -o bin/hela -t node10-linux,node10-macos,node10-win",
-    "xpostbuild": "ls bin/hela* | xargs gzip",
-    "xprepublishOnly": "yarn bundle && yarn build"
+    "test": "yarn hela"
   },
   "bin": {
-    "hela": "./dist/cli/index.js",
-    "hela-cli": "./dist/cli/index.js",
-    "hela-bin": "./dist/cli/index.js"
+    "hela": "./src/cli/index.js",
+    "hela-cli": "./src/cli/index.js",
+    "hela-bin": "./src/cli/index.js"
   },
   "files": [
-    "dist"
+    "src"
   ],
   "hela": "./src/dev/index.js",
-  "main": "./dist/core/index.js",
+  "main": "./src/core/index.js",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public",

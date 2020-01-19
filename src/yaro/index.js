@@ -275,14 +275,12 @@ class Yaro {
 
     const command = this.checkArguments(cmd.command);
     const res = { ...this.result, command };
-    // console.log(res);
-    // let flags = {};
 
     [...command.flags.values()].forEach((flag) => {
-      flag.names.forEach((flagName) => {
-        if (hasOwn(res.flags, flagName)) {
-          res.flags[flagName] = res.flags.flagName;
-        }
+      flag.names.filter(Boolean).forEach((flagName) => {
+        // if (hasOwn(res.flags, flagName)) {
+        //   res.flags[flagName] =
+        // }
         if (hasOwn(flag.config, 'default')) {
           res.flags[flagName] = flag.config.default;
         }
@@ -482,10 +480,19 @@ class Yaro {
   }
 
   __getResult(argv) {
+    const flagAliases = {};
+
+    [...this.commands.entries()].forEach(([_, cmd]) => {
+      [...cmd.flags.entries()].forEach(([flagName, flag]) => {
+        flagAliases[flagName] = flag.names;
+      });
+    });
+
     const parsed = parseArgv(argv, {
       alias: {
         h: 'help',
         v: 'version',
+        ...flagAliases,
       },
     });
 

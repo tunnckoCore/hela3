@@ -20,14 +20,14 @@ exports.createJestCommand = function createJestCommand(prog) {
         'A regexp pattern string that is matched against all tests paths before executing the test.',
       )
       .option(
-        '-t, --testNamePattern,',
+        '-t, --testNamePattern',
         'Run only tests with a name that matches the regex pattern',
       )
       .option('-o, --onlyChanged', 'Run only on changed packages')
       .action(async (argv) => {
         // switch the env set by default when running Jest. For ensurance.
         process.env.NODE_ENV = name;
-
+        console.log(argv);
         const opts = { ...argv };
 
         const ignores = opts.exclude;
@@ -50,7 +50,7 @@ exports.createJestCommand = function createJestCommand(prog) {
         });
 
         const flags = toFlags(opts, { allowCamelCase: true });
-
+        // console.log(opts, flags);
         const configDir = path.join(__dirname, 'configs', name);
         const configPath = path.join(configDir, 'config.js');
 
