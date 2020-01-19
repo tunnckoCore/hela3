@@ -1,6 +1,6 @@
 {
   "name": "hela",
-  "version": "3.0.0-next.20200119.3",
+  "version": "3.0.0-next.20200119.4",
   "description": "Powerful software development",
   "author": "Charlike Mike Reagent <opensource@tunnckocore.com>",
   "license": "(Parity-7.0.0 AND Prosperity-3.0.0) OR Patron-1.0.0",
@@ -39,7 +39,6 @@
     "@tunnckocore/utils": "^1.2.0",
     "@zeit/ncc": "^0.21.0",
     "babel-eslint": "^10.0.3",
-    "dargs": "^7.0.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -60,11 +59,7 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "eslint-plugin-unicorn": "^15.0.1",
-    "execa": "^4.0.0",
-    "global-dirs": "^2.0.1",
     "jest": "^24.9.0",
-    "mri": "^1.1.4",
-    "pkg": "^4.4.2",
     "prettier": "^1.19.1",
     "react": "^16.12.0"
   },
@@ -77,7 +72,11 @@
     "jest-runner-rollup": "^1.2.0"
   },
   "dependencies": {
+    "dargs": "^7.0.0",
+    "execa": "^4.0.0",
+    "global-dirs": "^2.0.1",
     "is-ci": "^2.0.0",
+    "mri": "^1.1.4",
     "picomatch": "^2.2.1"
   }
 }
