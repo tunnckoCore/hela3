@@ -11,7 +11,7 @@
   "scripts": {
     "release": "lerna version && lerna publish from-package",
     "clean:fresh": "lerna clean -y && rm -rf node_modules yarn.lock",
-    "setup": "yarn && yarn run lint:lockfile &&yarn run bootstrap",
+    "setup": "yarn && yarn run lint:lockfile && yarn run bootstrap",
     "lint:lockfile": "lockfile-lint --path yarn.lock --type yarn --validate-https",
     "bootstrap": "lerna bootstrap --since",
     "presetup": "echo foo-bar",

@@ -8,5 +8,5 @@ module.exports = {
     '@tunnckocore/eslint-config/node',
     '@tunnckocore/eslint-config/promise',
     '@tunnckocore/eslint-config/unicorn',
-  ]
+  ],
 };
