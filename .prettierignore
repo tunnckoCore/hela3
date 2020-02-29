@@ -1,30 +1,36 @@
-fixture
-fixtures
-__fixture__
-__fixtures__
+**/CHANGELOG.md
+**/LICENSE*
+dist
+**/*fixture*/**
 .gitkeep
 *.map
 *.lock
 .npmrc
 .yarnrc
 *.js.snap
-.yarn
-.pnp.js
-_*
+coverage
+*.*ignore
+.editorconfig
+*.ico
+*.png
+*.svg
+*.jpeg
+*.jpg
+.now
+
+# !*.*js*
+# !*.*ts*
+# !*.*md*
+
+@packages/function-arguments
+
+# .*
+# !.verb*.md
+patches
+**/static/**/*.css
 
 *.tsbuildinfo
-.cache
-.*cache
-*.cache
-
-# Markdown files
-*.md
-LICENSE
-CHANGELOG.md
-
-# Build environment
-dist
-lerna.json
+*.*cache
 
 # Package managers lockfiles
 package-lock.json
