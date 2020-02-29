@@ -1,3 +1,4 @@
+/* eslint-disable node/no-unsupported-features/node-builtins */
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
 

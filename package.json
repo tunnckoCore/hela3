@@ -11,11 +11,14 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --since",
     "clean:fresh": "lerna clean -y && rm -rf node_modules yarn.lock",
+    "format": "prettier '**/*.{js,md,json}' --write",
+    "lint:js": "eslint '{commands,modules,packages,presets}/*/{src,__tests__}/**/*.js' --fix --cache --quiet --format codeframe",
     "lint:lockfile": "lockfile-lint --path yarn.lock --type yarn --validate-https",
     "release": "lerna version && lerna publish from-package",
     "presetup": "echo foo-bar",
     "setup": "yarn && yarn run lint:lockfile && yarn run bootstrap",
-    "setup:ci": "yarn --frozen-lockfile && yarn run lint:lockfile && yarn run bootstrap"
+    "setup:ci": "yarn --frozen-lockfile --check-files && yarn run lint:lockfile && yarn run bootstrap",
+    "test:ci": "echo ok"
   },
   "dependencies": {
     "@tunnckocore/eslint-config": "^5.4.5",
