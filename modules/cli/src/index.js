@@ -10,6 +10,8 @@ const { hela, HelaError } = require('@hela/core');
 
 const CWD = process.cwd();
 
+const { log } = console;
+
 const prog = hela();
 
 prog
@@ -28,10 +30,7 @@ module.exports = async function main() {
     : cfg.config;
 
   if (process.argv.includes('--verbose')) {
-    console.log(
-      '[info] hela: Loading config ->',
-      path.relative(CWD, cfg.filepath),
-    );
+    log('[info] hela: Loading config ->', path.relative(CWD, cfg.filepath));
   }
 
   if (!isValidConfig(config)) {
@@ -108,7 +107,7 @@ async function getConfig(name, { cwd } = {}) {
       config = require(filepath);
     } catch (err) {
       if (process.argv.includes('--verbose')) {
-        console.log('[error] hela: while loading config!', err.message || err);
+        log('[error] hela: while loading config!', err.message || err);
       }
       config = null;
     }
@@ -127,7 +126,7 @@ async function getPkg(cwd) {
     pkg = JSON.parse(await fs.promises.readFile(filepath, 'utf8'));
   } catch (err) {
     if (process.argv.includes('--verbose')) {
-      console.log('[error] hela: while loading config!', err.message || err);
+      log('[error] hela: while loading config!', err.message || err);
     }
     return null;
   }
