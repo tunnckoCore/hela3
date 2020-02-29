@@ -10,10 +10,6 @@ function isObject(val) {
   return val && typeof val === 'object' && Array.isArray(val) === false;
 }
 
-function removeBrackets(val) {
-  return val && val.replace(new RegExp('[<[].+'), '').trim();
-}
-
 class Yaro {
   constructor(programName, options) {
     if (isObject(programName) && !options) {
